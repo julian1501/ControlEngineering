@@ -1,0 +1,62 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   6 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "fileID"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Reference_model_Control_Engineering:96:134-140"\
+    }\
+    ChartData {\
+      Name         "NF"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Reference_model_Control_Engineering:96:141-143"\
+    }\
+    ChartData {\
+      Name         "busy"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Reference_model_Control_Engineering:96:144-148"\
+    }\
+    ChartData {\
+      Name         "NS"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "Reference_model_Control_Engineering:96:149-151"\
+    }\
+    ChartData {\
+      Name         "eml_openfiles"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "C:\Program Files\MATLAB\R2021b\toolbox\eml\lib\matlab\iofun\private\fileManager.m:7904-7917"\
+      Dimensions   [20]\
+    }\
+    ChartData {\
+      Name         "eml_autoflush"\
+      Description  "EmlPersistent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  "C:\Program Files\MATLAB\R2021b\toolbox\eml\lib\matlab\iofun\private\fileManager.m:7918-7931"\
+      Dimensions   [20]\
+    }\
+  }
+  %return ChartDataElements
+%endfunction

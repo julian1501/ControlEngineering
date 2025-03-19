@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.2
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Feb 27 10:37:22 2025
+ * C source code generated on : Thu Mar 13 12:04:23 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -193,7 +193,7 @@ struct P_IntroductionExperiment_T_ {
   real_T SFunction_P1_Size[2];         /* Computed Parameter: SFunction_P1_Size
                                         * Referenced by: '<S6>/S-Function'
                                         */
-  real_T ref_part[12];                 /* Variable: ref_part
+  real_T ref_part[18];                 /* Variable: ref_part
                                         * Referenced by: '<S6>/S-Function'
                                         */
   real_T Refpower_stat;                /* Mask Parameter: Refpower_stat

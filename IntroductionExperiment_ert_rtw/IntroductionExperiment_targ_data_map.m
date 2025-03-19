@@ -41,7 +41,7 @@
 
                     ;% IntroductionExperiment_P.Refpower_stat
                     section.data(3).logicalSrcIdx = 2;
-                    section.data(3).dtTransOffset = 14;
+                    section.data(3).dtTransOffset = 20;
 
             nTotData = nTotData + section.nData;
             paramMap.sections(1) = section;
@@ -511,8 +511,8 @@
     ;%
 
 
-    targMap.checksum0 = 278567032;
-    targMap.checksum1 = 3114168622;
-    targMap.checksum2 = 3439584280;
-    targMap.checksum3 = 2290730832;
+    targMap.checksum0 = 2183734962;
+    targMap.checksum1 = 1968368210;
+    targMap.checksum2 = 3268987147;
+    targMap.checksum3 = 1595424770;
 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.2
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Feb 27 10:37:22 2025
+ * C source code generated on : Thu Mar 13 12:04:23 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -817,10 +817,10 @@ void IntroductionExperiment_initialize(void)
   IntroductionExperiment_M->Timing.stepSize1 = 0.00025;
 
   /* External mode info */
-  IntroductionExperiment_M->Sizes.checksums[0] = (278567032U);
-  IntroductionExperiment_M->Sizes.checksums[1] = (3114168622U);
-  IntroductionExperiment_M->Sizes.checksums[2] = (3439584280U);
-  IntroductionExperiment_M->Sizes.checksums[3] = (2290730832U);
+  IntroductionExperiment_M->Sizes.checksums[0] = (2183734962U);
+  IntroductionExperiment_M->Sizes.checksums[1] = (1968368210U);
+  IntroductionExperiment_M->Sizes.checksums[2] = (3268987147U);
+  IntroductionExperiment_M->Sizes.checksums[3] = (1595424770U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
