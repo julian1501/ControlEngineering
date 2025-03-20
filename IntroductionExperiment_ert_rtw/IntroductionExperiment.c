@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.3
+ * Model version              : 7.7
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 13 12:04:23 2025
+ * C source code generated on : Thu Mar 20 10:31:02 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -139,6 +139,24 @@ real_T rt_nrand_Upu32_Yd_f_pw_snf(uint32_T *u)
   return y;
 }
 
+real_T rt_roundd_snf(real_T u)
+{
+  real_T y;
+  if (fabs(u) < 4.503599627370496E+15) {
+    if (u >= 0.5) {
+      y = floor(u + 0.5);
+    } else if (u > -0.5) {
+      y = u * 0.0;
+    } else {
+      y = ceil(u - 0.5);
+    }
+  } else {
+    y = u;
+  }
+
+  return y;
+}
+
 static void IntroductionExpe_emxInit_char_T(emxArray_char_T_IntroductionE_T
   **pEmxArray, int32_T numDimensions)
 {
@@ -214,7 +232,7 @@ static void IntroductionExpe_emxFree_char_T(emxArray_char_T_IntroductionE_T
   }
 }
 
-/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S4>/SPERTE_measurement_function' */
 static int8_T IntroductionExperiment_filedata(void)
 {
   int32_T k;
@@ -235,7 +253,7 @@ static int8_T IntroductionExperiment_filedata(void)
   return f;
 }
 
-/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S4>/SPERTE_measurement_function' */
 static int8_T IntroductionExperiment_cfopen(const
   emxArray_char_T_IntroductionE_T *cfilename, const char_T *cpermission)
 {
@@ -277,25 +295,7 @@ static int8_T IntroductionExperiment_cfopen(const
   return fileid;
 }
 
-real_T rt_roundd_snf(real_T u)
-{
-  real_T y;
-  if (fabs(u) < 4.503599627370496E+15) {
-    if (u >= 0.5) {
-      y = floor(u + 0.5);
-    } else if (u > -0.5) {
-      y = u * 0.0;
-    } else {
-      y = ceil(u - 0.5);
-    }
-  } else {
-    y = u;
-  }
-
-  return y;
-}
-
-/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S4>/SPERTE_measurement_function' */
 static int32_T IntroductionExperiment_cfclose(real_T fid)
 {
   FILE* filestar;
@@ -355,45 +355,85 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
   /* RandomNumber: '<Root>/Noise' */
   IntroductionExperiment_B.Noise = IntroductionExperiment_DW.NextOutput;
 
-  /* S-Function (ec_Supervisor): '<S8>/S-Function' */
+  /* Constant: '<S6>/Start setpoint' */
+  IntroductionExperiment_B.Startsetpoint =
+    IntroductionExperiment_P.Refpower_stat;
 
-  /* Level2 S-Function Block: '<S8>/S-Function' (ec_Supervisor) */
+  /* S-Function (ref3b): '<S7>/S-Function' */
+
+  /* Level2 S-Function Block: '<S7>/S-Function' (ref3b) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[0];
     sfcnOutputs(rts,0);
   }
 
-  /* S-Function (ec_Ebox): '<S7>/ec_Ebox' */
+  /* Quantizer: '<Root>/Quantizer1' */
+  IntroductionExperiment_B.Quantizer1 = rt_roundd_snf
+    (IntroductionExperiment_B.SFunction[2] /
+     IntroductionExperiment_P.Quantizer1_Interval) *
+    IntroductionExperiment_P.Quantizer1_Interval;
 
-  /* Level2 S-Function Block: '<S7>/ec_Ebox' (ec_Ebox) */
+  /* S-Function (ec_Supervisor): '<S9>/S-Function' */
+
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[1];
     sfcnOutputs(rts,0);
   }
 
-  /* ManualSwitch: '<Root>/Select encoder' */
+  /* S-Function (ec_Ebox): '<S8>/ec_Ebox' */
+
+  /* Level2 S-Function Block: '<S8>/ec_Ebox' (ec_Ebox) */
+  {
+    SimStruct *rts = IntroductionExperiment_M->childSfunctions[2];
+    sfcnOutputs(rts,0);
+  }
+
+  /* ManualSwitch: '<Root>/Select encoder' incorporates:
+   *  Gain: '<S3>/count2rad'
+   */
   if (IntroductionExperiment_P.Selectencoder_CurrentSetting == 1) {
-    /* ManualSwitch: '<Root>/Select encoder' incorporates:
-     *  Gain: '<S2>/count2rad'
-     */
-    IntroductionExperiment_B.Selectencoder =
-      IntroductionExperiment_P.count2rad_Gain *
+    IntroductionExperiment_B.Kfv = IntroductionExperiment_P.count2rad_Gain *
       IntroductionExperiment_B.ec_Ebox_o2[0];
   } else {
-    /* ManualSwitch: '<Root>/Select encoder' incorporates:
-     *  Gain: '<S2>/count2rad'
-     */
-    IntroductionExperiment_B.Selectencoder =
-      IntroductionExperiment_P.count2rad_Gain *
+    IntroductionExperiment_B.Kfv = IntroductionExperiment_P.count2rad_Gain *
       IntroductionExperiment_B.ec_Ebox_o2[1];
   }
 
   /* End of ManualSwitch: '<Root>/Select encoder' */
 
-  /* MATLAB Function: '<S3>/SPERTE_measurement_function' incorporates:
-   *  Constant: '<S3>/SPERTE_measurement_samples'
-   *  Constant: '<S3>/SPERTE_measurement_trigger_command'
-   *  SignalConversion generated from: '<S9>/ SFunction '
+  /* Sum: '<Root>/Sum' */
+  IntroductionExperiment_B.Sum4 = IntroductionExperiment_B.Quantizer1 -
+    IntroductionExperiment_B.Kfv;
+
+  /* Gain: '<S1>/Gain1' */
+  IntroductionExperiment_B.Gain1 = IntroductionExperiment_P.Gain1_Gain *
+    IntroductionExperiment_B.Sum4;
+
+  /* S-Function (dleadlag): '<S1>/Dctleadlag' */
+
+  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
+  {
+    SimStruct *rts = IntroductionExperiment_M->childSfunctions[3];
+    sfcnOutputs(rts,0);
+  }
+
+  /* S-Function (dlowpass2): '<S1>/Dct2lowpass' */
+
+  /* Level2 S-Function Block: '<S1>/Dct2lowpass' (dlowpass2) */
+  {
+    SimStruct *rts = IntroductionExperiment_M->childSfunctions[4];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Sum: '<Root>/Sum1' */
+  IntroductionExperiment_B.Sum1 = IntroductionExperiment_B.Dct2lowpass +
+    IntroductionExperiment_B.Noise;
+
+  /* MATLAB Function: '<S4>/SPERTE_measurement_function' incorporates:
+   *  Constant: '<S4>/SPERTE_measurement_samples'
+   *  Constant: '<S4>/SPERTE_measurement_trigger_command'
+   *  SignalConversion generated from: '<S10>/ SFunction '
    */
   if ((((IntroductionExperiment_P.MeasurementBlock_triggertype == 1) &&
         (IntroductionExperiment_P.MeasurementBlock_trigger_comman == 1)) ||
@@ -474,7 +514,7 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
         IntroductionExperiment_B.xout[0] = (real32_T)
           IntroductionExperiment_B.Noise;
         IntroductionExperiment_B.xout[1] = (real32_T)
-          IntroductionExperiment_B.Selectencoder;
+          IntroductionExperiment_B.Sum1;
         IntroductionExperiment_B.bytesOutSizet = fwrite
           (&IntroductionExperiment_B.xout[0], sizeof(real32_T), (size_t)2,
            IntroductionExperiment_B.filestar);
@@ -497,58 +537,14 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
     }
   }
 
-  /* End of MATLAB Function: '<S3>/SPERTE_measurement_function' */
+  /* End of MATLAB Function: '<S4>/SPERTE_measurement_function' */
 
-  /* Constant: '<S5>/Start setpoint' */
-  IntroductionExperiment_B.Startsetpoint =
-    IntroductionExperiment_P.Refpower_stat;
-
-  /* S-Function (ref3b): '<S6>/S-Function' */
-
-  /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
-  {
-    SimStruct *rts = IntroductionExperiment_M->childSfunctions[2];
-    sfcnOutputs(rts,0);
-  }
-
-  /* Sum: '<Root>/Sum' incorporates:
-   *  Quantizer: '<Root>/Quantizer1'
-   */
-  IntroductionExperiment_B.Sum = rt_roundd_snf
-    (IntroductionExperiment_B.SFunction_c[2] /
-     IntroductionExperiment_P.Quantizer1_Interval) *
-    IntroductionExperiment_P.Quantizer1_Interval;
-
-  /* Gain: '<S1>/Gain1' */
-  IntroductionExperiment_B.Gain1 = IntroductionExperiment_P.Gain1_Gain *
-    IntroductionExperiment_B.Sum;
-
-  /* S-Function (dpd): '<S1>/Dctpd' */
-
-  /* Level2 S-Function Block: '<S1>/Dctpd' (dpd) */
-  {
-    SimStruct *rts = IntroductionExperiment_M->childSfunctions[3];
-    sfcnOutputs(rts,0);
-  }
-
-  /* S-Function (dlowpass2): '<S1>/Dct2lowpass' */
-
-  /* Level2 S-Function Block: '<S1>/Dct2lowpass' (dlowpass2) */
-  {
-    SimStruct *rts = IntroductionExperiment_M->childSfunctions[4];
-    sfcnOutputs(rts,0);
-  }
-
-  /* Sum: '<Root>/Sum1' */
-  IntroductionExperiment_B.Sum1 = IntroductionExperiment_B.Dct2lowpass +
-    IntroductionExperiment_B.Noise;
-
-  /* SignalConversion: '<S4>/Buffer' */
+  /* SignalConversion: '<S5>/Buffer' */
   IntroductionExperiment_B.Buffer[0] = IntroductionExperiment_B.Sum1;
-  IntroductionExperiment_B.Buffer[1] = IntroductionExperiment_B.Selectencoder;
-  IntroductionExperiment_B.Buffer[2] = IntroductionExperiment_B.Sum;
+  IntroductionExperiment_B.Buffer[1] = IntroductionExperiment_B.Kfv;
+  IntroductionExperiment_B.Buffer[2] = IntroductionExperiment_B.Sum4;
 
-  /* RateTransition: '<S4>/Downsample' */
+  /* RateTransition: '<S5>/Downsample' */
   if (IntroductionExperiment_M->Timing.RateInteraction.TID1_2) {
     IntroductionExperiment_DW.Downsample_Buffer[0] =
       IntroductionExperiment_B.Buffer[0];
@@ -558,80 +554,95 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
       IntroductionExperiment_B.Buffer[2];
   }
 
-  /* End of RateTransition: '<S4>/Downsample' */
+  /* End of RateTransition: '<S5>/Downsample' */
 
   /* SignalConversion generated from: '<Root>/To Workspace' */
   IntroductionExperiment_B.TmpSignalConversionAtToWorkspac[0] =
     IntroductionExperiment_B.Noise;
   IntroductionExperiment_B.TmpSignalConversionAtToWorkspac[1] =
-    IntroductionExperiment_B.Selectencoder;
+    IntroductionExperiment_B.Sum1;
 
-  /* Constant: '<S2>/Constant1' */
+  /* Constant: '<S3>/Constant1' */
   memcpy(&IntroductionExperiment_B.Constant1[0],
          &IntroductionExperiment_P.Constant1_Value[0], sizeof(real_T) << 3U);
 
-  /* Gain: '<S7>/Gain' incorporates:
-   *  Constant: '<S2>/Constant'
+  /* Gain: '<S8>/Gain' incorporates:
+   *  Constant: '<S3>/Constant'
    */
   IntroductionExperiment_B.Gain[0] = IntroductionExperiment_P.Gain_Gain *
     IntroductionExperiment_P.Constant_Value[0];
   IntroductionExperiment_B.Gain[1] = IntroductionExperiment_P.Gain_Gain *
     IntroductionExperiment_P.Constant_Value[1];
 
-  /* Saturate: '<S2>/Saturation' */
-  if (IntroductionExperiment_B.Sum1 >
+  /* Sum: '<Root>/Sum4' incorporates:
+   *  Gain: '<S2>/Kfa'
+   *  Gain: '<S2>/Kfp'
+   *  Gain: '<S2>/Kfv'
+   *  Sum: '<Root>/Sum2'
+   *  Sum: '<Root>/Sum3'
+   */
+  IntroductionExperiment_B.Quantizer1 = ((IntroductionExperiment_P.Kfa_Gain *
+    IntroductionExperiment_B.SFunction[0] + IntroductionExperiment_P.Kfv_Gain *
+    IntroductionExperiment_B.SFunction[1]) + IntroductionExperiment_P.Kfp_Gain *
+    IntroductionExperiment_B.Quantizer1) + IntroductionExperiment_B.Sum1;
+
+  /* Saturate: '<S3>/Saturation' */
+  if (IntroductionExperiment_B.Quantizer1 >
       IntroductionExperiment_P.Saturation_UpperSat) {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_P.Saturation_UpperSat;
-  } else if (IntroductionExperiment_B.Sum1 <
+    IntroductionExperiment_B.Quantizer1 =
+      IntroductionExperiment_P.Saturation_UpperSat;
+  } else if (IntroductionExperiment_B.Quantizer1 <
              IntroductionExperiment_P.Saturation_LowerSat) {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_P.Saturation_LowerSat;
-  } else {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_B.Sum1;
+    IntroductionExperiment_B.Quantizer1 =
+      IntroductionExperiment_P.Saturation_LowerSat;
   }
 
-  /* Saturate: '<S7>/Saturation' */
-  if (IntroductionExperiment_B.Sum >
+  /* Saturate: '<S8>/Saturation' */
+  if (IntroductionExperiment_B.Quantizer1 >
       IntroductionExperiment_P.Saturation_UpperSat_d) {
-    /* Saturate: '<S7>/Saturation' */
+    /* Saturate: '<S8>/Saturation' */
     IntroductionExperiment_B.Saturation[0] =
       IntroductionExperiment_P.Saturation_UpperSat_d;
-  } else if (IntroductionExperiment_B.Sum <
+  } else if (IntroductionExperiment_B.Quantizer1 <
              IntroductionExperiment_P.Saturation_LowerSat_e) {
-    /* Saturate: '<S7>/Saturation' */
+    /* Saturate: '<S8>/Saturation' */
     IntroductionExperiment_B.Saturation[0] =
       IntroductionExperiment_P.Saturation_LowerSat_e;
   } else {
-    /* Saturate: '<S7>/Saturation' */
-    IntroductionExperiment_B.Saturation[0] = IntroductionExperiment_B.Sum;
+    /* Saturate: '<S8>/Saturation' */
+    IntroductionExperiment_B.Saturation[0] = IntroductionExperiment_B.Quantizer1;
   }
 
-  /* Saturate: '<S2>/Saturation' incorporates:
-   *  Constant: '<S2>/Constant2'
+  /* Saturate: '<S3>/Saturation' incorporates:
+   *  Constant: '<S3>/Constant2'
    */
   if (IntroductionExperiment_P.Constant2_Value >
       IntroductionExperiment_P.Saturation_UpperSat) {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_P.Saturation_UpperSat;
+    IntroductionExperiment_B.Quantizer1 =
+      IntroductionExperiment_P.Saturation_UpperSat;
   } else if (IntroductionExperiment_P.Constant2_Value <
              IntroductionExperiment_P.Saturation_LowerSat) {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_P.Saturation_LowerSat;
+    IntroductionExperiment_B.Quantizer1 =
+      IntroductionExperiment_P.Saturation_LowerSat;
   } else {
-    IntroductionExperiment_B.Sum = IntroductionExperiment_P.Constant2_Value;
+    IntroductionExperiment_B.Quantizer1 =
+      IntroductionExperiment_P.Constant2_Value;
   }
 
-  /* Saturate: '<S7>/Saturation' */
-  if (IntroductionExperiment_B.Sum >
+  /* Saturate: '<S8>/Saturation' */
+  if (IntroductionExperiment_B.Quantizer1 >
       IntroductionExperiment_P.Saturation_UpperSat_d) {
-    /* Saturate: '<S7>/Saturation' */
+    /* Saturate: '<S8>/Saturation' */
     IntroductionExperiment_B.Saturation[1] =
       IntroductionExperiment_P.Saturation_UpperSat_d;
-  } else if (IntroductionExperiment_B.Sum <
+  } else if (IntroductionExperiment_B.Quantizer1 <
              IntroductionExperiment_P.Saturation_LowerSat_e) {
-    /* Saturate: '<S7>/Saturation' */
+    /* Saturate: '<S8>/Saturation' */
     IntroductionExperiment_B.Saturation[1] =
       IntroductionExperiment_P.Saturation_LowerSat_e;
   } else {
-    /* Saturate: '<S7>/Saturation' */
-    IntroductionExperiment_B.Saturation[1] = IntroductionExperiment_B.Sum;
+    /* Saturate: '<S8>/Saturation' */
+    IntroductionExperiment_B.Saturation[1] = IntroductionExperiment_B.Quantizer1;
   }
 
   /* Update for RandomNumber: '<Root>/Noise' */
@@ -699,7 +710,7 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
 /* Model step function for TID2 */
 void IntroductionExperiment_step2(void) /* Sample time: [0.002s, 0.0s] */
 {
-  /* RateTransition: '<S4>/Downsample' */
+  /* RateTransition: '<S5>/Downsample' */
   IntroductionExperiment_B.Downsample[0] =
     IntroductionExperiment_DW.Downsample_Buffer[0];
   IntroductionExperiment_B.Downsample[1] =
@@ -817,10 +828,10 @@ void IntroductionExperiment_initialize(void)
   IntroductionExperiment_M->Timing.stepSize1 = 0.00025;
 
   /* External mode info */
-  IntroductionExperiment_M->Sizes.checksums[0] = (2183734962U);
-  IntroductionExperiment_M->Sizes.checksums[1] = (1968368210U);
-  IntroductionExperiment_M->Sizes.checksums[2] = (3268987147U);
-  IntroductionExperiment_M->Sizes.checksums[3] = (1595424770U);
+  IntroductionExperiment_M->Sizes.checksums[0] = (3094848169U);
+  IntroductionExperiment_M->Sizes.checksums[1] = (72560541U);
+  IntroductionExperiment_M->Sizes.checksums[2] = (2714977471U);
+  IntroductionExperiment_M->Sizes.checksums[3] = (2797434118U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -925,7 +936,7 @@ void IntroductionExperiment_initialize(void)
       }
     }
 
-    /* Level2 S-Function Block: IntroductionExperiment/<S8>/S-Function (ec_Supervisor) */
+    /* Level2 S-Function Block: IntroductionExperiment/<S7>/S-Function (ref3b) */
     {
       SimStruct *rts = IntroductionExperiment_M->childSfunctions[0];
 
@@ -982,6 +993,30 @@ void IntroductionExperiment_initialize(void)
           &IntroductionExperiment_M->NonInlinedSFcns.periodicStatesInfo[0]);
       }
 
+      /* inputs */
+      {
+        _ssSetNumInputPorts(rts, 1);
+        ssSetPortInfoForInputs(rts,
+          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.inputPortInfo[0]);
+        _ssSetPortInfo2ForInputUnits(rts,
+          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.inputPortUnits[0]);
+        ssSetInputPortUnit(rts, 0, 0);
+        _ssSetPortInfo2ForInputCoSimAttribute(rts,
+          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.inputPortCoSimAttribute
+          [0]);
+        ssSetInputPortIsContinuousQuantity(rts, 0, 0);
+
+        /* port 0 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.UPtrs0;
+          sfcnUPtrs[0] = &IntroductionExperiment_B.Startsetpoint;
+          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 0, 1);
+          ssSetInputPortWidth(rts, 0, 1);
+        }
+      }
+
       /* outputs */
       {
         ssSetPortInfoForOutputs(rts,
@@ -998,16 +1033,15 @@ void IntroductionExperiment_initialize(void)
         /* port 0 */
         {
           _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
+          ssSetOutputPortWidth(rts, 0, 3);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &IntroductionExperiment_B.SFunction));
+            IntroductionExperiment_B.SFunction));
         }
       }
 
       /* path info */
       ssSetModelName(rts, "S-Function");
-      ssSetPath(rts,
-                "IntroductionExperiment/Fourth Order Motion System/Ethercat Supervisor/S-Function");
+      ssSetPath(rts, "IntroductionExperiment/Subsystem/S-Function");
       ssSetRTModel(rts,IntroductionExperiment_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1017,35 +1051,54 @@ void IntroductionExperiment_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.params;
-        ssSetSFcnParamsCount(rts, 2);
+        ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       IntroductionExperiment_P.SFunction_P1_Size_k);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       IntroductionExperiment_P.SFunction_P2_Size);
+                       IntroductionExperiment_P.SFunction_P1_Size);
+      }
+
+      /* work vectors */
+      ssSetRWork(rts, (real_T *) &IntroductionExperiment_DW.SFunction_RWORK[0]);
+
+      {
+        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
+          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.dWork;
+        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
+          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn0.dWorkAux;
+        ssSetSFcnDWork(rts, dWorkRecord);
+        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
+        _ssSetNumDWork(rts, 1);
+
+        /* RWORK */
+        ssSetDWorkWidth(rts, 0, 50);
+        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
+        ssSetDWorkComplexSignal(rts, 0, 0);
+        ssSetDWork(rts, 0, &IntroductionExperiment_DW.SFunction_RWORK[0]);
       }
 
       /* registration */
-      ec_Supervisor(rts);
+      ref3b(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.00025);
+      ssSetSampleTime(rts, 0, 0.0);
       ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 1;
+      sfcnTsMap[0] = 0;
 
       /* set compiled values of dynamic vector attributes */
       ssSetNumNonsampledZCs(rts, 0);
 
       /* Update connectivity flags for each port */
+      _ssSetInputPortConnected(rts, 0, 1);
       _ssSetOutputPortConnected(rts, 0, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
 
       /* Update the BufferDstPort flags for each input port */
+      ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: IntroductionExperiment/<S7>/ec_Ebox (ec_Ebox) */
+    /* Level2 S-Function Block: IntroductionExperiment/<S9>/S-Function (ec_Supervisor) */
     {
       SimStruct *rts = IntroductionExperiment_M->childSfunctions[1];
 
@@ -1102,110 +1155,32 @@ void IntroductionExperiment_initialize(void)
           &IntroductionExperiment_M->NonInlinedSFcns.periodicStatesInfo[1]);
       }
 
-      /* inputs */
-      {
-        _ssSetNumInputPorts(rts, 3);
-        ssSetPortInfoForInputs(rts,
-          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.inputPortInfo[0]);
-        _ssSetPortInfo2ForInputUnits(rts,
-          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.inputPortUnits[0]);
-        ssSetInputPortUnit(rts, 0, 0);
-        ssSetInputPortUnit(rts, 1, 0);
-        ssSetInputPortUnit(rts, 2, 0);
-        _ssSetPortInfo2ForInputCoSimAttribute(rts,
-          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.inputPortCoSimAttribute
-          [0]);
-        ssSetInputPortIsContinuousQuantity(rts, 0, 0);
-        ssSetInputPortIsContinuousQuantity(rts, 1, 0);
-        ssSetInputPortIsContinuousQuantity(rts, 2, 0);
-
-        /* port 0 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.UPtrs0;
-          sfcnUPtrs[0] = IntroductionExperiment_B.Saturation;
-          sfcnUPtrs[1] = &IntroductionExperiment_B.Saturation[1];
-          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 2);
-        }
-
-        /* port 1 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.UPtrs1;
-          sfcnUPtrs[0] = IntroductionExperiment_B.Gain;
-          sfcnUPtrs[1] = &IntroductionExperiment_B.Gain[1];
-          ssSetInputPortSignalPtrs(rts, 1, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 1, 1);
-          ssSetInputPortWidth(rts, 1, 2);
-        }
-
-        /* port 2 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.UPtrs2;
-
-          {
-            int_T i1;
-            const real_T *u2 = IntroductionExperiment_B.Constant1;
-            for (i1=0; i1 < 8; i1++) {
-              sfcnUPtrs[i1] = &u2[i1];
-            }
-          }
-
-          ssSetInputPortSignalPtrs(rts, 2, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 2, 1);
-          ssSetInputPortWidth(rts, 2, 8);
-        }
-      }
-
       /* outputs */
       {
         ssSetPortInfoForOutputs(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.outputPortInfo[0]);
-        _ssSetNumOutputPorts(rts, 3);
+        _ssSetNumOutputPorts(rts, 1);
         _ssSetPortInfo2ForOutputUnits(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.outputPortUnits[0]);
         ssSetOutputPortUnit(rts, 0, 0);
-        ssSetOutputPortUnit(rts, 1, 0);
-        ssSetOutputPortUnit(rts, 2, 0);
         _ssSetPortInfo2ForOutputCoSimAttribute(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.outputPortCoSimAttribute
           [0]);
         ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
-        ssSetOutputPortIsContinuousQuantity(rts, 1, 0);
-        ssSetOutputPortIsContinuousQuantity(rts, 2, 0);
 
         /* port 0 */
         {
           _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 2);
+          ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            IntroductionExperiment_B.ec_Ebox_o1));
-        }
-
-        /* port 1 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 1, 1);
-          ssSetOutputPortWidth(rts, 1, 2);
-          ssSetOutputPortSignal(rts, 1, ((real_T *)
-            IntroductionExperiment_B.ec_Ebox_o2));
-        }
-
-        /* port 2 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 2, 1);
-          ssSetOutputPortWidth(rts, 2, 8);
-          ssSetOutputPortSignal(rts, 2, ((real_T *)
-            IntroductionExperiment_B.ec_Ebox_o3));
+            &IntroductionExperiment_B.SFunction_b));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "ec_Ebox");
+      ssSetModelName(rts, "S-Function");
       ssSetPath(rts,
-                "IntroductionExperiment/Fourth Order Motion System/Ethercat E-box/ec_Ebox");
+                "IntroductionExperiment/Fourth Order Motion System/Ethercat Supervisor/S-Function");
       ssSetRTModel(rts,IntroductionExperiment_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1215,14 +1190,16 @@ void IntroductionExperiment_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn1.params;
-        ssSetSFcnParamsCount(rts, 1);
+        ssSetSFcnParamsCount(rts, 2);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       IntroductionExperiment_P.ec_Ebox_P1_Size);
+                       IntroductionExperiment_P.SFunction_P1_Size_k);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       IntroductionExperiment_P.SFunction_P2_Size);
       }
 
       /* registration */
-      ec_Ebox(rts);
+      ec_Supervisor(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -1235,23 +1212,13 @@ void IntroductionExperiment_initialize(void)
       ssSetNumNonsampledZCs(rts, 0);
 
       /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 1);
-      _ssSetInputPortConnected(rts, 1, 1);
-      _ssSetInputPortConnected(rts, 2, 1);
       _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortConnected(rts, 1, 1);
-      _ssSetOutputPortConnected(rts, 2, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
-      _ssSetOutputPortBeingMerged(rts, 1, 0);
-      _ssSetOutputPortBeingMerged(rts, 2, 0);
 
       /* Update the BufferDstPort flags for each input port */
-      ssSetInputPortBufferDstPort(rts, 0, -1);
-      ssSetInputPortBufferDstPort(rts, 1, -1);
-      ssSetInputPortBufferDstPort(rts, 2, -1);
     }
 
-    /* Level2 S-Function Block: IntroductionExperiment/<S6>/S-Function (ref3b) */
+    /* Level2 S-Function Block: IntroductionExperiment/<S8>/ec_Ebox (ec_Ebox) */
     {
       SimStruct *rts = IntroductionExperiment_M->childSfunctions[2];
 
@@ -1310,25 +1277,59 @@ void IntroductionExperiment_initialize(void)
 
       /* inputs */
       {
-        _ssSetNumInputPorts(rts, 1);
+        _ssSetNumInputPorts(rts, 3);
         ssSetPortInfoForInputs(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.inputPortInfo[0]);
         _ssSetPortInfo2ForInputUnits(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.inputPortUnits[0]);
         ssSetInputPortUnit(rts, 0, 0);
+        ssSetInputPortUnit(rts, 1, 0);
+        ssSetInputPortUnit(rts, 2, 0);
         _ssSetPortInfo2ForInputCoSimAttribute(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.inputPortCoSimAttribute
           [0]);
         ssSetInputPortIsContinuousQuantity(rts, 0, 0);
+        ssSetInputPortIsContinuousQuantity(rts, 1, 0);
+        ssSetInputPortIsContinuousQuantity(rts, 2, 0);
 
         /* port 0 */
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.UPtrs0;
-          sfcnUPtrs[0] = &IntroductionExperiment_B.Startsetpoint;
+          sfcnUPtrs[0] = IntroductionExperiment_B.Saturation;
+          sfcnUPtrs[1] = &IntroductionExperiment_B.Saturation[1];
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 1);
+          ssSetInputPortWidth(rts, 0, 2);
+        }
+
+        /* port 1 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.UPtrs1;
+          sfcnUPtrs[0] = IntroductionExperiment_B.Gain;
+          sfcnUPtrs[1] = &IntroductionExperiment_B.Gain[1];
+          ssSetInputPortSignalPtrs(rts, 1, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 1, 1);
+          ssSetInputPortWidth(rts, 1, 2);
+        }
+
+        /* port 2 */
+        {
+          real_T const **sfcnUPtrs = (real_T const **)
+            &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.UPtrs2;
+
+          {
+            int_T i1;
+            const real_T *u2 = IntroductionExperiment_B.Constant1;
+            for (i1=0; i1 < 8; i1++) {
+              sfcnUPtrs[i1] = &u2[i1];
+            }
+          }
+
+          ssSetInputPortSignalPtrs(rts, 2, (InputPtrsType)&sfcnUPtrs[0]);
+          _ssSetInputPortNumDimensions(rts, 2, 1);
+          ssSetInputPortWidth(rts, 2, 8);
         }
       }
 
@@ -1336,27 +1337,48 @@ void IntroductionExperiment_initialize(void)
       {
         ssSetPortInfoForOutputs(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.outputPortInfo[0]);
-        _ssSetNumOutputPorts(rts, 1);
+        _ssSetNumOutputPorts(rts, 3);
         _ssSetPortInfo2ForOutputUnits(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.outputPortUnits[0]);
         ssSetOutputPortUnit(rts, 0, 0);
+        ssSetOutputPortUnit(rts, 1, 0);
+        ssSetOutputPortUnit(rts, 2, 0);
         _ssSetPortInfo2ForOutputCoSimAttribute(rts,
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.outputPortCoSimAttribute
           [0]);
         ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
+        ssSetOutputPortIsContinuousQuantity(rts, 1, 0);
+        ssSetOutputPortIsContinuousQuantity(rts, 2, 0);
 
         /* port 0 */
         {
           _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 3);
+          ssSetOutputPortWidth(rts, 0, 2);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            IntroductionExperiment_B.SFunction_c));
+            IntroductionExperiment_B.ec_Ebox_o1));
+        }
+
+        /* port 1 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 1, 1);
+          ssSetOutputPortWidth(rts, 1, 2);
+          ssSetOutputPortSignal(rts, 1, ((real_T *)
+            IntroductionExperiment_B.ec_Ebox_o2));
+        }
+
+        /* port 2 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 2, 1);
+          ssSetOutputPortWidth(rts, 2, 8);
+          ssSetOutputPortSignal(rts, 2, ((real_T *)
+            IntroductionExperiment_B.ec_Ebox_o3));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "S-Function");
-      ssSetPath(rts, "IntroductionExperiment/Subsystem/S-Function");
+      ssSetModelName(rts, "ec_Ebox");
+      ssSetPath(rts,
+                "IntroductionExperiment/Fourth Order Motion System/Ethercat E-box/ec_Ebox");
       ssSetRTModel(rts,IntroductionExperiment_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1369,30 +1391,11 @@ void IntroductionExperiment_initialize(void)
         ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       IntroductionExperiment_P.SFunction_P1_Size);
-      }
-
-      /* work vectors */
-      ssSetRWork(rts, (real_T *) &IntroductionExperiment_DW.SFunction_RWORK[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &IntroductionExperiment_M->NonInlinedSFcns.Sfcn2.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* RWORK */
-        ssSetDWorkWidth(rts, 0, 50);
-        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &IntroductionExperiment_DW.SFunction_RWORK[0]);
+                       IntroductionExperiment_P.ec_Ebox_P1_Size);
       }
 
       /* registration */
-      ref3b(rts);
+      ec_Ebox(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -1406,14 +1409,22 @@ void IntroductionExperiment_initialize(void)
 
       /* Update connectivity flags for each port */
       _ssSetInputPortConnected(rts, 0, 1);
+      _ssSetInputPortConnected(rts, 1, 1);
+      _ssSetInputPortConnected(rts, 2, 1);
       _ssSetOutputPortConnected(rts, 0, 1);
+      _ssSetOutputPortConnected(rts, 1, 1);
+      _ssSetOutputPortConnected(rts, 2, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
+      _ssSetOutputPortBeingMerged(rts, 1, 0);
+      _ssSetOutputPortBeingMerged(rts, 2, 0);
 
       /* Update the BufferDstPort flags for each input port */
       ssSetInputPortBufferDstPort(rts, 0, -1);
+      ssSetInputPortBufferDstPort(rts, 1, -1);
+      ssSetInputPortBufferDstPort(rts, 2, -1);
     }
 
-    /* Level2 S-Function Block: IntroductionExperiment/<S1>/Dctpd (dpd) */
+    /* Level2 S-Function Block: IntroductionExperiment/<S1>/Dctleadlag (dleadlag) */
     {
       SimStruct *rts = IntroductionExperiment_M->childSfunctions[3];
 
@@ -1512,13 +1523,13 @@ void IntroductionExperiment_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &IntroductionExperiment_B.Dctpd));
+            &IntroductionExperiment_B.Dctleadlag));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctpd");
-      ssSetPath(rts, "IntroductionExperiment/Controller (motor side)/Dctpd");
+      ssSetModelName(rts, "Dctleadlag");
+      ssSetPath(rts, "IntroductionExperiment/Controller (motor side)/Dctleadlag");
       ssSetRTModel(rts,IntroductionExperiment_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1530,13 +1541,16 @@ void IntroductionExperiment_initialize(void)
           &IntroductionExperiment_M->NonInlinedSFcns.Sfcn3.params;
         ssSetSFcnParamsCount(rts, 3);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)IntroductionExperiment_P.Dctpd_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)IntroductionExperiment_P.Dctpd_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)IntroductionExperiment_P.Dctpd_P3_Size);
+        ssSetSFcnParam(rts, 0, (mxArray*)
+                       IntroductionExperiment_P.Dctleadlag_P1_Size);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       IntroductionExperiment_P.Dctleadlag_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       IntroductionExperiment_P.Dctleadlag_P3_Size);
       }
 
       /* work vectors */
-      ssSetRWork(rts, (real_T *) &IntroductionExperiment_DW.Dctpd_RWORK[0]);
+      ssSetRWork(rts, (real_T *) &IntroductionExperiment_DW.Dctleadlag_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1551,11 +1565,11 @@ void IntroductionExperiment_initialize(void)
         ssSetDWorkWidth(rts, 0, 2);
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &IntroductionExperiment_DW.Dctpd_RWORK[0]);
+        ssSetDWork(rts, 0, &IntroductionExperiment_DW.Dctleadlag_RWORK[0]);
       }
 
       /* registration */
-      dpd(rts);
+      dleadlag(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -1650,7 +1664,7 @@ void IntroductionExperiment_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &IntroductionExperiment_M->NonInlinedSFcns.Sfcn4.UPtrs0;
-          sfcnUPtrs[0] = &IntroductionExperiment_B.Dctpd;
+          sfcnUPtrs[0] = &IntroductionExperiment_B.Dctleadlag;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -1744,21 +1758,21 @@ void IntroductionExperiment_initialize(void)
     }
   }
 
-  /* Start for S-Function (ec_Supervisor): '<S8>/S-Function' */
-  /* Level2 S-Function Block: '<S8>/S-Function' (ec_Supervisor) */
+  /* Start for Constant: '<S6>/Start setpoint' */
+  IntroductionExperiment_B.Startsetpoint =
+    IntroductionExperiment_P.Refpower_stat;
+
+  /* Start for S-Function (ec_Supervisor): '<S9>/S-Function' */
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
-    SimStruct *rts = IntroductionExperiment_M->childSfunctions[0];
+    SimStruct *rts = IntroductionExperiment_M->childSfunctions[1];
     sfcnStart(rts);
     if (ssGetErrorStatus(rts) != (NULL))
       return;
   }
 
-  /* Start for Constant: '<S5>/Start setpoint' */
-  IntroductionExperiment_B.Startsetpoint =
-    IntroductionExperiment_P.Refpower_stat;
-
-  /* Start for S-Function (dpd): '<S1>/Dctpd' */
-  /* Level2 S-Function Block: '<S1>/Dctpd' (dpd) */
+  /* Start for S-Function (dleadlag): '<S1>/Dctleadlag' */
+  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[3];
     sfcnStart(rts);
@@ -1775,7 +1789,7 @@ void IntroductionExperiment_initialize(void)
       return;
   }
 
-  /* Start for Constant: '<S2>/Constant1' */
+  /* Start for Constant: '<S3>/Constant1' */
   memcpy(&IntroductionExperiment_B.Constant1[0],
          &IntroductionExperiment_P.Constant1_Value[0], sizeof(real_T) << 3U);
 
@@ -1812,16 +1826,16 @@ void IntroductionExperiment_initialize(void)
 
     /* End of InitializeConditions for RandomNumber: '<Root>/Noise' */
 
-    /* InitializeConditions for S-Function (ref3b): '<S6>/S-Function' */
-    /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
+    /* InitializeConditions for S-Function (ref3b): '<S7>/S-Function' */
+    /* Level2 S-Function Block: '<S7>/S-Function' (ref3b) */
     {
-      SimStruct *rts = IntroductionExperiment_M->childSfunctions[2];
+      SimStruct *rts = IntroductionExperiment_M->childSfunctions[0];
       sfcnInitializeConditions(rts);
       if (ssGetErrorStatus(rts) != (NULL))
         return;
     }
 
-    /* SystemInitialize for MATLAB Function: '<S3>/SPERTE_measurement_function' */
+    /* SystemInitialize for MATLAB Function: '<S4>/SPERTE_measurement_function' */
     a = NULL;
     for (i = 0; i < 20; i++) {
       IntroductionExperiment_DW.eml_autoflush[i] = false;
@@ -1833,36 +1847,36 @@ void IntroductionExperiment_initialize(void)
     IntroductionExperiment_DW.fileID = 0.0;
     IntroductionExperiment_DW.busy = 0U;
 
-    /* End of SystemInitialize for MATLAB Function: '<S3>/SPERTE_measurement_function' */
+    /* End of SystemInitialize for MATLAB Function: '<S4>/SPERTE_measurement_function' */
   }
 }
 
 /* Model terminate function */
 void IntroductionExperiment_terminate(void)
 {
-  /* Terminate for S-Function (ec_Supervisor): '<S8>/S-Function' */
-  /* Level2 S-Function Block: '<S8>/S-Function' (ec_Supervisor) */
+  /* Terminate for S-Function (ref3b): '<S7>/S-Function' */
+  /* Level2 S-Function Block: '<S7>/S-Function' (ref3b) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (ec_Ebox): '<S7>/ec_Ebox' */
-  /* Level2 S-Function Block: '<S7>/ec_Ebox' (ec_Ebox) */
+  /* Terminate for S-Function (ec_Supervisor): '<S9>/S-Function' */
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (ref3b): '<S6>/S-Function' */
-  /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
+  /* Terminate for S-Function (ec_Ebox): '<S8>/ec_Ebox' */
+  /* Level2 S-Function Block: '<S8>/ec_Ebox' (ec_Ebox) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dpd): '<S1>/Dctpd' */
-  /* Level2 S-Function Block: '<S1>/Dctpd' (dpd) */
+  /* Terminate for S-Function (dleadlag): '<S1>/Dctleadlag' */
+  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
   {
     SimStruct *rts = IntroductionExperiment_M->childSfunctions[3];
     sfcnTerminate(rts);
