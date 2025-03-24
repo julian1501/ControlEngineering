@@ -1,17 +1,14 @@
-t = simout.time;
-d = simout.signals.values(:,1);
-u = simout.signals.values(:,2);
 
-nfft = 400;
+d = simout(:,1);
+u = simout(:,2);
+
+nfft = 5000;
 window = hann(nfft);
-noverlap = 0.5*nfft;
+noverlap = nfft/2;
 
-[S,F] = tfestimate(d,u,window,noverlap,nfft,Fs);
+[S,F] = tfestimate(u,d,window,noverlap,nfft,Fs);
 
-Kp = 1.2; Kd = 0.1;
-C = Kp + Kd.*F;
-
-TF = C.^-1.*(S.^-1 - 1);
+TF = S.^-1 - 1;
 
 close all;
 
@@ -28,3 +25,4 @@ semilogx(F,(180/pi)*angle(TF))
 grid on;
 ylabel("Phase [deg]")
 xlabel("Frequency [Hz]")
+
