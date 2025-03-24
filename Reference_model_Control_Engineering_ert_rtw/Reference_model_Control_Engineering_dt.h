@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.0
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 13 11:48:57 2025
+ * C source code generated on : Mon Mar 24 13:10:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -72,14 +72,16 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&Reference_model_Control_Engineering_B.Noise), 0, 0, 43 }
+  { (char_T *)(&Reference_model_Control_Engineering_B.ec_Ebox_o1[0]), 0, 0, 12 },
+
+  { (char_T *)(&Reference_model_Control_Engineering_B.Noise), 0, 0, 30 }
   ,
 
   { (char_T *)(&Reference_model_Control_Engineering_DW.NextOutput), 0, 0, 61 },
 
   { (char_T *)
     (&Reference_model_Control_Engineering_DW.ToWorkspace_PWORK.LoggedData), 11,
-    0, 2 },
+    0, 6 },
 
   { (char_T *)(&Reference_model_Control_Engineering_DW.RandSeed), 7, 0, 2 },
 
@@ -96,14 +98,14 @@ static DataTypeTransition rtBTransitions[] = {
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  8U,
+  9U,
   rtBTransitions
 };
 
 /* data type transitions for Parameters structure */
 static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&Reference_model_Control_Engineering_P.SFunction_P1_Size[0]), 0,
-    0, 21 },
+    0, 9 },
 
   { (char_T *)(&Reference_model_Control_Engineering_P.MeasurementBlock_N_samples),
     7, 0, 1 },

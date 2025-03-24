@@ -41,7 +41,7 @@
 
                     ;% Reference_model_Control_Engineering_P.Refpower_stat
                     section.data(3).logicalSrcIdx = 2;
-                    section.data(3).dtTransOffset = 20;
+                    section.data(3).dtTransOffset = 8;
 
             nTotData = nTotData + section.nData;
             paramMap.sections(1) = section;
@@ -237,7 +237,7 @@
     ;%**************************
     
         nTotData      = 0; %add to this count as we go
-        nTotSects     = 1;
+        nTotSects     = 2;
         sectIdxOffset = 0;
 
         ;%
@@ -260,8 +260,27 @@
         ;%
         ;% Auto data (Reference_model_Control_Engineering_B)
         ;%
-            section.nData     = 18;
-            section.data(18)  = dumData; %prealloc
+            section.nData     = 3;
+            section.data(3)  = dumData; %prealloc
+
+                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o1
+                    section.data(1).logicalSrcIdx = 2;
+                    section.data(1).dtTransOffset = 0;
+
+                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o2
+                    section.data(2).logicalSrcIdx = 3;
+                    section.data(2).dtTransOffset = 2;
+
+                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o3
+                    section.data(3).logicalSrcIdx = 4;
+                    section.data(3).dtTransOffset = 4;
+
+            nTotData = nTotData + section.nData;
+            sigMap.sections(1) = section;
+            clear section
+
+            section.nData     = 15;
+            section.data(15)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_B.Noise
                     section.data(1).logicalSrcIdx = 0;
@@ -271,72 +290,60 @@
                     section.data(2).logicalSrcIdx = 1;
                     section.data(2).dtTransOffset = 1;
 
-                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o1
-                    section.data(3).logicalSrcIdx = 2;
+                    ;% Reference_model_Control_Engineering_B.Selectencoder
+                    section.data(3).logicalSrcIdx = 5;
                     section.data(3).dtTransOffset = 2;
 
-                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o2
-                    section.data(4).logicalSrcIdx = 3;
-                    section.data(4).dtTransOffset = 4;
-
-                    ;% Reference_model_Control_Engineering_B.ec_Ebox_o3
-                    section.data(5).logicalSrcIdx = 4;
-                    section.data(5).dtTransOffset = 6;
-
-                    ;% Reference_model_Control_Engineering_B.Selectencoder
-                    section.data(6).logicalSrcIdx = 5;
-                    section.data(6).dtTransOffset = 14;
-
                     ;% Reference_model_Control_Engineering_B.Startsetpoint
-                    section.data(7).logicalSrcIdx = 6;
-                    section.data(7).dtTransOffset = 15;
+                    section.data(4).logicalSrcIdx = 6;
+                    section.data(4).dtTransOffset = 3;
 
                     ;% Reference_model_Control_Engineering_B.SFunction_c
-                    section.data(8).logicalSrcIdx = 7;
-                    section.data(8).dtTransOffset = 16;
+                    section.data(5).logicalSrcIdx = 7;
+                    section.data(5).dtTransOffset = 4;
+
+                    ;% Reference_model_Control_Engineering_B.Sum
+                    section.data(6).logicalSrcIdx = 8;
+                    section.data(6).dtTransOffset = 7;
 
                     ;% Reference_model_Control_Engineering_B.Buffer
-                    section.data(9).logicalSrcIdx = 8;
-                    section.data(9).dtTransOffset = 19;
+                    section.data(7).logicalSrcIdx = 9;
+                    section.data(7).dtTransOffset = 8;
 
                     ;% Reference_model_Control_Engineering_B.Gain1
-                    section.data(10).logicalSrcIdx = 9;
-                    section.data(10).dtTransOffset = 22;
+                    section.data(8).logicalSrcIdx = 10;
+                    section.data(8).dtTransOffset = 11;
 
                     ;% Reference_model_Control_Engineering_B.Dctpd
-                    section.data(11).logicalSrcIdx = 10;
-                    section.data(11).dtTransOffset = 23;
+                    section.data(9).logicalSrcIdx = 11;
+                    section.data(9).dtTransOffset = 12;
 
                     ;% Reference_model_Control_Engineering_B.Dct2lowpass
-                    section.data(12).logicalSrcIdx = 11;
-                    section.data(12).dtTransOffset = 24;
+                    section.data(10).logicalSrcIdx = 12;
+                    section.data(10).dtTransOffset = 13;
 
                     ;% Reference_model_Control_Engineering_B.Sum1
-                    section.data(13).logicalSrcIdx = 12;
-                    section.data(13).dtTransOffset = 25;
-
-                    ;% Reference_model_Control_Engineering_B.TmpSignalConversionAtToWorkspac
-                    section.data(14).logicalSrcIdx = 13;
-                    section.data(14).dtTransOffset = 26;
+                    section.data(11).logicalSrcIdx = 13;
+                    section.data(11).dtTransOffset = 14;
 
                     ;% Reference_model_Control_Engineering_B.Constant1
-                    section.data(15).logicalSrcIdx = 14;
-                    section.data(15).dtTransOffset = 28;
+                    section.data(12).logicalSrcIdx = 14;
+                    section.data(12).dtTransOffset = 15;
 
                     ;% Reference_model_Control_Engineering_B.Gain
-                    section.data(16).logicalSrcIdx = 15;
-                    section.data(16).dtTransOffset = 36;
+                    section.data(13).logicalSrcIdx = 15;
+                    section.data(13).dtTransOffset = 23;
 
                     ;% Reference_model_Control_Engineering_B.Saturation
-                    section.data(17).logicalSrcIdx = 16;
-                    section.data(17).dtTransOffset = 38;
+                    section.data(14).logicalSrcIdx = 16;
+                    section.data(14).dtTransOffset = 25;
 
                     ;% Reference_model_Control_Engineering_B.Downsample
-                    section.data(18).logicalSrcIdx = 17;
-                    section.data(18).dtTransOffset = 40;
+                    section.data(15).logicalSrcIdx = 17;
+                    section.data(15).dtTransOffset = 27;
 
             nTotData = nTotData + section.nData;
-            sigMap.sections(1) = section;
+            sigMap.sections(2) = section;
             clear section
 
 
@@ -358,7 +365,7 @@
     
         nTotData      = 0; %add to this count as we go
         nTotSects     = 7;
-        sectIdxOffset = 1;
+        sectIdxOffset = 2;
 
         ;%
         ;% Define dummy sections & preallocate arrays
@@ -411,16 +418,32 @@
             dworkMap.sections(1) = section;
             clear section
 
-            section.nData     = 2;
-            section.data(2)  = dumData; %prealloc
+            section.nData     = 6;
+            section.data(6)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.ToWorkspace_PWORK.LoggedData
                     section.data(1).logicalSrcIdx = 6;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% Reference_model_Control_Engineering_DW.Live_Scope_PWORK.LoggedData
+                    ;% Reference_model_Control_Engineering_DW.ToWorkspace1_PWORK.LoggedData
                     section.data(2).logicalSrcIdx = 7;
                     section.data(2).dtTransOffset = 1;
+
+                    ;% Reference_model_Control_Engineering_DW.ToWorkspace2_PWORK.LoggedData
+                    section.data(3).logicalSrcIdx = 8;
+                    section.data(3).dtTransOffset = 2;
+
+                    ;% Reference_model_Control_Engineering_DW.ToWorkspace3_PWORK.LoggedData
+                    section.data(4).logicalSrcIdx = 9;
+                    section.data(4).dtTransOffset = 3;
+
+                    ;% Reference_model_Control_Engineering_DW.ToWorkspace4_PWORK.LoggedData
+                    section.data(5).logicalSrcIdx = 10;
+                    section.data(5).dtTransOffset = 4;
+
+                    ;% Reference_model_Control_Engineering_DW.Live_Scope_PWORK.LoggedData
+                    section.data(6).logicalSrcIdx = 11;
+                    section.data(6).dtTransOffset = 5;
 
             nTotData = nTotData + section.nData;
             dworkMap.sections(2) = section;
@@ -430,11 +453,11 @@
             section.data(2)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.RandSeed
-                    section.data(1).logicalSrcIdx = 8;
+                    section.data(1).logicalSrcIdx = 12;
                     section.data(1).dtTransOffset = 0;
 
                     ;% Reference_model_Control_Engineering_DW.NS
-                    section.data(2).logicalSrcIdx = 9;
+                    section.data(2).logicalSrcIdx = 13;
                     section.data(2).dtTransOffset = 1;
 
             nTotData = nTotData + section.nData;
@@ -445,7 +468,7 @@
             section.data(1)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.NF
-                    section.data(1).logicalSrcIdx = 10;
+                    section.data(1).logicalSrcIdx = 14;
                     section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
@@ -456,7 +479,7 @@
             section.data(1)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.busy
-                    section.data(1).logicalSrcIdx = 11;
+                    section.data(1).logicalSrcIdx = 15;
                     section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
@@ -467,7 +490,7 @@
             section.data(1)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.eml_autoflush
-                    section.data(1).logicalSrcIdx = 12;
+                    section.data(1).logicalSrcIdx = 16;
                     section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
@@ -478,7 +501,7 @@
             section.data(1)  = dumData; %prealloc
 
                     ;% Reference_model_Control_Engineering_DW.eml_openfiles
-                    section.data(1).logicalSrcIdx = 13;
+                    section.data(1).logicalSrcIdx = 17;
                     section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
@@ -511,8 +534,8 @@
     ;%
 
 
-    targMap.checksum0 = 3477193817;
-    targMap.checksum1 = 1569805435;
-    targMap.checksum2 = 2429156659;
-    targMap.checksum3 = 1168022689;
+    targMap.checksum0 = 834875490;
+    targMap.checksum1 = 2719438450;
+    targMap.checksum2 = 2938128024;
+    targMap.checksum3 = 3377281862;
 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.0
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 13 11:48:57 2025
+ * C source code generated on : Mon Mar 24 13:10:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -137,30 +137,29 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Noise;                        /* '<Root>/Noise' */
-  real_T SFunction;                    /* '<S8>/S-Function' */
   real_T ec_Ebox_o1[2];                /* '<S7>/ec_Ebox' */
   real_T ec_Ebox_o2[2];                /* '<S7>/ec_Ebox' */
   real_T ec_Ebox_o3[8];                /* '<S7>/ec_Ebox' */
+  size_t bytesOutSizet;
+  real32_T xout[2];
+  FILE* filestar;
+  FILE* filestar_m;
+  real_T Noise;                        /* '<Root>/Noise' */
+  real_T SFunction;                    /* '<S8>/S-Function' */
   real_T Selectencoder;                /* '<Root>/Select encoder' */
   real_T Startsetpoint;                /* '<S5>/Start setpoint' */
   real_T SFunction_c[3];               /* '<S6>/S-Function' */
+  real_T Sum;                          /* '<Root>/Sum' */
   real_T Buffer[3];                    /* '<S4>/Buffer' */
   real_T Gain1;                        /* '<S1>/Gain1' */
   real_T Dctpd;                        /* '<S1>/Dctpd' */
   real_T Dct2lowpass;                  /* '<S1>/Dct2lowpass' */
   real_T Sum1;                         /* '<Root>/Sum1' */
-  real_T TmpSignalConversionAtToWorkspac[2];
   real_T Constant1[8];                 /* '<S2>/Constant1' */
   real_T Gain[2];                      /* '<S7>/Gain' */
   real_T Saturation[2];                /* '<S7>/Saturation' */
   real_T Downsample[3];                /* '<S4>/Downsample' */
-  size_t bytesOutSizet;
-  real32_T xout[2];
-  FILE* filestar;
-  FILE* filestar_m;
   real_T Quantizer1;                   /* '<Root>/Quantizer1' */
-  real_T Sum;                          /* '<Root>/Sum' */
   int32_T nbytes;
   int32_T loop_ub;
 } B_Reference_model_Control_Engineering_T;
@@ -179,6 +178,22 @@ typedef struct {
 
   struct {
     void *LoggedData;
+  } ToWorkspace1_PWORK;                /* '<Root>/To Workspace1' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace2_PWORK;                /* '<Root>/To Workspace2' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace3_PWORK;                /* '<Root>/To Workspace3' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace4_PWORK;                /* '<Root>/To Workspace4' */
+
+  struct {
+    void *LoggedData;
   } Live_Scope_PWORK;                  /* '<S4>/Live_Scope' */
 
   uint32_T RandSeed;                   /* '<Root>/Noise' */
@@ -194,7 +209,7 @@ struct P_Reference_model_Control_Engineering_T_ {
   real_T SFunction_P1_Size[2];         /* Computed Parameter: SFunction_P1_Size
                                         * Referenced by: '<S6>/S-Function'
                                         */
-  real_T ref_part[18];                 /* Variable: ref_part
+  real_T ref_part[6];                  /* Variable: ref_part
                                         * Referenced by: '<S6>/S-Function'
                                         */
   real_T Refpower_stat;                /* Mask Parameter: Refpower_stat

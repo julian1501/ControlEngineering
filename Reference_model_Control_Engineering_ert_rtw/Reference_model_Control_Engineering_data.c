@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.0
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 13 11:48:57 2025
+ * C source code generated on : Mon Mar 24 13:10:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -27,13 +27,12 @@ P_Reference_model_Control_Engineering_T Reference_model_Control_Engineering_P =
   /* Computed Parameter: SFunction_P1_Size
    * Referenced by: '<S6>/S-Function'
    */
-  { 3.0, 6.0 },
+  { 1.0, 6.0 },
 
   /* Variable: ref_part
    * Referenced by: '<S6>/S-Function'
    */
-  { 0.0, 6.2832, 0.0, 0.0, 1.4816, -1.0, 6.2832, 0.0, 0.0, 5.0, 5.0, 0.0,
-    0.22499999999999998, 0.22499999999999998, 0.0, 1000.0, 1000.0, 0.0 },
+  { 0.0, 0.0, 1.0E+10, 4.0, 0.1, 100000.0 },
 
   /* Mask Parameter: Refpower_stat
    * Referenced by: '<S5>/Start setpoint'
@@ -63,7 +62,7 @@ P_Reference_model_Control_Engineering_T Reference_model_Control_Engineering_P =
   /* Computed Parameter: Noise_StdDev
    * Referenced by: '<Root>/Noise'
    */
-  0.54772255750516607,
+  0.44721359549995793,
 
   /* Expression: 0
    * Referenced by: '<Root>/Noise'
@@ -123,7 +122,7 @@ P_Reference_model_Control_Engineering_T Reference_model_Control_Engineering_P =
   /* Expression: kp
    * Referenced by: '<S1>/Dctpd'
    */
-  1.2,
+  0.0,
 
   /* Computed Parameter: Dctpd_P2_Size
    * Referenced by: '<S1>/Dctpd'
@@ -133,7 +132,7 @@ P_Reference_model_Control_Engineering_T Reference_model_Control_Engineering_P =
   /* Expression: kv
    * Referenced by: '<S1>/Dctpd'
    */
-  0.1,
+  0.0,
 
   /* Computed Parameter: Dctpd_P3_Size
    * Referenced by: '<S1>/Dctpd'

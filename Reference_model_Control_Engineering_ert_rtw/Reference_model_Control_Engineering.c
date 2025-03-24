@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.0
+ * Model version              : 7.3
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 13 11:48:57 2025
+ * C source code generated on : Mon Mar 24 13:10:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -561,7 +561,6 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
   }
 
   /* End of RateTransition: '<S4>/Downsample' */
-
   /* Gain: '<S1>/Gain1' */
   Reference_model_Control_Engineering_B.Gain1 =
     Reference_model_Control_Engineering_P.Gain1_Gain *
@@ -587,12 +586,6 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
   Reference_model_Control_Engineering_B.Sum1 =
     Reference_model_Control_Engineering_B.Dct2lowpass +
     Reference_model_Control_Engineering_B.Noise;
-
-  /* SignalConversion generated from: '<Root>/To Workspace' */
-  Reference_model_Control_Engineering_B.TmpSignalConversionAtToWorkspac[0] =
-    Reference_model_Control_Engineering_B.Noise;
-  Reference_model_Control_Engineering_B.TmpSignalConversionAtToWorkspac[1] =
-    Reference_model_Control_Engineering_B.Sum1;
 
   /* Constant: '<S2>/Constant1' */
   memcpy(&Reference_model_Control_Engineering_B.Constant1[0],
@@ -867,10 +860,10 @@ void Reference_model_Control_Engineering_initialize(void)
   Reference_model_Control_Engineering_M->Timing.stepSize1 = 0.00025;
 
   /* External mode info */
-  Reference_model_Control_Engineering_M->Sizes.checksums[0] = (3477193817U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[1] = (1569805435U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[2] = (2429156659U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[3] = (1168022689U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[0] = (834875490U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[1] = (2719438450U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[2] = (2938128024U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[3] = (3377281862U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
