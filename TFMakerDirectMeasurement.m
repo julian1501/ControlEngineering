@@ -8,10 +8,11 @@ noverlap = windowSize/2;
 
 
 [TF, F] = tfestimate(input,output,window,noverlap,windowSize,Fs);
+Coherence = mscohere(input,output,window,noverlap,windowSize,Fs);
 
 close all;
 
-tiledlayout(2,1);
+tiledlayout(3,1);
 
 nexttile()
 loglog(F,abs(TF))
@@ -23,5 +24,9 @@ nexttile()
 semilogx(F,(180/pi)*angle(TF))
 grid on;
 ylabel("Phase [deg]")
+
+nexttile()
+semilogx(F,Coherence)
+ylabel('Coherence [-]')
 xlabel("Frequency [Hz]")
 
