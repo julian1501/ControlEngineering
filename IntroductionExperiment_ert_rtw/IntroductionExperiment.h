@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.7
+ * Model version              : 7.9
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 20 10:31:02 2025
+ * C source code generated on : Wed Mar 26 12:02:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -138,12 +138,13 @@
 /* Block signals (default storage) */
 typedef struct {
   real_T Noise;                        /* '<Root>/Noise' */
-  real_T Startsetpoint;                /* '<S6>/Start setpoint' */
-  real_T SFunction[3];                 /* '<S7>/S-Function' */
-  real_T SFunction_b;                  /* '<S9>/S-Function' */
+  real_T SFunction;                    /* '<S9>/S-Function' */
   real_T ec_Ebox_o1[2];                /* '<S8>/ec_Ebox' */
   real_T ec_Ebox_o2[2];                /* '<S8>/ec_Ebox' */
   real_T ec_Ebox_o3[8];                /* '<S8>/ec_Ebox' */
+  real_T Selectencoder;                /* '<Root>/Select encoder' */
+  real_T Startsetpoint;                /* '<S6>/Start setpoint' */
+  real_T SFunction_c[3];               /* '<S7>/S-Function' */
   real_T Gain1;                        /* '<S1>/Gain1' */
   real_T Dctleadlag;                   /* '<S1>/Dctleadlag' */
   real_T Dct2lowpass;                  /* '<S1>/Dct2lowpass' */
@@ -158,9 +159,7 @@ typedef struct {
   real32_T xout[2];
   FILE* filestar;
   FILE* filestar_m;
-  real_T Quantizer1;                   /* '<Root>/Quantizer1' */
-  real_T Kfv;                          /* '<S2>/Kfv' */
-  real_T Sum4;                         /* '<Root>/Sum4' */
+  real_T Sum;                          /* '<Root>/Sum' */
   int32_T nbytes;
   int32_T loop_ub;
 } B_IntroductionExperiment_T;
@@ -221,9 +220,6 @@ struct P_IntroductionExperiment_T_ {
   real_T Noise_Seed;                   /* Expression: 0
                                         * Referenced by: '<Root>/Noise'
                                         */
-  real_T Quantizer1_Interval;          /* Expression: (2*pi)/(500*4)
-                                        * Referenced by: '<Root>/Quantizer1'
-                                        */
   real_T SFunction_P1_Size_k[2];      /* Computed Parameter: SFunction_P1_Size_k
                                        * Referenced by: '<S9>/S-Function'
                                        */
@@ -244,6 +240,9 @@ struct P_IntroductionExperiment_T_ {
                                         */
   real_T count2rad_Gain;               /* Expression: (2*pi)/(4*500)
                                         * Referenced by: '<S3>/count2rad'
+                                        */
+  real_T Quantizer1_Interval;          /* Expression: (2*pi)/(500*4)
+                                        * Referenced by: '<Root>/Quantizer1'
                                         */
   real_T Gain1_Gain;                   /* Expression: 0.65
                                         * Referenced by: '<S1>/Gain1'
@@ -283,15 +282,6 @@ struct P_IntroductionExperiment_T_ {
                                        */
   real_T Dct2lowpass_P3;               /* Expression: 0.001
                                         * Referenced by: '<S1>/Dct2lowpass'
-                                        */
-  real_T Kfa_Gain;                     /* Expression: 0
-                                        * Referenced by: '<S2>/Kfa'
-                                        */
-  real_T Kfv_Gain;                     /* Expression: 0
-                                        * Referenced by: '<S2>/Kfv'
-                                        */
-  real_T Kfp_Gain;                     /* Expression: 0
-                                        * Referenced by: '<S2>/Kfp'
                                         */
   real_T Constant_Value[2];            /* Expression: [0,0]
                                         * Referenced by: '<S3>/Constant'
@@ -354,29 +344,12 @@ struct tag_RTM_IntroductionExperiment_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[1];
-      struct _ssInPortUnit inputPortUnits[1];
-      struct _ssInPortCoSimAttribute inputPortCoSimAttribute[1];
-      real_T const *UPtrs0[1];
-      struct _ssPortOutputs outputPortInfo[1];
-      struct _ssOutPortUnit outputPortUnits[1];
-      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
-      uint_T attribs[1];
-      mxArray *params[1];
-      struct _ssDWorkRecord dWork[1];
-      struct _ssDWorkAuxRecord dWorkAux[1];
-    } Sfcn0;
-
-    struct {
-      time_T sfcnPeriod[1];
-      time_T sfcnOffset[1];
-      int_T sfcnTsMap[1];
       struct _ssPortOutputs outputPortInfo[1];
       struct _ssOutPortUnit outputPortUnits[1];
       struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
       uint_T attribs[2];
       mxArray *params[2];
-    } Sfcn1;
+    } Sfcn0;
 
     struct {
       time_T sfcnPeriod[1];
@@ -393,6 +366,23 @@ struct tag_RTM_IntroductionExperiment_T {
       struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[3];
       uint_T attribs[1];
       mxArray *params[1];
+    } Sfcn1;
+
+    struct {
+      time_T sfcnPeriod[1];
+      time_T sfcnOffset[1];
+      int_T sfcnTsMap[1];
+      struct _ssPortInputs inputPortInfo[1];
+      struct _ssInPortUnit inputPortUnits[1];
+      struct _ssInPortCoSimAttribute inputPortCoSimAttribute[1];
+      real_T const *UPtrs0[1];
+      struct _ssPortOutputs outputPortInfo[1];
+      struct _ssOutPortUnit outputPortUnits[1];
+      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
+      uint_T attribs[1];
+      mxArray *params[1];
+      struct _ssDWorkRecord dWork[1];
+      struct _ssDWorkAuxRecord dWorkAux[1];
     } Sfcn2;
 
     struct {
@@ -536,6 +526,16 @@ extern void IntroductionExperiment_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_IntroductionExperiment_T *const IntroductionExperiment_M;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S2>/Kfa' : Unused code path elimination
+ * Block '<S2>/Kfp' : Unused code path elimination
+ * Block '<S2>/Kfv' : Unused code path elimination
+ * Block '<Root>/Sum2' : Unused code path elimination
+ * Block '<Root>/Sum3' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly

@@ -2,7 +2,7 @@
 ## Makefile generated for component 'IntroductionExperiment'. 
 ## 
 ## Makefile     : IntroductionExperiment.mk
-## Generated on : Thu Mar 20 09:52:48 2025
+## Generated on : Wed Mar 26 11:43:33 2025
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/IntroductionExperiment.elf
 ## Product type : executable
 ## 
@@ -359,18 +359,6 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.c.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-%.s.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.s
-	$(AS) $(ASFLAGS) -o "$@" "$<"
-
-
-%.cpp.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
 %.c.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -380,6 +368,18 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 
 %.cpp.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/%.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+%.c.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+%.s.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
+
+
+%.cpp.o : $(START_DIR)/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 

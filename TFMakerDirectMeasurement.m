@@ -2,13 +2,12 @@
 input = simout(:,1);
 output = simout(:,2);
 
-windowSize = 5000;
-window = hann(windowSize);
-noverlap = windowSize/2;
+nfft = 5000;
+window = hamming(nfft);
+noverlap = nfft/2;
 
-
-[TF, F] = tfestimate(input,output,window,noverlap,windowSize,Fs);
-Coherence = mscohere(input,output,window,noverlap,windowSize,Fs);
+[TF, F] = tfestimate(input,output,window,noverlap,nfft,Fs);
+Coherence = mscohere(input,output,window,noverlap,nfft,Fs);
 
 close all;
 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.7
+ * Model version              : 7.9
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 20 10:31:02 2025
+ * C source code generated on : Wed Mar 26 12:02:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -43,9 +43,9 @@
 extern real_T rt_urand_Upu32_Yd_f_pw_snf(uint32_T *u);
 extern real_T rt_nrand_Upu32_Yd_f_pw_snf(uint32_T *u);
 extern real_T rt_roundd_snf(real_T u);
-extern void ref3b(SimStruct *rts);
 extern void ec_Supervisor(SimStruct *rts);
 extern void ec_Ebox(SimStruct *rts);
+extern void ref3b(SimStruct *rts);
 extern void dleadlag(SimStruct *rts);
 extern void dlowpass2(SimStruct *rts);
 

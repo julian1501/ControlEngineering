@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.7
+ * Model version              : 7.9
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 20 10:31:02 2025
+ * C source code generated on : Wed Mar 26 12:02:58 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -31,13 +31,13 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Variable: ref_part
    * Referenced by: '<S7>/S-Function'
    */
-  { 0.0, 6.2832, 0.0, 1.5, 4.5, -1.0, 6.2832, 0.0, 0.0, 5.0, 5.0, 0.0,
+  { 0.0, 6.2832, 0.0, 0.0, 1.4816, -1.0, 6.2832, 0.0, 0.0, 5.0, 5.0, 0.0,
     0.22499999999999998, 0.22499999999999998, 0.0, 1000.0, 1000.0, 0.0 },
 
   /* Mask Parameter: Refpower_stat
    * Referenced by: '<S6>/Start setpoint'
    */
-  1.0,
+  2.0,
 
   /* Mask Parameter: MeasurementBlock_N_samples
    * Referenced by: '<S4>/SPERTE_measurement_samples'
@@ -62,17 +62,12 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Computed Parameter: Noise_StdDev
    * Referenced by: '<Root>/Noise'
    */
-  0.0,
+  0.5,
 
   /* Expression: 0
    * Referenced by: '<Root>/Noise'
    */
   0.0,
-
-  /* Expression: (2*pi)/(500*4)
-   * Referenced by: '<Root>/Quantizer1'
-   */
-  0.0031415926535897933,
 
   /* Computed Parameter: SFunction_P1_Size_k
    * Referenced by: '<S9>/S-Function'
@@ -106,6 +101,11 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
 
   /* Expression: (2*pi)/(4*500)
    * Referenced by: '<S3>/count2rad'
+   */
+  0.0031415926535897933,
+
+  /* Expression: (2*pi)/(500*4)
+   * Referenced by: '<Root>/Quantizer1'
    */
   0.0031415926535897933,
 
@@ -173,21 +173,6 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
    * Referenced by: '<S1>/Dct2lowpass'
    */
   0.001,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Kfa'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Kfv'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Kfp'
-   */
-  0.0,
 
   /* Expression: [0,0]
    * Referenced by: '<S3>/Constant'

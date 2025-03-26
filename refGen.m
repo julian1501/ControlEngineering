@@ -37,5 +37,9 @@ function [refPos, refVel, refAcc] = refGen(t,Tr)
         refPos = -(240/Tcv)*t + 240*(1 + Tta/Tcv);
         refVel = -(240/Tcv);
         refAcc = 0;
+    else
+        refPos = 0;
+        refVel = 0;
+        refAcc = 0;    
     end
 end
