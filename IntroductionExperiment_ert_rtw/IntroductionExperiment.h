@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.9
+ * Model version              : 7.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 12:02:58 2025
+ * C source code generated on : Wed Mar 26 14:59:12 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -39,6 +39,7 @@
 
 /* Shared type includes */
 #include "multiword_types.h"
+#include "rtGetNaN.h"
 #include "rt_nonfinite.h"
 #include "rtGetInf.h"
 
@@ -137,151 +138,165 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Noise;                        /* '<Root>/Noise' */
-  real_T SFunction;                    /* '<S9>/S-Function' */
-  real_T ec_Ebox_o1[2];                /* '<S8>/ec_Ebox' */
-  real_T ec_Ebox_o2[2];                /* '<S8>/ec_Ebox' */
-  real_T ec_Ebox_o3[8];                /* '<S8>/ec_Ebox' */
+  real_T SFunction;                    /* '<S10>/S-Function' */
+  real_T ec_Ebox_o1[2];                /* '<S9>/ec_Ebox' */
+  real_T ec_Ebox_o2[2];                /* '<S9>/ec_Ebox' */
+  real_T ec_Ebox_o3[8];                /* '<S9>/ec_Ebox' */
+  real_T Gain;                         /* '<Root>/Gain' */
   real_T Selectencoder;                /* '<Root>/Select encoder' */
-  real_T Startsetpoint;                /* '<S6>/Start setpoint' */
-  real_T SFunction_c[3];               /* '<S7>/S-Function' */
-  real_T Gain1;                        /* '<S1>/Gain1' */
-  real_T Dctleadlag;                   /* '<S1>/Dctleadlag' */
-  real_T Dct2lowpass;                  /* '<S1>/Dct2lowpass' */
-  real_T Sum1;                         /* '<Root>/Sum1' */
-  real_T Buffer[3];                    /* '<S5>/Buffer' */
-  real_T TmpSignalConversionAtToWorkspac[2];
+  real_T Gain2;                        /* '<S1>/Gain2' */
+  real_T Dctleadlag2;                  /* '<S1>/Dctleadlag2' */
+  real_T Dct1lowpass3;                 /* '<S1>/Dct1lowpass3' */
+  real_T Dctnotch4;                    /* '<S1>/Dctnotch4' */
   real_T Constant1[8];                 /* '<S3>/Constant1' */
-  real_T Gain[2];                      /* '<S8>/Gain' */
-  real_T Saturation[2];                /* '<S8>/Saturation' */
-  real_T Downsample[3];                /* '<S5>/Downsample' */
+  real_T Gain_a[2];                    /* '<S9>/Gain' */
+  real_T Saturation[2];                /* '<S9>/Saturation' */
   size_t bytesOutSizet;
   real32_T xout[2];
   FILE* filestar;
   FILE* filestar_m;
+  real_T Startsetpoint;                /* '<S7>/Start setpoint' */
+  real_T SFunction_c[3];               /* '<S8>/S-Function' */
+  real_T Downsample[3];                /* '<S6>/Downsample' */
+  real_T Clock;                        /* '<Root>/Clock' */
   real_T Sum;                          /* '<Root>/Sum' */
   int32_T nbytes;
-  int32_T loop_ub;
+  uint32_T qY;
 } B_IntroductionExperiment_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
+  real_T Downsample_Buffer[3];         /* '<S6>/Downsample' */
   real_T NextOutput;                   /* '<Root>/Noise' */
-  real_T Downsample_Buffer[3];         /* '<S5>/Downsample' */
-  real_T fileID;                       /* '<S4>/SPERTE_measurement_function' */
-  real_T SFunction_RWORK[50];          /* '<S7>/S-Function' */
-  real_T Dctleadlag_RWORK[2];          /* '<S1>/Dctleadlag' */
-  real_T Dct2lowpass_RWORK[4];         /* '<S1>/Dct2lowpass' */
+  real_T fileID;                       /* '<S5>/SPERTE_measurement_function' */
+  real_T Dctleadlag2_RWORK[2];         /* '<S1>/Dctleadlag2' */
+  real_T Dct1lowpass3_RWORK[2];        /* '<S1>/Dct1lowpass3' */
+  real_T Dctnotch4_RWORK[4];           /* '<S1>/Dctnotch4' */
+  real_T SFunction_RWORK[50];          /* '<S8>/S-Function' */
   struct {
     void *LoggedData;
-  } ToWorkspace_PWORK;                 /* '<Root>/To Workspace' */
-
-  struct {
-    void *LoggedData;
-  } Live_Scope_PWORK;                  /* '<S5>/Live_Scope' */
+  } Live_Scope_PWORK;                  /* '<S6>/Live_Scope' */
 
   uint32_T RandSeed;                   /* '<Root>/Noise' */
-  uint32_T NS;                         /* '<S4>/SPERTE_measurement_function' */
-  int16_T NF;                          /* '<S4>/SPERTE_measurement_function' */
-  uint8_T busy;                        /* '<S4>/SPERTE_measurement_function' */
-  boolean_T eml_autoflush[20];         /* '<S4>/SPERTE_measurement_function' */
-  FILE* eml_openfiles[20];             /* '<S4>/SPERTE_measurement_function' */
+  uint32_T NS;                         /* '<S5>/SPERTE_measurement_function' */
+  int16_T NF;                          /* '<S5>/SPERTE_measurement_function' */
+  uint8_T busy;                        /* '<S5>/SPERTE_measurement_function' */
+  boolean_T eml_autoflush[20];         /* '<S5>/SPERTE_measurement_function' */
+  FILE* eml_openfiles[20];             /* '<S5>/SPERTE_measurement_function' */
 } DW_IntroductionExperiment_T;
 
 /* Parameters (default storage) */
 struct P_IntroductionExperiment_T_ {
   real_T SFunction_P1_Size[2];         /* Computed Parameter: SFunction_P1_Size
-                                        * Referenced by: '<S7>/S-Function'
+                                        * Referenced by: '<S8>/S-Function'
                                         */
   real_T ref_part[18];                 /* Variable: ref_part
-                                        * Referenced by: '<S7>/S-Function'
+                                        * Referenced by: '<S8>/S-Function'
                                         */
   real_T Refpower_stat;                /* Mask Parameter: Refpower_stat
-                                        * Referenced by: '<S6>/Start setpoint'
+                                        * Referenced by: '<S7>/Start setpoint'
                                         */
   uint32_T MeasurementBlock_N_samples;
                                    /* Mask Parameter: MeasurementBlock_N_samples
-                                    * Referenced by: '<S4>/SPERTE_measurement_samples'
+                                    * Referenced by: '<S5>/SPERTE_measurement_samples'
                                     */
   uint8_T MeasurementBlock_trigger_comman;
                               /* Mask Parameter: MeasurementBlock_trigger_comman
-                               * Referenced by: '<S4>/SPERTE_measurement_trigger_command'
+                               * Referenced by: '<S5>/SPERTE_measurement_trigger_command'
                                */
   uint8_T MeasurementBlock_triggertype;
                                  /* Mask Parameter: MeasurementBlock_triggertype
-                                  * Referenced by: '<S4>/SPERTE_measurement_function'
+                                  * Referenced by: '<S5>/SPERTE_measurement_function'
                                   */
-  real_T Noise_Mean;                   /* Expression: 0
-                                        * Referenced by: '<Root>/Noise'
-                                        */
-  real_T Noise_StdDev;                 /* Computed Parameter: Noise_StdDev
-                                        * Referenced by: '<Root>/Noise'
-                                        */
-  real_T Noise_Seed;                   /* Expression: 0
-                                        * Referenced by: '<Root>/Noise'
-                                        */
   real_T SFunction_P1_Size_k[2];      /* Computed Parameter: SFunction_P1_Size_k
-                                       * Referenced by: '<S9>/S-Function'
+                                       * Referenced by: '<S10>/S-Function'
                                        */
   real_T SFunction_P1;                 /* Expression: portid
-                                        * Referenced by: '<S9>/S-Function'
+                                        * Referenced by: '<S10>/S-Function'
                                         */
   real_T SFunction_P2_Size[2];         /* Computed Parameter: SFunction_P2_Size
-                                        * Referenced by: '<S9>/S-Function'
+                                        * Referenced by: '<S10>/S-Function'
                                         */
   real_T SFunction_P2;                 /* Expression: ectimeout
-                                        * Referenced by: '<S9>/S-Function'
+                                        * Referenced by: '<S10>/S-Function'
                                         */
   real_T ec_Ebox_P1_Size[2];           /* Computed Parameter: ec_Ebox_P1_Size
-                                        * Referenced by: '<S8>/ec_Ebox'
+                                        * Referenced by: '<S9>/ec_Ebox'
                                         */
   real_T ec_Ebox_P1;                   /* Expression: link_id
-                                        * Referenced by: '<S8>/ec_Ebox'
+                                        * Referenced by: '<S9>/ec_Ebox'
                                         */
   real_T count2rad_Gain;               /* Expression: (2*pi)/(4*500)
                                         * Referenced by: '<S3>/count2rad'
                                         */
+  real_T Gain_Gain;                    /* Expression: -1
+                                        * Referenced by: '<Root>/Gain'
+                                        */
   real_T Quantizer1_Interval;          /* Expression: (2*pi)/(500*4)
                                         * Referenced by: '<Root>/Quantizer1'
                                         */
-  real_T Gain1_Gain;                   /* Expression: 0.65
-                                        * Referenced by: '<S1>/Gain1'
+  real_T Gain2_Gain;                   /* Expression: 1.65
+                                        * Referenced by: '<S1>/Gain2'
                                         */
-  real_T Dctleadlag_P1_Size[2];        /* Computed Parameter: Dctleadlag_P1_Size
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dctleadlag_P1;                /* Expression: f_num
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dctleadlag_P2_Size[2];        /* Computed Parameter: Dctleadlag_P2_Size
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dctleadlag_P2;                /* Expression: f_den
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dctleadlag_P3_Size[2];        /* Computed Parameter: Dctleadlag_P3_Size
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dctleadlag_P3;                /* Expression: 0.001
-                                        * Referenced by: '<S1>/Dctleadlag'
-                                        */
-  real_T Dct2lowpass_P1_Size[2];      /* Computed Parameter: Dct2lowpass_P1_Size
-                                       * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P1_Size[2];      /* Computed Parameter: Dctleadlag2_P1_Size
+                                       * Referenced by: '<S1>/Dctleadlag2'
                                        */
-  real_T Dct2lowpass_P1;               /* Expression: f_den
-                                        * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P1;               /* Expression: f_num
+                                        * Referenced by: '<S1>/Dctleadlag2'
                                         */
-  real_T Dct2lowpass_P2_Size[2];      /* Computed Parameter: Dct2lowpass_P2_Size
-                                       * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P2_Size[2];      /* Computed Parameter: Dctleadlag2_P2_Size
+                                       * Referenced by: '<S1>/Dctleadlag2'
                                        */
-  real_T Dct2lowpass_P2;               /* Expression: b_den
-                                        * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P2;               /* Expression: f_den
+                                        * Referenced by: '<S1>/Dctleadlag2'
                                         */
-  real_T Dct2lowpass_P3_Size[2];      /* Computed Parameter: Dct2lowpass_P3_Size
-                                       * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P3_Size[2];      /* Computed Parameter: Dctleadlag2_P3_Size
+                                       * Referenced by: '<S1>/Dctleadlag2'
                                        */
-  real_T Dct2lowpass_P3;               /* Expression: 0.001
-                                        * Referenced by: '<S1>/Dct2lowpass'
+  real_T Dctleadlag2_P3;               /* Expression: 0.001
+                                        * Referenced by: '<S1>/Dctleadlag2'
+                                        */
+  real_T Dct1lowpass3_P1_Size[2];    /* Computed Parameter: Dct1lowpass3_P1_Size
+                                      * Referenced by: '<S1>/Dct1lowpass3'
+                                      */
+  real_T Dct1lowpass3_P1;              /* Expression: f_den
+                                        * Referenced by: '<S1>/Dct1lowpass3'
+                                        */
+  real_T Dct1lowpass3_P2_Size[2];    /* Computed Parameter: Dct1lowpass3_P2_Size
+                                      * Referenced by: '<S1>/Dct1lowpass3'
+                                      */
+  real_T Dct1lowpass3_P2;              /* Expression: 0.001
+                                        * Referenced by: '<S1>/Dct1lowpass3'
+                                        */
+  real_T Dctnotch4_P1_Size[2];         /* Computed Parameter: Dctnotch4_P1_Size
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P1;                 /* Expression: f_num
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P2_Size[2];         /* Computed Parameter: Dctnotch4_P2_Size
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P2;                 /* Expression: b_num
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P3_Size[2];         /* Computed Parameter: Dctnotch4_P3_Size
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P3;                 /* Expression: f_den
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P4_Size[2];         /* Computed Parameter: Dctnotch4_P4_Size
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P4;                 /* Expression: b_den
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P5_Size[2];         /* Computed Parameter: Dctnotch4_P5_Size
+                                        * Referenced by: '<S1>/Dctnotch4'
+                                        */
+  real_T Dctnotch4_P5;                 /* Expression: 0.001
+                                        * Referenced by: '<S1>/Dctnotch4'
                                         */
   real_T Constant_Value[2];            /* Expression: [0,0]
                                         * Referenced by: '<S3>/Constant'
@@ -292,8 +307,17 @@ struct P_IntroductionExperiment_T_ {
   real_T Constant2_Value;              /* Expression: 0
                                         * Referenced by: '<S3>/Constant2'
                                         */
-  real_T Gain_Gain;                    /* Expression: 1/100
-                                        * Referenced by: '<S8>/Gain'
+  real_T Gain_Gain_g;                  /* Expression: 1/100
+                                        * Referenced by: '<S9>/Gain'
+                                        */
+  real_T Noise_Mean;                   /* Expression: 0
+                                        * Referenced by: '<Root>/Noise'
+                                        */
+  real_T Noise_StdDev;                 /* Computed Parameter: Noise_StdDev
+                                        * Referenced by: '<Root>/Noise'
+                                        */
+  real_T Noise_Seed;                   /* Expression: 0
+                                        * Referenced by: '<Root>/Noise'
                                         */
   real_T Saturation_UpperSat;          /* Expression: 2.5
                                         * Referenced by: '<S3>/Saturation'
@@ -302,10 +326,10 @@ struct P_IntroductionExperiment_T_ {
                                         * Referenced by: '<S3>/Saturation'
                                         */
   real_T Saturation_UpperSat_d;        /* Expression: 10
-                                        * Referenced by: '<S8>/Saturation'
+                                        * Referenced by: '<S9>/Saturation'
                                         */
   real_T Saturation_LowerSat_e;        /* Expression: -10
-                                        * Referenced by: '<S8>/Saturation'
+                                        * Referenced by: '<S9>/Saturation'
                                         */
   uint8_T Selectencoder_CurrentSetting;
                              /* Computed Parameter: Selectencoder_CurrentSetting
@@ -331,15 +355,15 @@ struct tag_RTM_IntroductionExperiment_T {
   struct {
     RTWSfcnInfo sfcnInfo;
     time_T *taskTimePtrs[3];
-    SimStruct childSFunctions[5];
-    SimStruct *childSFunctionPtrs[5];
-    struct _ssBlkInfo2 blkInfo2[5];
-    struct _ssSFcnModelMethods2 methods2[5];
-    struct _ssSFcnModelMethods3 methods3[5];
-    struct _ssSFcnModelMethods4 methods4[5];
-    struct _ssStatesInfo2 statesInfo2[5];
-    ssPeriodicStatesInfo periodicStatesInfo[5];
-    struct _ssPortInfo2 inputOutputPortInfo2[5];
+    SimStruct childSFunctions[6];
+    SimStruct *childSFunctionPtrs[6];
+    struct _ssBlkInfo2 blkInfo2[6];
+    struct _ssSFcnModelMethods2 methods2[6];
+    struct _ssSFcnModelMethods3 methods3[6];
+    struct _ssSFcnModelMethods4 methods4[6];
+    struct _ssStatesInfo2 statesInfo2[6];
+    ssPeriodicStatesInfo periodicStatesInfo[6];
+    struct _ssPortInfo2 inputOutputPortInfo2[6];
     struct {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
@@ -379,8 +403,8 @@ struct tag_RTM_IntroductionExperiment_T {
       struct _ssPortOutputs outputPortInfo[1];
       struct _ssOutPortUnit outputPortUnits[1];
       struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
-      uint_T attribs[1];
-      mxArray *params[1];
+      uint_T attribs[3];
+      mxArray *params[3];
       struct _ssDWorkRecord dWork[1];
       struct _ssDWorkAuxRecord dWorkAux[1];
     } Sfcn2;
@@ -396,8 +420,8 @@ struct tag_RTM_IntroductionExperiment_T {
       struct _ssPortOutputs outputPortInfo[1];
       struct _ssOutPortUnit outputPortUnits[1];
       struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
-      uint_T attribs[3];
-      mxArray *params[3];
+      uint_T attribs[2];
+      mxArray *params[2];
       struct _ssDWorkRecord dWork[1];
       struct _ssDWorkAuxRecord dWorkAux[1];
     } Sfcn3;
@@ -413,11 +437,28 @@ struct tag_RTM_IntroductionExperiment_T {
       struct _ssPortOutputs outputPortInfo[1];
       struct _ssOutPortUnit outputPortUnits[1];
       struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
-      uint_T attribs[3];
-      mxArray *params[3];
+      uint_T attribs[5];
+      mxArray *params[5];
       struct _ssDWorkRecord dWork[1];
       struct _ssDWorkAuxRecord dWorkAux[1];
     } Sfcn4;
+
+    struct {
+      time_T sfcnPeriod[1];
+      time_T sfcnOffset[1];
+      int_T sfcnTsMap[1];
+      struct _ssPortInputs inputPortInfo[1];
+      struct _ssInPortUnit inputPortUnits[1];
+      struct _ssInPortCoSimAttribute inputPortCoSimAttribute[1];
+      real_T const *UPtrs0[1];
+      struct _ssPortOutputs outputPortInfo[1];
+      struct _ssOutPortUnit outputPortUnits[1];
+      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[1];
+      uint_T attribs[1];
+      mxArray *params[1];
+      struct _ssDWorkRecord dWork[1];
+      struct _ssDWorkAuxRecord dWorkAux[1];
+    } Sfcn5;
   } NonInlinedSFcns;
 
   boolean_T zCCacheNeedsReset;
@@ -531,8 +572,9 @@ extern RT_MODEL_IntroductionExperiment_T *const IntroductionExperiment_M;
  * These blocks were eliminated from the model due to optimizations:
  *
  * Block '<S2>/Kfa' : Unused code path elimination
- * Block '<S2>/Kfp' : Unused code path elimination
+ * Block '<S2>/Kfc' : Unused code path elimination
  * Block '<S2>/Kfv' : Unused code path elimination
+ * Block '<S2>/Sign' : Unused code path elimination
  * Block '<Root>/Sum2' : Unused code path elimination
  * Block '<Root>/Sum3' : Unused code path elimination
  */
@@ -555,12 +597,13 @@ extern RT_MODEL_IntroductionExperiment_T *const IntroductionExperiment_M;
  * '<S1>'   : 'IntroductionExperiment/Controller (motor side)'
  * '<S2>'   : 'IntroductionExperiment/Feedforward'
  * '<S3>'   : 'IntroductionExperiment/Fourth Order Motion System'
- * '<S4>'   : 'IntroductionExperiment/Measurement Block'
- * '<S5>'   : 'IntroductionExperiment/Real-time scope'
- * '<S6>'   : 'IntroductionExperiment/Ref power'
- * '<S7>'   : 'IntroductionExperiment/Subsystem'
- * '<S8>'   : 'IntroductionExperiment/Fourth Order Motion System/Ethercat E-box'
- * '<S9>'   : 'IntroductionExperiment/Fourth Order Motion System/Ethercat Supervisor'
- * '<S10>'  : 'IntroductionExperiment/Measurement Block/SPERTE_measurement_function'
+ * '<S4>'   : 'IntroductionExperiment/MATLAB Function'
+ * '<S5>'   : 'IntroductionExperiment/Measurement Block'
+ * '<S6>'   : 'IntroductionExperiment/Real-time scope'
+ * '<S7>'   : 'IntroductionExperiment/Ref power'
+ * '<S8>'   : 'IntroductionExperiment/Subsystem'
+ * '<S9>'   : 'IntroductionExperiment/Fourth Order Motion System/Ethercat E-box'
+ * '<S10>'  : 'IntroductionExperiment/Fourth Order Motion System/Ethercat Supervisor'
+ * '<S11>'  : 'IntroductionExperiment/Measurement Block/SPERTE_measurement_function'
  */
 #endif                                /* RTW_HEADER_IntroductionExperiment_h_ */

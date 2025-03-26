@@ -1,0 +1,14 @@
+measurement = SPERTE_Measure_And_Collect(p,2,600000,"IntroductionExperiment1",1);
+measurement = measurement(10000:end,:);
+setpoint = measurement(:,1);
+error = measurement(:,2);
+
+rms
+
+function [rms,peak] = errorCalc(error,Ts)
+    samples = max(size(error));
+    Tsim = Ts*samples;
+
+    rms = (1/Tsim)*trapz(error.^2);
+    peak = max(error);
+end

@@ -73,136 +73,172 @@
             paramMap.sections(3) = section;
             clear section
 
-            section.nData     = 32;
-            section.data(32)  = dumData; %prealloc
+            section.nData     = 41;
+            section.data(41)  = dumData; %prealloc
 
-                    ;% IntroductionExperiment_P.Noise_Mean
+                    ;% IntroductionExperiment_P.SFunction_P1_Size_k
                     section.data(1).logicalSrcIdx = 6;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% IntroductionExperiment_P.Noise_StdDev
-                    section.data(2).logicalSrcIdx = 7;
-                    section.data(2).dtTransOffset = 1;
-
-                    ;% IntroductionExperiment_P.Noise_Seed
-                    section.data(3).logicalSrcIdx = 8;
-                    section.data(3).dtTransOffset = 2;
-
-                    ;% IntroductionExperiment_P.SFunction_P1_Size_k
-                    section.data(4).logicalSrcIdx = 9;
-                    section.data(4).dtTransOffset = 3;
-
                     ;% IntroductionExperiment_P.SFunction_P1
-                    section.data(5).logicalSrcIdx = 10;
-                    section.data(5).dtTransOffset = 5;
+                    section.data(2).logicalSrcIdx = 7;
+                    section.data(2).dtTransOffset = 2;
 
                     ;% IntroductionExperiment_P.SFunction_P2_Size
-                    section.data(6).logicalSrcIdx = 11;
-                    section.data(6).dtTransOffset = 6;
+                    section.data(3).logicalSrcIdx = 8;
+                    section.data(3).dtTransOffset = 3;
 
                     ;% IntroductionExperiment_P.SFunction_P2
-                    section.data(7).logicalSrcIdx = 12;
-                    section.data(7).dtTransOffset = 8;
+                    section.data(4).logicalSrcIdx = 9;
+                    section.data(4).dtTransOffset = 5;
 
                     ;% IntroductionExperiment_P.ec_Ebox_P1_Size
-                    section.data(8).logicalSrcIdx = 13;
-                    section.data(8).dtTransOffset = 9;
+                    section.data(5).logicalSrcIdx = 10;
+                    section.data(5).dtTransOffset = 6;
 
                     ;% IntroductionExperiment_P.ec_Ebox_P1
+                    section.data(6).logicalSrcIdx = 11;
+                    section.data(6).dtTransOffset = 8;
+
+                    ;% IntroductionExperiment_P.count2rad_Gain
+                    section.data(7).logicalSrcIdx = 12;
+                    section.data(7).dtTransOffset = 9;
+
+                    ;% IntroductionExperiment_P.Gain_Gain
+                    section.data(8).logicalSrcIdx = 13;
+                    section.data(8).dtTransOffset = 10;
+
+                    ;% IntroductionExperiment_P.Quantizer1_Interval
                     section.data(9).logicalSrcIdx = 14;
                     section.data(9).dtTransOffset = 11;
 
-                    ;% IntroductionExperiment_P.count2rad_Gain
+                    ;% IntroductionExperiment_P.Gain2_Gain
                     section.data(10).logicalSrcIdx = 15;
                     section.data(10).dtTransOffset = 12;
 
-                    ;% IntroductionExperiment_P.Quantizer1_Interval
+                    ;% IntroductionExperiment_P.Dctleadlag2_P1_Size
                     section.data(11).logicalSrcIdx = 16;
                     section.data(11).dtTransOffset = 13;
 
-                    ;% IntroductionExperiment_P.Gain1_Gain
+                    ;% IntroductionExperiment_P.Dctleadlag2_P1
                     section.data(12).logicalSrcIdx = 17;
-                    section.data(12).dtTransOffset = 14;
+                    section.data(12).dtTransOffset = 15;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P1_Size
+                    ;% IntroductionExperiment_P.Dctleadlag2_P2_Size
                     section.data(13).logicalSrcIdx = 18;
-                    section.data(13).dtTransOffset = 15;
+                    section.data(13).dtTransOffset = 16;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P1
+                    ;% IntroductionExperiment_P.Dctleadlag2_P2
                     section.data(14).logicalSrcIdx = 19;
-                    section.data(14).dtTransOffset = 17;
+                    section.data(14).dtTransOffset = 18;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P2_Size
+                    ;% IntroductionExperiment_P.Dctleadlag2_P3_Size
                     section.data(15).logicalSrcIdx = 20;
-                    section.data(15).dtTransOffset = 18;
+                    section.data(15).dtTransOffset = 19;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P2
+                    ;% IntroductionExperiment_P.Dctleadlag2_P3
                     section.data(16).logicalSrcIdx = 21;
-                    section.data(16).dtTransOffset = 20;
+                    section.data(16).dtTransOffset = 21;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P3_Size
+                    ;% IntroductionExperiment_P.Dct1lowpass3_P1_Size
                     section.data(17).logicalSrcIdx = 22;
-                    section.data(17).dtTransOffset = 21;
+                    section.data(17).dtTransOffset = 22;
 
-                    ;% IntroductionExperiment_P.Dctleadlag_P3
+                    ;% IntroductionExperiment_P.Dct1lowpass3_P1
                     section.data(18).logicalSrcIdx = 23;
-                    section.data(18).dtTransOffset = 23;
+                    section.data(18).dtTransOffset = 24;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P1_Size
+                    ;% IntroductionExperiment_P.Dct1lowpass3_P2_Size
                     section.data(19).logicalSrcIdx = 24;
-                    section.data(19).dtTransOffset = 24;
+                    section.data(19).dtTransOffset = 25;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P1
+                    ;% IntroductionExperiment_P.Dct1lowpass3_P2
                     section.data(20).logicalSrcIdx = 25;
-                    section.data(20).dtTransOffset = 26;
+                    section.data(20).dtTransOffset = 27;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P2_Size
+                    ;% IntroductionExperiment_P.Dctnotch4_P1_Size
                     section.data(21).logicalSrcIdx = 26;
-                    section.data(21).dtTransOffset = 27;
+                    section.data(21).dtTransOffset = 28;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P2
+                    ;% IntroductionExperiment_P.Dctnotch4_P1
                     section.data(22).logicalSrcIdx = 27;
-                    section.data(22).dtTransOffset = 29;
+                    section.data(22).dtTransOffset = 30;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P3_Size
+                    ;% IntroductionExperiment_P.Dctnotch4_P2_Size
                     section.data(23).logicalSrcIdx = 28;
-                    section.data(23).dtTransOffset = 30;
+                    section.data(23).dtTransOffset = 31;
 
-                    ;% IntroductionExperiment_P.Dct2lowpass_P3
+                    ;% IntroductionExperiment_P.Dctnotch4_P2
                     section.data(24).logicalSrcIdx = 29;
-                    section.data(24).dtTransOffset = 32;
+                    section.data(24).dtTransOffset = 33;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P3_Size
+                    section.data(25).logicalSrcIdx = 30;
+                    section.data(25).dtTransOffset = 34;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P3
+                    section.data(26).logicalSrcIdx = 31;
+                    section.data(26).dtTransOffset = 36;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P4_Size
+                    section.data(27).logicalSrcIdx = 32;
+                    section.data(27).dtTransOffset = 37;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P4
+                    section.data(28).logicalSrcIdx = 33;
+                    section.data(28).dtTransOffset = 39;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P5_Size
+                    section.data(29).logicalSrcIdx = 34;
+                    section.data(29).dtTransOffset = 40;
+
+                    ;% IntroductionExperiment_P.Dctnotch4_P5
+                    section.data(30).logicalSrcIdx = 35;
+                    section.data(30).dtTransOffset = 42;
 
                     ;% IntroductionExperiment_P.Constant_Value
-                    section.data(25).logicalSrcIdx = 30;
-                    section.data(25).dtTransOffset = 33;
+                    section.data(31).logicalSrcIdx = 36;
+                    section.data(31).dtTransOffset = 43;
 
                     ;% IntroductionExperiment_P.Constant1_Value
-                    section.data(26).logicalSrcIdx = 31;
-                    section.data(26).dtTransOffset = 35;
+                    section.data(32).logicalSrcIdx = 37;
+                    section.data(32).dtTransOffset = 45;
 
                     ;% IntroductionExperiment_P.Constant2_Value
-                    section.data(27).logicalSrcIdx = 32;
-                    section.data(27).dtTransOffset = 43;
+                    section.data(33).logicalSrcIdx = 38;
+                    section.data(33).dtTransOffset = 53;
 
-                    ;% IntroductionExperiment_P.Gain_Gain
-                    section.data(28).logicalSrcIdx = 33;
-                    section.data(28).dtTransOffset = 44;
+                    ;% IntroductionExperiment_P.Gain_Gain_g
+                    section.data(34).logicalSrcIdx = 39;
+                    section.data(34).dtTransOffset = 54;
+
+                    ;% IntroductionExperiment_P.Noise_Mean
+                    section.data(35).logicalSrcIdx = 40;
+                    section.data(35).dtTransOffset = 55;
+
+                    ;% IntroductionExperiment_P.Noise_StdDev
+                    section.data(36).logicalSrcIdx = 41;
+                    section.data(36).dtTransOffset = 56;
+
+                    ;% IntroductionExperiment_P.Noise_Seed
+                    section.data(37).logicalSrcIdx = 42;
+                    section.data(37).dtTransOffset = 57;
 
                     ;% IntroductionExperiment_P.Saturation_UpperSat
-                    section.data(29).logicalSrcIdx = 34;
-                    section.data(29).dtTransOffset = 45;
+                    section.data(38).logicalSrcIdx = 43;
+                    section.data(38).dtTransOffset = 58;
 
                     ;% IntroductionExperiment_P.Saturation_LowerSat
-                    section.data(30).logicalSrcIdx = 35;
-                    section.data(30).dtTransOffset = 46;
+                    section.data(39).logicalSrcIdx = 44;
+                    section.data(39).dtTransOffset = 59;
 
                     ;% IntroductionExperiment_P.Saturation_UpperSat_d
-                    section.data(31).logicalSrcIdx = 36;
-                    section.data(31).dtTransOffset = 47;
+                    section.data(40).logicalSrcIdx = 45;
+                    section.data(40).dtTransOffset = 60;
 
                     ;% IntroductionExperiment_P.Saturation_LowerSat_e
-                    section.data(32).logicalSrcIdx = 37;
-                    section.data(32).dtTransOffset = 48;
+                    section.data(41).logicalSrcIdx = 46;
+                    section.data(41).dtTransOffset = 61;
 
             nTotData = nTotData + section.nData;
             paramMap.sections(4) = section;
@@ -212,7 +248,7 @@
             section.data(1)  = dumData; %prealloc
 
                     ;% IntroductionExperiment_P.Selectencoder_CurrentSetting
-                    section.data(1).logicalSrcIdx = 38;
+                    section.data(1).logicalSrcIdx = 47;
                     section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
@@ -237,7 +273,7 @@
     ;%**************************
     
         nTotData      = 0; %add to this count as we go
-        nTotSects     = 1;
+        nTotSects     = 2;
         sectIdxOffset = 0;
 
         ;%
@@ -260,83 +296,82 @@
         ;%
         ;% Auto data (IntroductionExperiment_B)
         ;%
-            section.nData     = 18;
-            section.data(18)  = dumData; %prealloc
+            section.nData     = 13;
+            section.data(13)  = dumData; %prealloc
 
-                    ;% IntroductionExperiment_B.Noise
+                    ;% IntroductionExperiment_B.SFunction
                     section.data(1).logicalSrcIdx = 0;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% IntroductionExperiment_B.SFunction
+                    ;% IntroductionExperiment_B.ec_Ebox_o1
                     section.data(2).logicalSrcIdx = 1;
                     section.data(2).dtTransOffset = 1;
 
-                    ;% IntroductionExperiment_B.ec_Ebox_o1
-                    section.data(3).logicalSrcIdx = 2;
-                    section.data(3).dtTransOffset = 2;
-
                     ;% IntroductionExperiment_B.ec_Ebox_o2
-                    section.data(4).logicalSrcIdx = 3;
-                    section.data(4).dtTransOffset = 4;
+                    section.data(3).logicalSrcIdx = 2;
+                    section.data(3).dtTransOffset = 3;
 
                     ;% IntroductionExperiment_B.ec_Ebox_o3
+                    section.data(4).logicalSrcIdx = 3;
+                    section.data(4).dtTransOffset = 5;
+
+                    ;% IntroductionExperiment_B.Gain
                     section.data(5).logicalSrcIdx = 4;
-                    section.data(5).dtTransOffset = 6;
+                    section.data(5).dtTransOffset = 13;
 
                     ;% IntroductionExperiment_B.Selectencoder
                     section.data(6).logicalSrcIdx = 5;
                     section.data(6).dtTransOffset = 14;
 
-                    ;% IntroductionExperiment_B.Startsetpoint
+                    ;% IntroductionExperiment_B.Gain2
                     section.data(7).logicalSrcIdx = 6;
                     section.data(7).dtTransOffset = 15;
 
-                    ;% IntroductionExperiment_B.SFunction_c
+                    ;% IntroductionExperiment_B.Dctleadlag2
                     section.data(8).logicalSrcIdx = 7;
                     section.data(8).dtTransOffset = 16;
 
-                    ;% IntroductionExperiment_B.Gain1
+                    ;% IntroductionExperiment_B.Dct1lowpass3
                     section.data(9).logicalSrcIdx = 8;
-                    section.data(9).dtTransOffset = 19;
+                    section.data(9).dtTransOffset = 17;
 
-                    ;% IntroductionExperiment_B.Dctleadlag
+                    ;% IntroductionExperiment_B.Dctnotch4
                     section.data(10).logicalSrcIdx = 9;
-                    section.data(10).dtTransOffset = 20;
-
-                    ;% IntroductionExperiment_B.Dct2lowpass
-                    section.data(11).logicalSrcIdx = 10;
-                    section.data(11).dtTransOffset = 21;
-
-                    ;% IntroductionExperiment_B.Sum1
-                    section.data(12).logicalSrcIdx = 11;
-                    section.data(12).dtTransOffset = 22;
-
-                    ;% IntroductionExperiment_B.Buffer
-                    section.data(13).logicalSrcIdx = 12;
-                    section.data(13).dtTransOffset = 23;
-
-                    ;% IntroductionExperiment_B.TmpSignalConversionAtToWorkspac
-                    section.data(14).logicalSrcIdx = 13;
-                    section.data(14).dtTransOffset = 26;
+                    section.data(10).dtTransOffset = 18;
 
                     ;% IntroductionExperiment_B.Constant1
-                    section.data(15).logicalSrcIdx = 14;
-                    section.data(15).dtTransOffset = 28;
+                    section.data(11).logicalSrcIdx = 10;
+                    section.data(11).dtTransOffset = 19;
 
-                    ;% IntroductionExperiment_B.Gain
-                    section.data(16).logicalSrcIdx = 15;
-                    section.data(16).dtTransOffset = 36;
+                    ;% IntroductionExperiment_B.Gain_a
+                    section.data(12).logicalSrcIdx = 11;
+                    section.data(12).dtTransOffset = 27;
 
                     ;% IntroductionExperiment_B.Saturation
-                    section.data(17).logicalSrcIdx = 16;
-                    section.data(17).dtTransOffset = 38;
-
-                    ;% IntroductionExperiment_B.Downsample
-                    section.data(18).logicalSrcIdx = 17;
-                    section.data(18).dtTransOffset = 40;
+                    section.data(13).logicalSrcIdx = 12;
+                    section.data(13).dtTransOffset = 29;
 
             nTotData = nTotData + section.nData;
             sigMap.sections(1) = section;
+            clear section
+
+            section.nData     = 3;
+            section.data(3)  = dumData; %prealloc
+
+                    ;% IntroductionExperiment_B.Startsetpoint
+                    section.data(1).logicalSrcIdx = 13;
+                    section.data(1).dtTransOffset = 0;
+
+                    ;% IntroductionExperiment_B.SFunction_c
+                    section.data(2).logicalSrcIdx = 14;
+                    section.data(2).dtTransOffset = 1;
+
+                    ;% IntroductionExperiment_B.Downsample
+                    section.data(3).logicalSrcIdx = 15;
+                    section.data(3).dtTransOffset = 4;
+
+            nTotData = nTotData + section.nData;
+            sigMap.sections(2) = section;
             clear section
 
 
@@ -358,7 +393,7 @@
     
         nTotData      = 0; %add to this count as we go
         nTotSects     = 7;
-        sectIdxOffset = 1;
+        sectIdxOffset = 2;
 
         ;%
         ;% Define dummy sections & preallocate arrays
@@ -380,47 +415,47 @@
         ;%
         ;% Auto data (IntroductionExperiment_DW)
         ;%
-            section.nData     = 6;
-            section.data(6)  = dumData; %prealloc
+            section.nData     = 7;
+            section.data(7)  = dumData; %prealloc
 
-                    ;% IntroductionExperiment_DW.NextOutput
+                    ;% IntroductionExperiment_DW.Downsample_Buffer
                     section.data(1).logicalSrcIdx = 0;
                     section.data(1).dtTransOffset = 0;
 
-                    ;% IntroductionExperiment_DW.Downsample_Buffer
+                    ;% IntroductionExperiment_DW.NextOutput
                     section.data(2).logicalSrcIdx = 1;
-                    section.data(2).dtTransOffset = 1;
+                    section.data(2).dtTransOffset = 3;
 
                     ;% IntroductionExperiment_DW.fileID
                     section.data(3).logicalSrcIdx = 2;
                     section.data(3).dtTransOffset = 4;
 
-                    ;% IntroductionExperiment_DW.SFunction_RWORK
+                    ;% IntroductionExperiment_DW.Dctleadlag2_RWORK
                     section.data(4).logicalSrcIdx = 3;
                     section.data(4).dtTransOffset = 5;
 
-                    ;% IntroductionExperiment_DW.Dctleadlag_RWORK
+                    ;% IntroductionExperiment_DW.Dct1lowpass3_RWORK
                     section.data(5).logicalSrcIdx = 4;
-                    section.data(5).dtTransOffset = 55;
+                    section.data(5).dtTransOffset = 7;
 
-                    ;% IntroductionExperiment_DW.Dct2lowpass_RWORK
+                    ;% IntroductionExperiment_DW.Dctnotch4_RWORK
                     section.data(6).logicalSrcIdx = 5;
-                    section.data(6).dtTransOffset = 57;
+                    section.data(6).dtTransOffset = 9;
+
+                    ;% IntroductionExperiment_DW.SFunction_RWORK
+                    section.data(7).logicalSrcIdx = 6;
+                    section.data(7).dtTransOffset = 13;
 
             nTotData = nTotData + section.nData;
             dworkMap.sections(1) = section;
             clear section
 
-            section.nData     = 2;
-            section.data(2)  = dumData; %prealloc
-
-                    ;% IntroductionExperiment_DW.ToWorkspace_PWORK.LoggedData
-                    section.data(1).logicalSrcIdx = 6;
-                    section.data(1).dtTransOffset = 0;
+            section.nData     = 1;
+            section.data(1)  = dumData; %prealloc
 
                     ;% IntroductionExperiment_DW.Live_Scope_PWORK.LoggedData
-                    section.data(2).logicalSrcIdx = 7;
-                    section.data(2).dtTransOffset = 1;
+                    section.data(1).logicalSrcIdx = 7;
+                    section.data(1).dtTransOffset = 0;
 
             nTotData = nTotData + section.nData;
             dworkMap.sections(2) = section;
@@ -511,8 +546,8 @@
     ;%
 
 
-    targMap.checksum0 = 2550551473;
-    targMap.checksum1 = 2467380485;
-    targMap.checksum2 = 3414423598;
-    targMap.checksum3 = 770466386;
+    targMap.checksum0 = 2138491138;
+    targMap.checksum1 = 2804763056;
+    targMap.checksum2 = 1385277147;
+    targMap.checksum3 = 3412428191;
 

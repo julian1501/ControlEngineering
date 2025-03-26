@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.9
+ * Model version              : 7.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 12:02:58 2025
+ * C source code generated on : Wed Mar 26 14:59:12 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -72,13 +72,15 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&IntroductionExperiment_B.Noise), 0, 0, 43 }
+  { (char_T *)(&IntroductionExperiment_B.SFunction), 0, 0, 31 },
+
+  { (char_T *)(&IntroductionExperiment_B.Startsetpoint), 0, 0, 7 }
   ,
 
-  { (char_T *)(&IntroductionExperiment_DW.NextOutput), 0, 0, 61 },
+  { (char_T *)(&IntroductionExperiment_DW.Downsample_Buffer[0]), 0, 0, 63 },
 
-  { (char_T *)(&IntroductionExperiment_DW.ToWorkspace_PWORK.LoggedData), 11, 0,
-    2 },
+  { (char_T *)(&IntroductionExperiment_DW.Live_Scope_PWORK.LoggedData), 11, 0, 1
+  },
 
   { (char_T *)(&IntroductionExperiment_DW.RandSeed), 7, 0, 2 },
 
@@ -93,7 +95,7 @@ static DataTypeTransition rtBTransitions[] = {
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  8U,
+  9U,
   rtBTransitions
 };
 
@@ -106,7 +108,7 @@ static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&IntroductionExperiment_P.MeasurementBlock_trigger_comman), 3, 0,
     2 },
 
-  { (char_T *)(&IntroductionExperiment_P.Noise_Mean), 0, 0, 49 },
+  { (char_T *)(&IntroductionExperiment_P.SFunction_P1_Size_k[0]), 0, 0, 62 },
 
   { (char_T *)(&IntroductionExperiment_P.Selectencoder_CurrentSetting), 3, 0, 1
   }
