@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.20
+ * Model version              : 7.27
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 14:59:12 2025
+ * C source code generated on : Tue Apr  1 13:56:35 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

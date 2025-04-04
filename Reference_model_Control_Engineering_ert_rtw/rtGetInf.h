@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.3
+ * Model version              : 7.25
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 24 13:10:58 2025
+ * C source code generated on : Fri Apr  4 12:56:30 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

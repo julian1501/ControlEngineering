@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.20
+ * Model version              : 7.27
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 14:59:12 2025
+ * C source code generated on : Tue Apr  1 13:56:35 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,15 +24,12 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
-#include <float.h>
 #ifndef IntroductionExperiment_COMMON_INCLUDES_
 #define IntroductionExperiment_COMMON_INCLUDES_
 #include <stdio.h>
 #include "rtwtypes.h"
 #include "simstruc.h"
 #include "fixedpoint.h"
-#include "dt_info.h"
-#include "ext_work.h"
 #endif                             /* IntroductionExperiment_COMMON_INCLUDES_ */
 
 #include "IntroductionExperiment_types.h"
@@ -62,10 +59,6 @@
 
 #ifndef rtmGetFinalTime
 #define rtmGetFinalTime(rtm)           ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetRTWExtModeInfo
-#define rtmGetRTWExtModeInfo(rtm)      ((rtm)->extModeInfo)
 #endif
 
 #ifndef rtmGetSampleHitArray
@@ -144,6 +137,7 @@ typedef struct {
   real_T ec_Ebox_o3[8];                /* '<S9>/ec_Ebox' */
   real_T Gain;                         /* '<Root>/Gain' */
   real_T Selectencoder;                /* '<Root>/Select encoder' */
+  real_T Buffer[3];                    /* '<S6>/Buffer' */
   real_T Gain2;                        /* '<S1>/Gain2' */
   real_T Dctleadlag2;                  /* '<S1>/Dctleadlag2' */
   real_T Dct1lowpass3;                 /* '<S1>/Dct1lowpass3' */
@@ -157,7 +151,6 @@ typedef struct {
   FILE* filestar_m;
   real_T Startsetpoint;                /* '<S7>/Start setpoint' */
   real_T SFunction_c[3];               /* '<S8>/S-Function' */
-  real_T Downsample[3];                /* '<S6>/Downsample' */
   real_T Clock;                        /* '<Root>/Clock' */
   real_T Sum;                          /* '<Root>/Sum' */
   int32_T nbytes;
@@ -235,7 +228,7 @@ struct P_IntroductionExperiment_T_ {
   real_T Quantizer1_Interval;          /* Expression: (2*pi)/(500*4)
                                         * Referenced by: '<Root>/Quantizer1'
                                         */
-  real_T Gain2_Gain;                   /* Expression: 1.65
+  real_T Gain2_Gain;                   /* Expression: 5.4
                                         * Referenced by: '<S1>/Gain2'
                                         */
   real_T Dctleadlag2_P1_Size[2];      /* Computed Parameter: Dctleadlag2_P1_Size
@@ -342,7 +335,6 @@ struct tag_RTM_IntroductionExperiment_T {
   struct SimStruct_tag * *childSfunctions;
   const char_T *errorStatus;
   SS_SimMode simMode;
-  RTWExtModeInfo *extModeInfo;
   RTWSolverInfo solverInfo;
   RTWSolverInfo *solverInfoPtr;
   void *sfcnInfo;
@@ -472,7 +464,6 @@ struct tag_RTM_IntroductionExperiment_T {
    * dwork, sample times, etc.
    */
   struct {
-    uint32_T checksums[4];
     uint32_T options;
     int_T numContStates;
     int_T numU;
@@ -492,15 +483,6 @@ struct tag_RTM_IntroductionExperiment_T {
   } Sizes;
 
   /*
-   * SpecialInfo:
-   * The following substructure contains special information
-   * related to other components that are dependent on RTW.
-   */
-  struct {
-    const void *mappingInfo;
-  } SpecialInfo;
-
-  /*
    * Timing:
    * The following substructure contains information regarding
    * the timing information for the model.
@@ -513,8 +495,6 @@ struct tag_RTM_IntroductionExperiment_T {
     uint32_T clockTick1;
     uint32_T clockTickH1;
     time_T stepSize1;
-    uint32_T clockTick2;
-    uint32_T clockTickH2;
     struct {
       uint8_T TID[3];
     } TaskCounters;

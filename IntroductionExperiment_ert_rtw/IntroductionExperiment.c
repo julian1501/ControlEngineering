@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.20
+ * Model version              : 7.27
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 14:59:12 2025
+ * C source code generated on : Tue Apr  1 13:56:35 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,7 +20,6 @@
 
 #include "IntroductionExperiment.h"
 #include "IntroductionExperiment_private.h"
-#include "IntroductionExperiment_dt.h"
 
 /* Block signals (default storage) */
 B_IntroductionExperiment_T IntroductionExperiment_B;
@@ -549,14 +548,19 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
 
   /* End of MATLAB Function: '<S5>/SPERTE_measurement_function' */
 
-  /* RateTransition: '<S6>/Downsample' incorporates:
-   *  SignalConversion: '<S6>/Buffer'
-   */
+  /* SignalConversion: '<S6>/Buffer' */
+  IntroductionExperiment_B.Buffer[0] = IntroductionExperiment_B.Sum;
+  IntroductionExperiment_B.Buffer[1] = 0.0;
+  IntroductionExperiment_B.Buffer[2] = 0.0;
+
+  /* RateTransition: '<S6>/Downsample' */
   if (IntroductionExperiment_M->Timing.RateInteraction.TID1_2) {
     IntroductionExperiment_DW.Downsample_Buffer[0] =
-      IntroductionExperiment_B.Gain;
-    IntroductionExperiment_DW.Downsample_Buffer[1] = 0.0;
-    IntroductionExperiment_DW.Downsample_Buffer[2] = 0.0;
+      IntroductionExperiment_B.Buffer[0];
+    IntroductionExperiment_DW.Downsample_Buffer[1] =
+      IntroductionExperiment_B.Buffer[1];
+    IntroductionExperiment_DW.Downsample_Buffer[2] =
+      IntroductionExperiment_B.Buffer[2];
   }
 
   /* End of RateTransition: '<S6>/Downsample' */
@@ -682,24 +686,6 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
     (&IntroductionExperiment_DW.RandSeed) *
     IntroductionExperiment_P.Noise_StdDev + IntroductionExperiment_P.Noise_Mean;
 
-  /* External mode */
-  rtExtModeUploadCheckTrigger(3);
-  rtExtModeUpload(1, (real_T)IntroductionExperiment_M->Timing.t[0]);
-
-  /* signal main to stop simulation */
-  {                                    /* Sample time: [0.0s, 0.0s] */
-    if ((rtmGetTFinal(IntroductionExperiment_M)!=-1) &&
-        !((rtmGetTFinal(IntroductionExperiment_M)-
-           IntroductionExperiment_M->Timing.t[0]) >
-          IntroductionExperiment_M->Timing.t[0] * (DBL_EPSILON))) {
-      rtmSetErrorStatus(IntroductionExperiment_M, "Simulation finished");
-    }
-
-    if (rtmGetStopRequested(IntroductionExperiment_M)) {
-      rtmSetErrorStatus(IntroductionExperiment_M, "Simulation finished");
-    }
-  }
-
   /* Update absolute time */
   /* The "clockTick0" counts the number of times the code of this task has
    * been executed. The absolute time is the multiplication of "clockTick0"
@@ -742,29 +728,12 @@ void IntroductionExperiment_step0(void) /* Sample time: [0.0s, 0.0s] */
 /* Model step function for TID2 */
 void IntroductionExperiment_step2(void) /* Sample time: [0.002s, 0.0s] */
 {
-  /* RateTransition: '<S6>/Downsample' */
-  IntroductionExperiment_B.Downsample[0] =
-    IntroductionExperiment_DW.Downsample_Buffer[0];
-  IntroductionExperiment_B.Downsample[1] =
-    IntroductionExperiment_DW.Downsample_Buffer[1];
-  IntroductionExperiment_B.Downsample[2] =
-    IntroductionExperiment_DW.Downsample_Buffer[2];
-  rtExtModeUpload(2, (real_T)(((IntroductionExperiment_M->Timing.clockTick2+
-    IntroductionExperiment_M->Timing.clockTickH2* 4294967296.0)) * 0.002));
+  real_T rtb_Downsample[3];
 
-  /* Update absolute time */
-  /* The "clockTick2" counts the number of times the code of this task has
-   * been executed. The resolution of this integer timer is 0.002, which is the step size
-   * of the task. Size of "clockTick2" ensures timer will not overflow during the
-   * application lifespan selected.
-   * Timer of this task consists of two 32 bit unsigned integers.
-   * The two integers represent the low bits Timing.clockTick2 and the high bits
-   * Timing.clockTickH2. When the low bit overflows to 0, the high bits increment.
-   */
-  IntroductionExperiment_M->Timing.clockTick2++;
-  if (!IntroductionExperiment_M->Timing.clockTick2) {
-    IntroductionExperiment_M->Timing.clockTickH2++;
-  }
+  /* RateTransition: '<S6>/Downsample' */
+  rtb_Downsample[0] = IntroductionExperiment_DW.Downsample_Buffer[0];
+  rtb_Downsample[1] = IntroductionExperiment_DW.Downsample_Buffer[1];
+  rtb_Downsample[2] = IntroductionExperiment_DW.Downsample_Buffer[2];
 }
 
 /* Use this function only if you need to maintain compatibility with an existing static main program. */
@@ -858,30 +827,6 @@ void IntroductionExperiment_initialize(void)
   rtmSetTFinal(IntroductionExperiment_M, -1);
   IntroductionExperiment_M->Timing.stepSize0 = 0.00025;
   IntroductionExperiment_M->Timing.stepSize1 = 0.00025;
-
-  /* External mode info */
-  IntroductionExperiment_M->Sizes.checksums[0] = (2138491138U);
-  IntroductionExperiment_M->Sizes.checksums[1] = (2804763056U);
-  IntroductionExperiment_M->Sizes.checksums[2] = (1385277147U);
-  IntroductionExperiment_M->Sizes.checksums[3] = (3412428191U);
-
-  {
-    static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
-    static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[3];
-    IntroductionExperiment_M->extModeInfo = (&rt_ExtModeInfo);
-    rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
-    systemRan[0] = &rtAlwaysEnabled;
-    systemRan[1] = &rtAlwaysEnabled;
-    systemRan[2] = &rtAlwaysEnabled;
-    rteiSetModelMappingInfoPtr(IntroductionExperiment_M->extModeInfo,
-      &IntroductionExperiment_M->SpecialInfo.mappingInfo);
-    rteiSetChecksumsPtr(IntroductionExperiment_M->extModeInfo,
-                        IntroductionExperiment_M->Sizes.checksums);
-    rteiSetTPtr(IntroductionExperiment_M->extModeInfo, rtmGetTPtr
-                (IntroductionExperiment_M));
-  }
-
   IntroductionExperiment_M->solverInfoPtr =
     (&IntroductionExperiment_M->solverInfo);
   IntroductionExperiment_M->Timing.stepSize = (0.00025);
@@ -896,23 +841,6 @@ void IntroductionExperiment_initialize(void)
   /* states (dwork) */
   (void) memset((void *)&IntroductionExperiment_DW, 0,
                 sizeof(DW_IntroductionExperiment_T));
-
-  /* data type transition information */
-  {
-    static DataTypeTransInfo dtInfo;
-    (void) memset((char_T *) &dtInfo, 0,
-                  sizeof(dtInfo));
-    IntroductionExperiment_M->SpecialInfo.mappingInfo = (&dtInfo);
-    dtInfo.numDataTypes = 21;
-    dtInfo.dataTypeSizes = &rtDataTypeSizes[0];
-    dtInfo.dataTypeNames = &rtDataTypeNames[0];
-
-    /* Block I/O transition table */
-    dtInfo.BTransTable = &rtBTransTable;
-
-    /* Parameters transition table */
-    dtInfo.PTransTable = &rtPTransTable;
-  }
 
   /* child S-Function registration */
   {

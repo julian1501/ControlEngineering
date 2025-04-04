@@ -78,38 +78,12 @@ void *baseRateTask(void *arg)
       sem_post(&subrateTaskSem[0]);
     }
 
-    /* External mode */
-    {
-      boolean_T rtmStopReq = false;
-      rtExtModePauseIfNeeded(IntroductionExperiment_M->extModeInfo, 3,
-        &rtmStopReq);
-      if (rtmStopReq) {
-        rtmSetStopRequested(IntroductionExperiment_M, true);
-      }
-
-      if (rtmGetStopRequested(IntroductionExperiment_M) == true) {
-        rtmSetErrorStatus(IntroductionExperiment_M, "Simulation finished");
-        break;
-      }
-    }
-
-    /* External mode */
-    {
-      boolean_T rtmStopReq = false;
-      rtExtModeOneStep(IntroductionExperiment_M->extModeInfo, 3, &rtmStopReq);
-      if (rtmStopReq) {
-        rtmSetStopRequested(IntroductionExperiment_M, true);
-      }
-    }
-
     IntroductionExperiment_step(0);
 
     /* Get model outputs here */
-    rtExtModeCheckEndTrigger();
     pthread_mutex_unlock(&rateTaskFcnRunningMutex[0]);
     stopRequested = !((rtmGetErrorStatus(IntroductionExperiment_M) == (NULL)) &&
                       !rtmGetStopRequested(IntroductionExperiment_M));
-    runModel = !stopRequested;
   }
 
   terminateTask(arg);
@@ -152,7 +126,6 @@ void *terminateTask(void *arg)
 
   /* Terminate model */
   IntroductionExperiment_terminate();
-  rtExtModeShutdown(3);
   sem_post(&stopSem);
   return NULL;
 }
@@ -176,25 +149,9 @@ int main(int argc, char **argv)
   mwRaspiInit();
   MW_launchPyserver();
   rtmSetErrorStatus(IntroductionExperiment_M, 0);
-  rtExtModeParseArgs(argc, (const char_T **)argv, NULL);
 
   /* Initialize model */
   IntroductionExperiment_initialize();
-
-  /* External mode */
-  rtSetTFinalForExtMode(&rtmGetTFinal(IntroductionExperiment_M));
-  rtExtModeCheckInit(3);
-
-  {
-    boolean_T rtmStopReq = false;
-    rtExtModeWaitForStartPkt(IntroductionExperiment_M->extModeInfo, 3,
-      &rtmStopReq);
-    if (rtmStopReq) {
-      rtmSetStopRequested(IntroductionExperiment_M, true);
-    }
-  }
-
-  rtERTExtModeStartMsg();
 
   /* Call RTOS Initialization function */
   myRTOSInit(0.00025, 1);

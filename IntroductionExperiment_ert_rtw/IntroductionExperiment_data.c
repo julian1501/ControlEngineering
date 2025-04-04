@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.20
+ * Model version              : 7.27
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Wed Mar 26 14:59:12 2025
+ * C source code generated on : Tue Apr  1 13:56:35 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -31,8 +31,8 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Variable: ref_part
    * Referenced by: '<S8>/S-Function'
    */
-  { 0.0, 6.2832, 0.0, 0.0, 1.4816, -1.0, 6.2832, 0.0, 0.0, 5.0, 5.0, 0.0,
-    0.22499999999999998, 0.22499999999999998, 0.0, 1000.0, 1000.0, 0.0 },
+  { 0.0, 3.0, 0.0, 3.0, 10.0, -1.0, 3.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.001, 1.001,
+    0.0, 1000.0, 1000.0, 0.0 },
 
   /* Mask Parameter: Refpower_stat
    * Referenced by: '<S7>/Start setpoint'
@@ -42,7 +42,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Mask Parameter: MeasurementBlock_N_samples
    * Referenced by: '<S5>/SPERTE_measurement_samples'
    */
-  60000U,
+  600000U,
 
   /* Mask Parameter: MeasurementBlock_trigger_comman
    * Referenced by: '<S5>/SPERTE_measurement_trigger_command'
@@ -99,10 +99,10 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
    */
   0.0031415926535897933,
 
-  /* Expression: 1.65
+  /* Expression: 5.4
    * Referenced by: '<S1>/Gain2'
    */
-  1.65,
+  5.4,
 
   /* Computed Parameter: Dctleadlag2_P1_Size
    * Referenced by: '<S1>/Dctleadlag2'
@@ -112,7 +112,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: f_num
    * Referenced by: '<S1>/Dctleadlag2'
    */
-  5.0,
+  10.0,
 
   /* Computed Parameter: Dctleadlag2_P2_Size
    * Referenced by: '<S1>/Dctleadlag2'
@@ -122,7 +122,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: f_den
    * Referenced by: '<S1>/Dctleadlag2'
    */
-  40.0,
+  130.0,
 
   /* Computed Parameter: Dctleadlag2_P3_Size
    * Referenced by: '<S1>/Dctleadlag2'
@@ -142,7 +142,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: f_den
    * Referenced by: '<S1>/Dct1lowpass3'
    */
-  150.0,
+  275.0,
 
   /* Computed Parameter: Dct1lowpass3_P2_Size
    * Referenced by: '<S1>/Dct1lowpass3'
@@ -162,7 +162,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: f_num
    * Referenced by: '<S1>/Dctnotch4'
    */
-  60.0,
+  58.0,
 
   /* Computed Parameter: Dctnotch4_P2_Size
    * Referenced by: '<S1>/Dctnotch4'
@@ -172,7 +172,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: b_num
    * Referenced by: '<S1>/Dctnotch4'
    */
-  0.1,
+  0.25,
 
   /* Computed Parameter: Dctnotch4_P3_Size
    * Referenced by: '<S1>/Dctnotch4'
@@ -192,7 +192,7 @@ P_IntroductionExperiment_T IntroductionExperiment_P = {
   /* Expression: b_den
    * Referenced by: '<S1>/Dctnotch4'
    */
-  0.28,
+  0.65,
 
   /* Computed Parameter: Dctnotch4_P5_Size
    * Referenced by: '<S1>/Dctnotch4'
