@@ -1,4 +1,4 @@
-
+%% Make TF data from measurement data
 % measurement = SPERTE_Measure_And_Collect(p,2,600000,"IntroductionExperiment",1);
 % measurement = measurement(10000:end,:);
 input = measurement(:,1);
@@ -13,6 +13,10 @@ noverlap = nfft/2;
 
 [TF, F] = tfestimate(input,output,window,noverlap,nfft,Fs);
 Coherence = mscohere(input,output,window,noverlap,nfft,Fs);
+
+TF = TF(3:end,:);
+F = F(3:end,:);
+Coherence = Coherence(3:end,:);
 
 close all;
 
