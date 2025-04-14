@@ -1,5 +1,6 @@
 %% Measure the error
-measurement = SPERTE_Measure_And_Collect(p,2,300000,"Reference_model_Control_Engineering",0);
+% measurement = SPERTE_Measure_And_Collect(p,2,300000,"Reference_model_Control_Engineering",0);
+measurement = simout(:,:);
 measurement = measurement(10000:end-10000,:);
 error_motor = measurement(:,1);
 error_load = measurement(:,2);
