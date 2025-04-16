@@ -4,10 +4,14 @@ measurement = simout(:,:);
 measurement = measurement(10000:end-10000,:);
 error_motor = measurement(:,1);
 error_load = measurement(:,2);
+acc = measurement(:,3);
 
 ham_size = 500;
-error_motor_ham = hampel(error_motor,ham_size,1.5);
-error_load_ham  = hampel(error_load,ham_size,1.5);
+error_motor_ham = hampel(error_motor,ham_size,2);
+error_load_ham  = hampel(error_load,ham_size,2);
+
+err_motor_ham_cv = error_motor_ham(acc == 0);
+err_load_ham_cv = error_load_ham(acc == 0);
 
 %% Analyze the plots
 close all;
