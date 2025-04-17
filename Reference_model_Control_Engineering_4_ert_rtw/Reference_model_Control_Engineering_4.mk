@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Reference_model_Control_Engineering_4'. 
 ## 
 ## Makefile     : Reference_model_Control_Engineering_4.mk
-## Generated on : Tue Apr 15 10:44:16 2025
+## Generated on : Wed Apr 16 14:06:55 2025
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/Reference_model_Control_Engineering_4.elf
 ## Product type : executable
 ## 
@@ -174,7 +174,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(MATLAB_ROOT)/rtw/c/src/rt_matrx.c $(MATLAB_ROOT)/rtw/c/src/rt_printf.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/Reference_model_Control_Engineering_4.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/Reference_model_Control_Engineering_4_data.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rtGetInf.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rtGetNaN.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rt_nonfinite.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/ext_svr.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/updown.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/ext_work.c $(MATLAB_ROOT)/toolbox/coder/rtiostream/src/utils/rtiostream_utils.c $(MATLAB_ROOT)/toolbox/shapeit/ddoubleint.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dleadlag.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dlowpass2.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dnotch.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/ec_Ebox.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/ec_Supervisor.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/ref3b.c $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021b/toolbox/realtime/targets/raspi/src/MW_raspi_init.c $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021b/toolbox/realtime/targets/raspi/src/periphs/MW_Pyserver_control.c $(MATLAB_ROOT)/toolbox/target/codertarget/rtos/src/linuxinitialize.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/rtiostream_interface.c $(MATLAB_ROOT)/toolbox/coder/rtiostream/src/rtiostreamtcpip/rtiostream_tcpip.c
+SRCS = $(MATLAB_ROOT)/rtw/c/src/rt_matrx.c $(MATLAB_ROOT)/rtw/c/src/rt_printf.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/Reference_model_Control_Engineering_4.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/Reference_model_Control_Engineering_4_data.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rtGetInf.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rtGetNaN.c $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/rt_nonfinite.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/ext_svr.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/updown.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/ext_work.c $(MATLAB_ROOT)/toolbox/coder/rtiostream/src/utils/rtiostream_utils.c $(MATLAB_ROOT)/toolbox/shapeit/ddoubleint.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dleadlag.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dlowpass2.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dnotch.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dweakint.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/ec_Ebox.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/ec_Supervisor.c $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/ref3ma/ref3b.c $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021b/toolbox/realtime/targets/raspi/src/MW_raspi_init.c $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021b/toolbox/realtime/targets/raspi/src/periphs/MW_Pyserver_control.c $(MATLAB_ROOT)/toolbox/target/codertarget/rtos/src/linuxinitialize.c $(MATLAB_ROOT)/rtw/c/src/ext_mode/common/rtiostream_interface.c $(MATLAB_ROOT)/toolbox/coder/rtiostream/src/rtiostreamtcpip/rtiostream_tcpip.c
 
 MAIN_SRC = $(START_DIR)/Reference_model_Control_Engineering_4_ert_rtw/ert_main.c
 
@@ -184,7 +184,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = rt_matrx.c.o rt_printf.c.o Reference_model_Control_Engineering_4.c.o Reference_model_Control_Engineering_4_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o ddoubleint.c.o dleadlag.c.o dlowpass2.c.o dnotch.c.o ec_Ebox.c.o ec_Supervisor.c.o ref3b.c.o MW_raspi_init.c.o MW_Pyserver_control.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o
+OBJS = rt_matrx.c.o rt_printf.c.o Reference_model_Control_Engineering_4.c.o Reference_model_Control_Engineering_4_data.c.o rtGetInf.c.o rtGetNaN.c.o rt_nonfinite.c.o ext_svr.c.o updown.c.o ext_work.c.o rtiostream_utils.c.o ddoubleint.c.o dleadlag.c.o dlowpass2.c.o dnotch.c.o dweakint.c.o ec_Ebox.c.o ec_Supervisor.c.o ref3b.c.o MW_raspi_init.c.o MW_Pyserver_control.c.o linuxinitialize.c.o rtiostream_interface.c.o rtiostream_tcpip.c.o
 
 MAIN_OBJ = ert_main.c.o
 
@@ -528,6 +528,10 @@ dlowpass2.c.o : $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th
 
 
 dnotch.c.o : $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dnotch.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+dweakint.c.o : $(MATLAB_WORKSPACE)/C/Users/20191981/OneDrive_-_TU_Eindhoven/6th_year_courses/Quartile_3/4CM00_Control_Engineering/Assignments/SPERTE/SPERTE_Installation/Tooling/Simulink_Lib/SPERTE_Blocks/sfunctions/dweakint.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

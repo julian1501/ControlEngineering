@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.25
+ * Model version              : 7.35
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Fri Apr  4 12:56:30 2025
+ * C source code generated on : Tue Apr 15 10:42:22 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,7 +25,7 @@
 
 /* Model Code Variants */
 
-/* Custom Type definition for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+/* Custom Type definition for MATLAB Function: '<S3>/SPERTE_measurement_function' */
 #include <stdio.h>
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T

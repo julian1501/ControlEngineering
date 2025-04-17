@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering".
  *
- * Model version              : 7.25
+ * Model version              : 7.35
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Fri Apr  4 12:56:30 2025
+ * C source code generated on : Tue Apr 15 10:42:22 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -21,8 +21,6 @@
 #include "Reference_model_Control_Engineering.h"
 #include "Reference_model_Control_Engineering_private.h"
 #include "Reference_model_Control_Engineering_dt.h"
-
-const real_T Reference_model_Control_Engineering_RGND = 0.0;/* real_T ground */
 
 /* Block signals (default storage) */
 B_Reference_model_Control_Engineering_T Reference_model_Control_Engineering_B;
@@ -238,7 +236,7 @@ static void Reference_model__emxFree_char_T(emxArray_char_T_Reference_mod_T
   }
 }
 
-/* Function for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
 static int8_T Reference_model_Contro_filedata(void)
 {
   int32_T k;
@@ -260,7 +258,7 @@ static int8_T Reference_model_Contro_filedata(void)
   return f;
 }
 
-/* Function for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
 static int8_T Reference_model_Control__cfopen(const
   emxArray_char_T_Reference_mod_T *cfilename, const char_T *cpermission)
 {
@@ -302,7 +300,7 @@ static int8_T Reference_model_Control__cfopen(const
   return fileid;
 }
 
-/* Function for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+/* Function for MATLAB Function: '<S3>/SPERTE_measurement_function' */
 static int32_T Reference_model_Control_cfclose(real_T fid)
 {
   FILE* filestar;
@@ -350,7 +348,8 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
 {
   emxArray_char_T_Reference_mod_T *charStr;
   emxArray_char_T_Reference_mod_T *charStr_0;
-  int32_T i;
+  int32_T tmp;
+  uint32_T qY;
   int8_T b_fileid;
   boolean_T autoflush;
 
@@ -358,115 +357,57 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
     rate_monotonic_scheduler();
   }
 
-  /* S-Function (ec_Supervisor): '<S11>/S-Function' */
+  /* S-Function (ec_Supervisor): '<S9>/S-Function' */
 
-  /* Level2 S-Function Block: '<S11>/S-Function' (ec_Supervisor) */
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[0];
     sfcnOutputs(rts,0);
   }
 
-  /* S-Function (ec_Ebox): '<S10>/ec_Ebox' */
+  /* S-Function (ec_Ebox): '<S8>/ec_Ebox' */
 
-  /* Level2 S-Function Block: '<S10>/ec_Ebox' (ec_Ebox) */
+  /* Level2 S-Function Block: '<S8>/ec_Ebox' (ec_Ebox) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[1];
     sfcnOutputs(rts,0);
   }
 
-  /* Gain: '<S4>/count2rad' */
-  Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 =
-    Reference_model_Control_Engineering_P.count2rad_Gain *
-    Reference_model_Control_Engineering_B.ec_Ebox_o2[0];
+  /* Constant: '<S5>/Start setpoint' */
+  Reference_model_Control_Engineering_B.Startsetpoint =
+    Reference_model_Control_Engineering_P.Refpower_stat;
 
-  /* Clock: '<Root>/Clock' */
-  Reference_model_Control_Engineering_B.Clock =
-    Reference_model_Control_Engineering_M->Timing.t[0];
+  /* S-Function (ref3b): '<S6>/S-Function' */
 
-  /* MATLAB Function: '<Root>/MATLAB Function' */
-  if (rtIsNaN(Reference_model_Control_Engineering_B.Clock) || rtIsInf
-      (Reference_model_Control_Engineering_B.Clock)) {
-    Reference_model_Control_Engineering_B.a = (rtNaN);
-  } else if (Reference_model_Control_Engineering_B.Clock == 0.0) {
-    Reference_model_Control_Engineering_B.a = 0.0;
-  } else {
-    Reference_model_Control_Engineering_B.a = fmod
-      (Reference_model_Control_Engineering_B.Clock, 12.0);
-    if (Reference_model_Control_Engineering_B.a == 0.0) {
-      Reference_model_Control_Engineering_B.a = 0.0;
-    } else if (Reference_model_Control_Engineering_B.Clock < 0.0) {
-      Reference_model_Control_Engineering_B.a += 12.0;
-    }
+  /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
+  {
+    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
+    sfcnOutputs(rts,0);
   }
-
-  if (Reference_model_Control_Engineering_B.a <= 2.8157120755974772) {
-    Reference_model_Control_Engineering_B.p = -21.308996938995747 *
-      Reference_model_Control_Engineering_B.a;
-    Reference_model_Control_Engineering_B.Clock = -21.308996938995747;
-    Reference_model_Control_Engineering_B.a = 0.0;
-  } else if ((2.8157120755974772 < Reference_model_Control_Engineering_B.a) &&
-             (Reference_model_Control_Engineering_B.a <= 3.1842879244025228)) {
-    Reference_model_Control_Engineering_B.Clock =
-      (Reference_model_Control_Engineering_B.a - 2.8157120755974772) *
-      3.1415926535897931 / 0.36857584880504568;
-    Reference_model_Control_Engineering_B.a = sin
-      (Reference_model_Control_Engineering_B.Clock);
-    Reference_model_Control_Engineering_B.p = -60.0 - 2.5 *
-      Reference_model_Control_Engineering_B.a;
-    Reference_model_Control_Engineering_B.Clock = cos
-      (Reference_model_Control_Engineering_B.Clock) * -21.308996938995758;
-    Reference_model_Control_Engineering_B.a *= 181.62934021845223;
-  } else if ((3.1842879244025228 < Reference_model_Control_Engineering_B.a) &&
-             (Reference_model_Control_Engineering_B.a <= 8.8157120755974763)) {
-    Reference_model_Control_Engineering_B.p = 21.308996938995747 *
-      Reference_model_Control_Engineering_B.a - 127.85398163397447;
-    Reference_model_Control_Engineering_B.Clock = 21.308996938995747;
-    Reference_model_Control_Engineering_B.a = 0.0;
-  } else if ((8.8157120755974763 < Reference_model_Control_Engineering_B.a) &&
-             (Reference_model_Control_Engineering_B.a <= 9.184287924402522)) {
-    Reference_model_Control_Engineering_B.Clock =
-      (Reference_model_Control_Engineering_B.a - 8.8157120755974763) *
-      3.1415926535897931 / 0.36857584880504568;
-    Reference_model_Control_Engineering_B.a = sin
-      (Reference_model_Control_Engineering_B.Clock);
-    Reference_model_Control_Engineering_B.p = 2.5 *
-      Reference_model_Control_Engineering_B.a + 60.0;
-    Reference_model_Control_Engineering_B.Clock = cos
-      (Reference_model_Control_Engineering_B.Clock) * 21.308996938995758;
-    Reference_model_Control_Engineering_B.a *= -181.62934021845223;
-  } else if ((9.184287924402522 < Reference_model_Control_Engineering_B.a) &&
-             (Reference_model_Control_Engineering_B.a <= 12.0)) {
-    Reference_model_Control_Engineering_B.p = -21.308996938995747 *
-      Reference_model_Control_Engineering_B.a + 255.70796326794894;
-    Reference_model_Control_Engineering_B.Clock = -21.308996938995747;
-    Reference_model_Control_Engineering_B.a = 0.0;
-  } else {
-    Reference_model_Control_Engineering_B.p = 0.0;
-    Reference_model_Control_Engineering_B.Clock = 0.0;
-    Reference_model_Control_Engineering_B.a = 0.0;
-  }
-
-  /* End of MATLAB Function: '<Root>/MATLAB Function' */
 
   /* Quantizer: '<Root>/Quantizer1' */
   Reference_model_Control_Engineering_B.Sum1_p = rt_roundd_snf
-    (Reference_model_Control_Engineering_B.p /
+    (Reference_model_Control_Engineering_B.SFunction_c[2] /
      Reference_model_Control_Engineering_P.Quantizer1_Interval) *
     Reference_model_Control_Engineering_P.Quantizer1_Interval;
 
   /* Sum: '<Root>/Sum2' incorporates:
    *  Gain: '<Root>/Gain'
+   *  Gain: '<S2>/count2rad'
    */
-  Reference_model_Control_Engineering_B.p =
+  Reference_model_Control_Engineering_B.Sum2 =
     Reference_model_Control_Engineering_B.Sum1_p -
-    Reference_model_Control_Engineering_P.Gain_Gain *
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0;
+    Reference_model_Control_Engineering_P.count2rad_Gain *
+    Reference_model_Control_Engineering_B.ec_Ebox_o2[0] *
+    Reference_model_Control_Engineering_P.Gain_Gain;
 
   /* ManualSwitch: '<Root>/Select encoder' incorporates:
-   *  Gain: '<S4>/count2rad'
+   *  Gain: '<S2>/count2rad'
    */
-  if (Reference_model_Control_Engineering_P.Selectencoder_CurrentSetting != 1) {
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 =
+  if (Reference_model_Control_Engineering_P.Selectencoder_CurrentSetting == 1) {
+    Reference_model_Control_Engineering_B.u0 = 0.0;
+  } else {
+    Reference_model_Control_Engineering_B.u0 =
       Reference_model_Control_Engineering_P.count2rad_Gain *
       Reference_model_Control_Engineering_B.ec_Ebox_o2[1];
   }
@@ -474,14 +415,14 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
   /* End of ManualSwitch: '<Root>/Select encoder' */
 
   /* Sum: '<Root>/Sum' */
-  Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 =
+  Reference_model_Control_Engineering_B.Sum =
     Reference_model_Control_Engineering_B.Sum1_p -
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0;
+    Reference_model_Control_Engineering_B.u0;
 
-  /* MATLAB Function: '<S6>/SPERTE_measurement_function' incorporates:
-   *  Constant: '<S6>/SPERTE_measurement_samples'
-   *  Constant: '<S6>/SPERTE_measurement_trigger_command'
-   *  SignalConversion generated from: '<S12>/ SFunction '
+  /* MATLAB Function: '<S3>/SPERTE_measurement_function' incorporates:
+   *  Constant: '<S3>/SPERTE_measurement_samples'
+   *  Constant: '<S3>/SPERTE_measurement_trigger_command'
+   *  SignalConversion generated from: '<S10>/ SFunction '
    */
   if ((((Reference_model_Control_Engineering_P.MeasurementBlock_triggertype == 1)
         &&
@@ -494,38 +435,45 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
     Reference_model__emxInit_char_T(&charStr, 2);
     Reference_model_Control_Engineering_B.nbytes = (int32_T)snprintf(NULL, 0,
       "measurement_%d.bin", Reference_model_Control_Engineering_DW.NF) + 1;
-    i = charStr->size[0] * charStr->size[1];
+    tmp = charStr->size[0] * charStr->size[1];
     charStr->size[0] = 1;
     charStr->size[1] = Reference_model_Control_Engineering_B.nbytes;
-    Refere_emxEnsureCapacity_char_T(charStr, i);
+    Refere_emxEnsureCapacity_char_T(charStr, tmp);
     snprintf(&charStr->data[0], (size_t)
              Reference_model_Control_Engineering_B.nbytes, "measurement_%d.bin",
              Reference_model_Control_Engineering_DW.NF);
     if (1 > Reference_model_Control_Engineering_B.nbytes - 1) {
-      Reference_model_Control_Engineering_B.nbytes = -1;
+      Reference_model_Control_Engineering_B.loop_ub = -1;
     } else {
-      Reference_model_Control_Engineering_B.nbytes -= 2;
+      Reference_model_Control_Engineering_B.loop_ub =
+        Reference_model_Control_Engineering_B.nbytes - 2;
     }
 
     Reference_model__emxInit_char_T(&charStr_0, 2);
-    i = charStr_0->size[0] * charStr_0->size[1];
+    tmp = charStr_0->size[0] * charStr_0->size[1];
     charStr_0->size[0] = 1;
-    charStr_0->size[1] = Reference_model_Control_Engineering_B.nbytes + 1;
-    Refere_emxEnsureCapacity_char_T(charStr_0, i);
-    for (i = 0; i <= Reference_model_Control_Engineering_B.nbytes; i++) {
-      charStr_0->data[i] = charStr->data[i];
+    charStr_0->size[1] = Reference_model_Control_Engineering_B.loop_ub + 1;
+    Refere_emxEnsureCapacity_char_T(charStr_0, tmp);
+    for (Reference_model_Control_Engineering_B.nbytes = 0;
+         Reference_model_Control_Engineering_B.nbytes <=
+         Reference_model_Control_Engineering_B.loop_ub;
+         Reference_model_Control_Engineering_B.nbytes++) {
+      charStr_0->data[Reference_model_Control_Engineering_B.nbytes] =
+        charStr->data[Reference_model_Control_Engineering_B.nbytes];
     }
 
     Reference_model__emxFree_char_T(&charStr);
     b_fileid = Reference_model_Control__cfopen(charStr_0, "wb");
     Reference_model_Control_Engineering_DW.fileID = b_fileid;
-    i = Reference_model_Control_Engineering_DW.NF + 1;
+    Reference_model_Control_Engineering_B.nbytes =
+      Reference_model_Control_Engineering_DW.NF + 1;
     Reference_model__emxFree_char_T(&charStr_0);
     if (Reference_model_Control_Engineering_DW.NF + 1 > 32767) {
-      i = 32767;
+      Reference_model_Control_Engineering_B.nbytes = 32767;
     }
 
-    Reference_model_Control_Engineering_DW.NF = (int16_T)i;
+    Reference_model_Control_Engineering_DW.NF = (int16_T)
+      Reference_model_Control_Engineering_B.nbytes;
     Reference_model_Control_Engineering_DW.busy = 1U;
     Reference_model_Control_Engineering_DW.NS = 0U;
   }
@@ -565,9 +513,9 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
 
       if (!(Reference_model_Control_Engineering_B.filestar == NULL)) {
         Reference_model_Control_Engineering_B.xout[0] = (real32_T)
-          Reference_model_Control_Engineering_B.p;
+          Reference_model_Control_Engineering_B.Sum2;
         Reference_model_Control_Engineering_B.xout[1] = (real32_T)
-          Reference_model_Control_Engineering_B.rtb_Saturation_idx_0;
+          Reference_model_Control_Engineering_B.Sum;
         Reference_model_Control_Engineering_B.bytesOutSizet = fwrite
           (&Reference_model_Control_Engineering_B.xout[0], sizeof(real32_T),
            (size_t)2, Reference_model_Control_Engineering_B.filestar);
@@ -577,15 +525,13 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
         }
       }
 
-      Reference_model_Control_Engineering_B.qY =
-        Reference_model_Control_Engineering_DW.NS + 1U;
+      qY = Reference_model_Control_Engineering_DW.NS + 1U;
       if (Reference_model_Control_Engineering_DW.NS + 1U <
           Reference_model_Control_Engineering_DW.NS) {
-        Reference_model_Control_Engineering_B.qY = MAX_uint32_T;
+        qY = MAX_uint32_T;
       }
 
-      Reference_model_Control_Engineering_DW.NS =
-        Reference_model_Control_Engineering_B.qY;
+      Reference_model_Control_Engineering_DW.NS = qY;
     } else {
       Reference_model_Control_cfclose
         (Reference_model_Control_Engineering_DW.fileID);
@@ -594,16 +540,19 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
     }
   }
 
-  /* End of MATLAB Function: '<S6>/SPERTE_measurement_function' */
+  /* End of MATLAB Function: '<S3>/SPERTE_measurement_function' */
 
-  /* SignalConversion: '<S7>/Buffer' */
+  /* SignalConversion: '<S4>/Buffer' incorporates:
+   *  Gain: '<Root>/Gain1'
+   */
   Reference_model_Control_Engineering_B.Buffer[0] = 0.0;
   Reference_model_Control_Engineering_B.Buffer[1] =
-    Reference_model_Control_Engineering_B.p;
+    Reference_model_Control_Engineering_P.Gain1_Gain *
+    Reference_model_Control_Engineering_B.Sum1_p;
   Reference_model_Control_Engineering_B.Buffer[2] =
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0;
+    Reference_model_Control_Engineering_B.Sum;
 
-  /* RateTransition: '<S7>/Downsample' */
+  /* RateTransition: '<S4>/Downsample' */
   if (Reference_model_Control_Engineering_M->Timing.RateInteraction.TID1_2) {
     Reference_model_Control_Engineering_DW.Downsample_Buffer[0] =
       Reference_model_Control_Engineering_B.Buffer[0];
@@ -613,60 +562,21 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
       Reference_model_Control_Engineering_B.Buffer[2];
   }
 
-  /* End of RateTransition: '<S7>/Downsample' */
+  /* End of RateTransition: '<S4>/Downsample' */
 
-  /* Gain: '<S1>/Gain2' */
-  Reference_model_Control_Engineering_B.Gain2 =
-    Reference_model_Control_Engineering_P.Gain2_Gain *
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0;
+  /* SignalConversion generated from: '<Root>/To Workspace' */
+  Reference_model_Control_Engineering_B.TmpSignalConversionAtToWorkspac[0] =
+    Reference_model_Control_Engineering_B.Sum2;
+  Reference_model_Control_Engineering_B.TmpSignalConversionAtToWorkspac[1] =
+    Reference_model_Control_Engineering_B.Sum;
 
-  /* S-Function (dnotch): '<S1>/Dctnotch' */
-
-  /* Level2 S-Function Block: '<S1>/Dctnotch' (dnotch) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
-    sfcnOutputs(rts,0);
-  }
-
-  /* S-Function (dweakint): '<S1>/Dctintegrator' */
-
-  /* Level2 S-Function Block: '<S1>/Dctintegrator' (dweakint) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[3];
-    sfcnOutputs(rts,0);
-  }
-
-  /* S-Function (dleadlag): '<S1>/Dctleadlag' */
-
-  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[4];
-    sfcnOutputs(rts,0);
-  }
-
-  /* S-Function (dlowpass2): '<S1>/Dct2lowpass' */
-
-  /* Level2 S-Function Block: '<S1>/Dct2lowpass' (dlowpass2) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[5];
-    sfcnOutputs(rts,0);
-  }
-
-  /* S-Function (dleadlag): '<S1>/Dctleadlag1' */
-
-  /* Level2 S-Function Block: '<S1>/Dctleadlag1' (dleadlag) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[6];
-    sfcnOutputs(rts,0);
-  }
-
-  /* Constant: '<S4>/Constant1' */
+  /* Constant: '<S2>/Constant1' */
   memcpy(&Reference_model_Control_Engineering_B.Constant1[0],
          &Reference_model_Control_Engineering_P.Constant1_Value[0], sizeof
          (real_T) << 3U);
 
-  /* Gain: '<S10>/Gain' incorporates:
-   *  Constant: '<S4>/Constant'
+  /* Gain: '<S8>/Gain' incorporates:
+   *  Constant: '<S2>/Constant'
    */
   Reference_model_Control_Engineering_B.Gain[0] =
     Reference_model_Control_Engineering_P.Gain_Gain_g *
@@ -675,137 +585,144 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
     Reference_model_Control_Engineering_P.Gain_Gain_g *
     Reference_model_Control_Engineering_P.Constant_Value[1];
 
-  /* RandomNumber: '<Root>/Noise' */
-  Reference_model_Control_Engineering_B.Noise =
-    Reference_model_Control_Engineering_DW.NextOutput;
+  /* Gain: '<S7>/Gain5' */
+  Reference_model_Control_Engineering_B.Gain5 =
+    Reference_model_Control_Engineering_P.Gain5_Gain *
+    Reference_model_Control_Engineering_B.Sum;
 
-  /* Signum: '<S3>/Sign' */
-  if (Reference_model_Control_Engineering_B.Clock < 0.0) {
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 = -1.0;
-  } else if (Reference_model_Control_Engineering_B.Clock > 0.0) {
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 = 1.0;
-  } else {
-    Reference_model_Control_Engineering_B.rtb_Saturation_idx_0 = 0.0;
+  /* S-Function (dnotch): '<S7>/Dctnotch8' */
+
+  /* Level2 S-Function Block: '<S7>/Dctnotch8' (dnotch) */
+  {
+    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[3];
+    sfcnOutputs(rts,0);
   }
 
-  /* End of Signum: '<S3>/Sign' */
+  /* S-Function (dleadlag): '<S7>/Dctleadlag4' */
 
-  /* Sum: '<Root>/Sum1' incorporates:
-   *  Gain: '<S3>/Ka'
-   *  Gain: '<S3>/Kfc'
-   *  Gain: '<S3>/Kv'
-   *  Sum: '<S3>/Sum'
-   *  Sum: '<S3>/Sum1'
-   */
-  Reference_model_Control_Engineering_B.Clock =
-    (((Reference_model_Control_Engineering_P.Ka_Gain *
-       Reference_model_Control_Engineering_B.a +
-       Reference_model_Control_Engineering_P.Kv_Gain *
-       Reference_model_Control_Engineering_B.Clock) +
-      Reference_model_Control_Engineering_P.Kfc_Gain *
-      Reference_model_Control_Engineering_B.rtb_Saturation_idx_0) +
-     Reference_model_Control_Engineering_B.Dct2lowpass) +
-    Reference_model_Control_Engineering_B.Noise;
-
-  /* Saturate: '<S4>/Saturation' */
-  if (Reference_model_Control_Engineering_B.Clock >
-      Reference_model_Control_Engineering_P.Saturation_UpperSat) {
-    Reference_model_Control_Engineering_B.Clock =
-      Reference_model_Control_Engineering_P.Saturation_UpperSat;
-  } else if (Reference_model_Control_Engineering_B.Clock <
-             Reference_model_Control_Engineering_P.Saturation_LowerSat) {
-    Reference_model_Control_Engineering_B.Clock =
-      Reference_model_Control_Engineering_P.Saturation_LowerSat;
+  /* Level2 S-Function Block: '<S7>/Dctleadlag4' (dleadlag) */
+  {
+    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[4];
+    sfcnOutputs(rts,0);
   }
 
-  /* Saturate: '<S10>/Saturation' */
-  if (Reference_model_Control_Engineering_B.Clock >
-      Reference_model_Control_Engineering_P.Saturation_UpperSat_d) {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[0] =
-      Reference_model_Control_Engineering_P.Saturation_UpperSat_d;
-  } else if (Reference_model_Control_Engineering_B.Clock <
-             Reference_model_Control_Engineering_P.Saturation_LowerSat_e) {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[0] =
-      Reference_model_Control_Engineering_P.Saturation_LowerSat_e;
-  } else {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[0] =
-      Reference_model_Control_Engineering_B.Clock;
+  /* S-Function (dnotch): '<S7>/Dctnotch9' */
+
+  /* Level2 S-Function Block: '<S7>/Dctnotch9' (dnotch) */
+  {
+    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[5];
+    sfcnOutputs(rts,0);
   }
 
-  /* Saturate: '<S4>/Saturation' incorporates:
-   *  Constant: '<S4>/Constant2'
-   */
-  if (Reference_model_Control_Engineering_P.Constant2_Value >
-      Reference_model_Control_Engineering_P.Saturation_UpperSat) {
-    Reference_model_Control_Engineering_B.Clock =
-      Reference_model_Control_Engineering_P.Saturation_UpperSat;
-  } else if (Reference_model_Control_Engineering_P.Constant2_Value <
-             Reference_model_Control_Engineering_P.Saturation_LowerSat) {
-    Reference_model_Control_Engineering_B.Clock =
-      Reference_model_Control_Engineering_P.Saturation_LowerSat;
-  } else {
-    Reference_model_Control_Engineering_B.Clock =
-      Reference_model_Control_Engineering_P.Constant2_Value;
+  /* S-Function (ddoubleint): '<S7>/Dctdoubleintegrator4' */
+
+  /* Level2 S-Function Block: '<S7>/Dctdoubleintegrator4' (ddoubleint) */
+  {
+    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[6];
+    sfcnOutputs(rts,0);
   }
 
-  /* Saturate: '<S10>/Saturation' */
-  if (Reference_model_Control_Engineering_B.Clock >
-      Reference_model_Control_Engineering_P.Saturation_UpperSat_d) {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[1] =
-      Reference_model_Control_Engineering_P.Saturation_UpperSat_d;
-  } else if (Reference_model_Control_Engineering_B.Clock <
-             Reference_model_Control_Engineering_P.Saturation_LowerSat_e) {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[1] =
-      Reference_model_Control_Engineering_P.Saturation_LowerSat_e;
-  } else {
-    /* Saturate: '<S10>/Saturation' */
-    Reference_model_Control_Engineering_B.Saturation[1] =
-      Reference_model_Control_Engineering_B.Clock;
-  }
+  /* S-Function (dlowpass2): '<S7>/Dct2lowpass4' */
 
-  /* Gain: '<S2>/Gain2' */
-  Reference_model_Control_Engineering_B.Gain2_e =
-    Reference_model_Control_Engineering_P.Gain2_Gain_h * 0.0;
-
-  /* S-Function (dnotch): '<S2>/Dctnotch' */
-
-  /* Level2 S-Function Block: '<S2>/Dctnotch' (dnotch) */
+  /* Level2 S-Function Block: '<S7>/Dct2lowpass4' (dlowpass2) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[7];
     sfcnOutputs(rts,0);
   }
 
-  /* S-Function (dleadlag): '<S2>/Dctleadlag' */
+  /* RandomNumber: '<Root>/Noise' */
+  Reference_model_Control_Engineering_B.Noise =
+    Reference_model_Control_Engineering_DW.NextOutput;
 
-  /* Level2 S-Function Block: '<S2>/Dctleadlag' (dleadlag) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[8];
-    sfcnOutputs(rts,0);
+  /* Signum: '<S1>/Sign' */
+  if (Reference_model_Control_Engineering_B.SFunction_c[1] < 0.0) {
+    Reference_model_Control_Engineering_B.u0 = -1.0;
+  } else if (Reference_model_Control_Engineering_B.SFunction_c[1] > 0.0) {
+    Reference_model_Control_Engineering_B.u0 = 1.0;
+  } else if (Reference_model_Control_Engineering_B.SFunction_c[1] == 0.0) {
+    Reference_model_Control_Engineering_B.u0 = 0.0;
+  } else {
+    Reference_model_Control_Engineering_B.u0 = (rtNaN);
   }
 
-  /* S-Function (dweakint): '<S2>/Dctintegrator' */
+  /* End of Signum: '<S1>/Sign' */
 
-  /* Level2 S-Function Block: '<S2>/Dctintegrator' (dweakint) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[9];
-    sfcnOutputs(rts,0);
+  /* Sum: '<Root>/Sum1' incorporates:
+   *  Gain: '<S1>/Ka'
+   *  Gain: '<S1>/Kfc'
+   *  Gain: '<S1>/Kv'
+   *  Sum: '<S1>/Sum'
+   *  Sum: '<S1>/Sum1'
+   */
+  Reference_model_Control_Engineering_B.u0 =
+    (((Reference_model_Control_Engineering_P.Ka_Gain *
+       Reference_model_Control_Engineering_B.SFunction_c[0] +
+       Reference_model_Control_Engineering_P.Kv_Gain *
+       Reference_model_Control_Engineering_B.SFunction_c[1]) +
+      Reference_model_Control_Engineering_P.Kfc_Gain *
+      Reference_model_Control_Engineering_B.u0) +
+     Reference_model_Control_Engineering_B.Dct2lowpass4) +
+    Reference_model_Control_Engineering_B.Noise;
+
+  /* Saturate: '<S2>/Saturation' */
+  if (Reference_model_Control_Engineering_B.u0 >
+      Reference_model_Control_Engineering_P.Saturation_UpperSat) {
+    Reference_model_Control_Engineering_B.u0 =
+      Reference_model_Control_Engineering_P.Saturation_UpperSat;
+  } else if (Reference_model_Control_Engineering_B.u0 <
+             Reference_model_Control_Engineering_P.Saturation_LowerSat) {
+    Reference_model_Control_Engineering_B.u0 =
+      Reference_model_Control_Engineering_P.Saturation_LowerSat;
   }
 
-  /* Constant: '<S8>/Start setpoint' */
-  Reference_model_Control_Engineering_B.Startsetpoint =
-    Reference_model_Control_Engineering_P.Refpower_stat;
+  /* Saturate: '<S8>/Saturation' */
+  if (Reference_model_Control_Engineering_B.u0 >
+      Reference_model_Control_Engineering_P.Saturation_UpperSat_d) {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[0] =
+      Reference_model_Control_Engineering_P.Saturation_UpperSat_d;
+  } else if (Reference_model_Control_Engineering_B.u0 <
+             Reference_model_Control_Engineering_P.Saturation_LowerSat_e) {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[0] =
+      Reference_model_Control_Engineering_P.Saturation_LowerSat_e;
+  } else {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[0] =
+      Reference_model_Control_Engineering_B.u0;
+  }
 
-  /* S-Function (ref3b): '<S9>/S-Function' */
+  /* Saturate: '<S2>/Saturation' incorporates:
+   *  Constant: '<S2>/Constant2'
+   */
+  if (Reference_model_Control_Engineering_P.Constant2_Value >
+      Reference_model_Control_Engineering_P.Saturation_UpperSat) {
+    Reference_model_Control_Engineering_B.u0 =
+      Reference_model_Control_Engineering_P.Saturation_UpperSat;
+  } else if (Reference_model_Control_Engineering_P.Constant2_Value <
+             Reference_model_Control_Engineering_P.Saturation_LowerSat) {
+    Reference_model_Control_Engineering_B.u0 =
+      Reference_model_Control_Engineering_P.Saturation_LowerSat;
+  } else {
+    Reference_model_Control_Engineering_B.u0 =
+      Reference_model_Control_Engineering_P.Constant2_Value;
+  }
 
-  /* Level2 S-Function Block: '<S9>/S-Function' (ref3b) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[10];
-    sfcnOutputs(rts,0);
+  /* Saturate: '<S8>/Saturation' */
+  if (Reference_model_Control_Engineering_B.u0 >
+      Reference_model_Control_Engineering_P.Saturation_UpperSat_d) {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[1] =
+      Reference_model_Control_Engineering_P.Saturation_UpperSat_d;
+  } else if (Reference_model_Control_Engineering_B.u0 <
+             Reference_model_Control_Engineering_P.Saturation_LowerSat_e) {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[1] =
+      Reference_model_Control_Engineering_P.Saturation_LowerSat_e;
+  } else {
+    /* Saturate: '<S8>/Saturation' */
+    Reference_model_Control_Engineering_B.Saturation[1] =
+      Reference_model_Control_Engineering_B.u0;
   }
 
   /* Update for RandomNumber: '<Root>/Noise' */
@@ -876,7 +793,7 @@ void Reference_model_Control_Engineering_step0(void) /* Sample time: [0.0s, 0.0s
 /* Model step function for TID2 */
 void Reference_model_Control_Engineering_step2(void) /* Sample time: [0.002s, 0.0s] */
 {
-  /* RateTransition: '<S7>/Downsample' */
+  /* RateTransition: '<S4>/Downsample' */
   Reference_model_Control_Engineering_B.Downsample[0] =
     Reference_model_Control_Engineering_DW.Downsample_Buffer[0];
   Reference_model_Control_Engineering_B.Downsample[1] =
@@ -1002,20 +919,19 @@ void Reference_model_Control_Engineering_initialize(void)
   Reference_model_Control_Engineering_M->Timing.stepSize1 = 0.00025;
 
   /* External mode info */
-  Reference_model_Control_Engineering_M->Sizes.checksums[0] = (2831927501U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[1] = (3144154703U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[2] = (2014916639U);
-  Reference_model_Control_Engineering_M->Sizes.checksums[3] = (2803038288U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[0] = (1116409048U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[1] = (314148267U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[2] = (3455438554U);
+  Reference_model_Control_Engineering_M->Sizes.checksums[3] = (4140027505U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[3];
+    static const sysRanDType *systemRan[2];
     Reference_model_Control_Engineering_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
     systemRan[1] = &rtAlwaysEnabled;
-    systemRan[2] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr
       (Reference_model_Control_Engineering_M->extModeInfo,
        &Reference_model_Control_Engineering_M->SpecialInfo.mappingInfo);
@@ -1101,28 +1017,28 @@ void Reference_model_Control_Engineering_initialize(void)
                          &Reference_model_Control_Engineering_M->solverInfoPtr);
   }
 
-  Reference_model_Control_Engineering_M->Sizes.numSFcns = (11);
+  Reference_model_Control_Engineering_M->Sizes.numSFcns = (8);
 
   /* register each child */
   {
     (void) memset((void *)
                   &Reference_model_Control_Engineering_M->NonInlinedSFcns.childSFunctions
                   [0], 0,
-                  11*sizeof(SimStruct));
+                  8*sizeof(SimStruct));
     Reference_model_Control_Engineering_M->childSfunctions =
       (&Reference_model_Control_Engineering_M->NonInlinedSFcns.childSFunctionPtrs
        [0]);
 
     {
       int_T i;
-      for (i = 0; i < 11; i++) {
+      for (i = 0; i < 8; i++) {
         Reference_model_Control_Engineering_M->childSfunctions[i] =
           (&Reference_model_Control_Engineering_M->NonInlinedSFcns.childSFunctions
            [i]);
       }
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S11>/S-Function (ec_Supervisor) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S9>/S-Function (ec_Supervisor) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[0];
 
@@ -1250,7 +1166,7 @@ void Reference_model_Control_Engineering_initialize(void)
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S10>/ec_Ebox (ec_Ebox) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S8>/ec_Ebox (ec_Ebox) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[1];
 
@@ -1466,7 +1382,7 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetInputPortBufferDstPort(rts, 2, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S1>/Dctnotch (dnotch) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S6>/S-Function (ref3b) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
 
@@ -1548,7 +1464,7 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn2.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Gain2;
+          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Startsetpoint;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -1573,16 +1489,15 @@ void Reference_model_Control_Engineering_initialize(void)
         /* port 0 */
         {
           _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
+          ssSetOutputPortWidth(rts, 0, 3);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctnotch));
+            Reference_model_Control_Engineering_B.SFunction_c));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctnotch");
-      ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (load side)/Dctnotch");
+      ssSetModelName(rts, "S-Function");
+      ssSetPath(rts, "Reference_model_Control_Engineering/Subsystem/S-Function");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1592,23 +1507,15 @@ void Reference_model_Control_Engineering_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn2.params;
-        ssSetSFcnParamsCount(rts, 5);
+        ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P3_Size);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P4_Size);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P5_Size);
+                       Reference_model_Control_Engineering_P.SFunction_P1_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctnotch_RWORK[0]);
+                 &Reference_model_Control_Engineering_DW.SFunction_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1620,22 +1527,22 @@ void Reference_model_Control_Engineering_initialize(void)
         _ssSetNumDWork(rts, 1);
 
         /* RWORK */
-        ssSetDWorkWidth(rts, 0, 4);
+        ssSetDWorkWidth(rts, 0, 50);
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctnotch_RWORK[0]);
+                   &Reference_model_Control_Engineering_DW.SFunction_RWORK[0]);
       }
 
       /* registration */
-      dnotch(rts);
+      ref3b(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.00025);
+      ssSetSampleTime(rts, 0, 0.0);
       ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 1;
+      sfcnTsMap[0] = 0;
 
       /* set compiled values of dynamic vector attributes */
       ssSetNumNonsampledZCs(rts, 0);
@@ -1649,7 +1556,7 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S1>/Dctintegrator (dweakint) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S7>/Dctnotch8 (dnotch) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[3];
 
@@ -1731,7 +1638,7 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn3.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctnotch;
+          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Gain5;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -1758,14 +1665,14 @@ void Reference_model_Control_Engineering_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctintegrator));
+            &Reference_model_Control_Engineering_B.Dctnotch8));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctintegrator");
+      ssSetModelName(rts, "Dctnotch8");
       ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (load side)/Dctintegrator");
+                "Reference_model_Control_Engineering/T10-2 High gain - similar 3 Hz notch + 60 Notch wide (second order)_ 53.68 dB gain/Dctnotch8");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1775,17 +1682,23 @@ void Reference_model_Control_Engineering_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn3.params;
-        ssSetSFcnParamsCount(rts, 2);
+        ssSetSFcnParamsCount(rts, 5);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctintegrator_P1_Size);
+                       Reference_model_Control_Engineering_P.Dctnotch8_P1_Size);
         ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctintegrator_P2_Size);
+                       Reference_model_Control_Engineering_P.Dctnotch8_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       Reference_model_Control_Engineering_P.Dctnotch8_P3_Size);
+        ssSetSFcnParam(rts, 3, (mxArray*)
+                       Reference_model_Control_Engineering_P.Dctnotch8_P4_Size);
+        ssSetSFcnParam(rts, 4, (mxArray*)
+                       Reference_model_Control_Engineering_P.Dctnotch8_P5_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctintegrator_RWORK[0]);
+                 &Reference_model_Control_Engineering_DW.Dctnotch8_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1797,15 +1710,15 @@ void Reference_model_Control_Engineering_initialize(void)
         _ssSetNumDWork(rts, 1);
 
         /* RWORK */
-        ssSetDWorkWidth(rts, 0, 2);
+        ssSetDWorkWidth(rts, 0, 4);
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctintegrator_RWORK[0]);
+                   &Reference_model_Control_Engineering_DW.Dctnotch8_RWORK[0]);
       }
 
       /* registration */
-      dweakint(rts);
+      dnotch(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -1826,7 +1739,7 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S1>/Dctleadlag (dleadlag) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S7>/Dctleadlag4 (dleadlag) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[4];
 
@@ -1908,7 +1821,7 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn4.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctintegrator;
+          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctnotch8;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -1935,14 +1848,14 @@ void Reference_model_Control_Engineering_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctleadlag));
+            &Reference_model_Control_Engineering_B.Dctleadlag4));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctleadlag");
+      ssSetModelName(rts, "Dctleadlag4");
       ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (load side)/Dctleadlag");
+                "Reference_model_Control_Engineering/T10-2 High gain - similar 3 Hz notch + 60 Notch wide (second order)_ 53.68 dB gain/Dctleadlag4");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1955,16 +1868,16 @@ void Reference_model_Control_Engineering_initialize(void)
         ssSetSFcnParamsCount(rts, 3);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P1_Size);
+                       Reference_model_Control_Engineering_P.Dctleadlag4_P1_Size);
         ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P2_Size);
+                       Reference_model_Control_Engineering_P.Dctleadlag4_P2_Size);
         ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P3_Size);
+                       Reference_model_Control_Engineering_P.Dctleadlag4_P3_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctleadlag_RWORK[0]);
+                 &Reference_model_Control_Engineering_DW.Dctleadlag4_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1980,7 +1893,7 @@ void Reference_model_Control_Engineering_initialize(void)
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctleadlag_RWORK[0]);
+                   &Reference_model_Control_Engineering_DW.Dctleadlag4_RWORK[0]);
       }
 
       /* registration */
@@ -2005,7 +1918,7 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S1>/Dct2lowpass (dlowpass2) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S7>/Dctnotch9 (dnotch) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[5];
 
@@ -2087,7 +2000,7 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn5.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctleadlag;
+          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctleadlag4;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -2114,14 +2027,14 @@ void Reference_model_Control_Engineering_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dct2lowpass));
+            &Reference_model_Control_Engineering_B.Dctnotch9));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dct2lowpass");
+      ssSetModelName(rts, "Dctnotch9");
       ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (load side)/Dct2lowpass");
+                "Reference_model_Control_Engineering/T10-2 High gain - similar 3 Hz notch + 60 Notch wide (second order)_ 53.68 dB gain/Dctnotch9");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -2131,19 +2044,23 @@ void Reference_model_Control_Engineering_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn5.params;
-        ssSetSFcnParamsCount(rts, 3);
+        ssSetSFcnParamsCount(rts, 5);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dct2lowpass_P1_Size);
+                       Reference_model_Control_Engineering_P.Dctnotch9_P1_Size);
         ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dct2lowpass_P2_Size);
+                       Reference_model_Control_Engineering_P.Dctnotch9_P2_Size);
         ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dct2lowpass_P3_Size);
+                       Reference_model_Control_Engineering_P.Dctnotch9_P3_Size);
+        ssSetSFcnParam(rts, 3, (mxArray*)
+                       Reference_model_Control_Engineering_P.Dctnotch9_P4_Size);
+        ssSetSFcnParam(rts, 4, (mxArray*)
+                       Reference_model_Control_Engineering_P.Dctnotch9_P5_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dct2lowpass_RWORK[0]);
+                 &Reference_model_Control_Engineering_DW.Dctnotch9_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -2159,11 +2076,11 @@ void Reference_model_Control_Engineering_initialize(void)
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dct2lowpass_RWORK[0]);
+                   &Reference_model_Control_Engineering_DW.Dctnotch9_RWORK[0]);
       }
 
       /* registration */
-      dlowpass2(rts);
+      dnotch(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -2184,7 +2101,7 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S1>/Dctleadlag1 (dleadlag) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S7>/Dctdoubleintegrator4 (ddoubleint) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[6];
 
@@ -2266,8 +2183,7 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn6.UPtrs0;
-          sfcnUPtrs[0] = ((const real_T*)
-                          &Reference_model_Control_Engineering_RGND);
+          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctnotch9;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -2294,14 +2210,14 @@ void Reference_model_Control_Engineering_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctleadlag1));
+            &Reference_model_Control_Engineering_B.Dctdoubleintegrator4));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctleadlag1");
+      ssSetModelName(rts, "Dctdoubleintegrator4");
       ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (load side)/Dctleadlag1");
+                "Reference_model_Control_Engineering/T10-2 High gain - similar 3 Hz notch + 60 Notch wide (second order)_ 53.68 dB gain/Dctdoubleintegrator4");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -2314,16 +2230,17 @@ void Reference_model_Control_Engineering_initialize(void)
         ssSetSFcnParamsCount(rts, 3);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag1_P1_Size);
+                       Reference_model_Control_Engineering_P.Dctdoubleintegrator4_P1_Size);
         ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag1_P2_Size);
+                       Reference_model_Control_Engineering_P.Dctdoubleintegrator4_P2_Size);
         ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag1_P3_Size);
+                       Reference_model_Control_Engineering_P.Dctdoubleintegrator4_P3_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctleadlag1_RWORK[0]);
+                 &Reference_model_Control_Engineering_DW.Dctdoubleintegrator4_RWORK
+                 [0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -2335,15 +2252,16 @@ void Reference_model_Control_Engineering_initialize(void)
         _ssSetNumDWork(rts, 1);
 
         /* RWORK */
-        ssSetDWorkWidth(rts, 0, 2);
+        ssSetDWorkWidth(rts, 0, 4);
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctleadlag1_RWORK[0]);
+                   &Reference_model_Control_Engineering_DW.Dctdoubleintegrator4_RWORK
+                   [0]);
       }
 
       /* registration */
-      dleadlag(rts);
+      ddoubleint(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -2356,15 +2274,15 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetNumNonsampledZCs(rts, 0);
 
       /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 0);
-      _ssSetOutputPortConnected(rts, 0, 0);
+      _ssSetInputPortConnected(rts, 0, 1);
+      _ssSetOutputPortConnected(rts, 0, 1);
       _ssSetOutputPortBeingMerged(rts, 0, 0);
 
       /* Update the BufferDstPort flags for each input port */
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S2>/Dctnotch (dnotch) */
+    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S7>/Dct2lowpass4 (dlowpass2) */
     {
       SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[7];
 
@@ -2446,7 +2364,8 @@ void Reference_model_Control_Engineering_initialize(void)
         {
           real_T const **sfcnUPtrs = (real_T const **)
             &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn7.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Gain2_e;
+          sfcnUPtrs[0] =
+            &Reference_model_Control_Engineering_B.Dctdoubleintegrator4;
           ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
@@ -2473,14 +2392,14 @@ void Reference_model_Control_Engineering_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctnotch_n));
+            &Reference_model_Control_Engineering_B.Dct2lowpass4));
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "Dctnotch");
+      ssSetModelName(rts, "Dct2lowpass4");
       ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (motor side)/Dctnotch");
+                "Reference_model_Control_Engineering/T10-2 High gain - similar 3 Hz notch + 60 Notch wide (second order)_ 53.68 dB gain/Dct2lowpass4");
       ssSetRTModel(rts,Reference_model_Control_Engineering_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -2490,23 +2409,19 @@ void Reference_model_Control_Engineering_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn7.params;
-        ssSetSFcnParamsCount(rts, 5);
+        ssSetSFcnParamsCount(rts, 3);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P1_Size_f);
+                       Reference_model_Control_Engineering_P.Dct2lowpass4_P1_Size);
         ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P2_Size_k);
+                       Reference_model_Control_Engineering_P.Dct2lowpass4_P2_Size);
         ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P3_Size_j);
-        ssSetSFcnParam(rts, 3, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P4_Size_n);
-        ssSetSFcnParam(rts, 4, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctnotch_P5_Size_e);
+                       Reference_model_Control_Engineering_P.Dct2lowpass4_P3_Size);
       }
 
       /* work vectors */
       ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctnotch_RWORK_k[0]);
+                 &Reference_model_Control_Engineering_DW.Dct2lowpass4_RWORK[0]);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -2522,11 +2437,11 @@ void Reference_model_Control_Engineering_initialize(void)
         ssSetDWorkDataType(rts, 0,SS_DOUBLE);
         ssSetDWorkComplexSignal(rts, 0, 0);
         ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctnotch_RWORK_k[0]);
+                   &Reference_model_Control_Engineering_DW.Dct2lowpass4_RWORK[0]);
       }
 
       /* registration */
-      dnotch(rts);
+      dlowpass2(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -2534,538 +2449,6 @@ void Reference_model_Control_Engineering_initialize(void)
       ssSetSampleTime(rts, 0, 0.00025);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 1;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 1);
-      _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-      ssSetInputPortBufferDstPort(rts, 0, -1);
-    }
-
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S2>/Dctleadlag (dleadlag) */
-    {
-      SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[8];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.sfcnPeriod;
-      time_T *sfcnOffset =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.sfcnOffset;
-      int_T *sfcnTsMap =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.blkInfo2
-                         [8]);
-      }
-
-      _ssSetBlkInfo2PortInfo2Ptr(rts,
-        &Reference_model_Control_Engineering_M->NonInlinedSFcns.inputOutputPortInfo2
-        [8]);
-
-      /* Set up the mdlInfo pointer */
-      ssSetRTWSfcnInfo(rts, Reference_model_Control_Engineering_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods2
-                           [8]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods3
-                           [8]);
-      }
-
-      /* Allocate memory of model methods 4 */
-      {
-        ssSetModelMethods4(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods4
-                           [8]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.statesInfo2
-                         [8]);
-        ssSetPeriodicStatesInfo(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.periodicStatesInfo
-          [8]);
-      }
-
-      /* inputs */
-      {
-        _ssSetNumInputPorts(rts, 1);
-        ssSetPortInfoForInputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.inputPortInfo
-          [0]);
-        _ssSetPortInfo2ForInputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.inputPortUnits
-          [0]);
-        ssSetInputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForInputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.inputPortCoSimAttribute
-          [0]);
-        ssSetInputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Dctnotch_n;
-          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 1);
-        }
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.outputPortInfo
-          [0]);
-        _ssSetNumOutputPorts(rts, 1);
-        _ssSetPortInfo2ForOutputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.outputPortUnits
-          [0]);
-        ssSetOutputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForOutputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.outputPortCoSimAttribute
-          [0]);
-        ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctleadlag_j));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "Dctleadlag");
-      ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (motor side)/Dctleadlag");
-      ssSetRTModel(rts,Reference_model_Control_Engineering_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.params;
-        ssSetSFcnParamsCount(rts, 3);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P1_Size_k);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P2_Size_d);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctleadlag_P3_Size_p);
-      }
-
-      /* work vectors */
-      ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctleadlag_RWORK_k[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn8.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* RWORK */
-        ssSetDWorkWidth(rts, 0, 2);
-        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctleadlag_RWORK_k[0]);
-      }
-
-      /* registration */
-      dleadlag(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.00025);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 1;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 1);
-      _ssSetOutputPortConnected(rts, 0, 1);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-      ssSetInputPortBufferDstPort(rts, 0, -1);
-    }
-
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S2>/Dctintegrator (dweakint) */
-    {
-      SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[9];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.sfcnPeriod;
-      time_T *sfcnOffset =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.sfcnOffset;
-      int_T *sfcnTsMap =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.blkInfo2
-                         [9]);
-      }
-
-      _ssSetBlkInfo2PortInfo2Ptr(rts,
-        &Reference_model_Control_Engineering_M->NonInlinedSFcns.inputOutputPortInfo2
-        [9]);
-
-      /* Set up the mdlInfo pointer */
-      ssSetRTWSfcnInfo(rts, Reference_model_Control_Engineering_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods2
-                           [9]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods3
-                           [9]);
-      }
-
-      /* Allocate memory of model methods 4 */
-      {
-        ssSetModelMethods4(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods4
-                           [9]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.statesInfo2
-                         [9]);
-        ssSetPeriodicStatesInfo(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.periodicStatesInfo
-          [9]);
-      }
-
-      /* inputs */
-      {
-        _ssSetNumInputPorts(rts, 1);
-        ssSetPortInfoForInputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.inputPortInfo
-          [0]);
-        _ssSetPortInfo2ForInputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.inputPortUnits
-          [0]);
-        ssSetInputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForInputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.inputPortCoSimAttribute
-          [0]);
-        ssSetInputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.UPtrs0;
-          sfcnUPtrs[0] = ((const real_T*)
-                          &Reference_model_Control_Engineering_RGND);
-          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 1);
-        }
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.outputPortInfo
-          [0]);
-        _ssSetNumOutputPorts(rts, 1);
-        _ssSetPortInfo2ForOutputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.outputPortUnits
-          [0]);
-        ssSetOutputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForOutputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.outputPortCoSimAttribute
-          [0]);
-        ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 1);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            &Reference_model_Control_Engineering_B.Dctintegrator_c));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "Dctintegrator");
-      ssSetPath(rts,
-                "Reference_model_Control_Engineering/Controller (motor side)/Dctintegrator");
-      ssSetRTModel(rts,Reference_model_Control_Engineering_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.params;
-        ssSetSFcnParamsCount(rts, 2);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctintegrator_P1_Size_b);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       Reference_model_Control_Engineering_P.Dctintegrator_P2_Size_l);
-      }
-
-      /* work vectors */
-      ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.Dctintegrator_RWORK_a[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn9.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* RWORK */
-        ssSetDWorkWidth(rts, 0, 2);
-        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.Dctintegrator_RWORK_a[
-                   0]);
-      }
-
-      /* registration */
-      dweakint(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.00025);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 1;
-
-      /* set compiled values of dynamic vector attributes */
-      ssSetNumNonsampledZCs(rts, 0);
-
-      /* Update connectivity flags for each port */
-      _ssSetInputPortConnected(rts, 0, 0);
-      _ssSetOutputPortConnected(rts, 0, 0);
-      _ssSetOutputPortBeingMerged(rts, 0, 0);
-
-      /* Update the BufferDstPort flags for each input port */
-      ssSetInputPortBufferDstPort(rts, 0, -1);
-    }
-
-    /* Level2 S-Function Block: Reference_model_Control_Engineering/<S9>/S-Function (ref3b) */
-    {
-      SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[10];
-
-      /* timing info */
-      time_T *sfcnPeriod =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.sfcnPeriod;
-      time_T *sfcnOffset =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.sfcnOffset;
-      int_T *sfcnTsMap =
-        Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.sfcnTsMap;
-      (void) memset((void*)sfcnPeriod, 0,
-                    sizeof(time_T)*1);
-      (void) memset((void*)sfcnOffset, 0,
-                    sizeof(time_T)*1);
-      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
-      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
-      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
-
-      {
-        ssSetBlkInfo2Ptr(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.blkInfo2
-                         [10]);
-      }
-
-      _ssSetBlkInfo2PortInfo2Ptr(rts,
-        &Reference_model_Control_Engineering_M->NonInlinedSFcns.inputOutputPortInfo2
-        [10]);
-
-      /* Set up the mdlInfo pointer */
-      ssSetRTWSfcnInfo(rts, Reference_model_Control_Engineering_M->sfcnInfo);
-
-      /* Allocate memory of model methods 2 */
-      {
-        ssSetModelMethods2(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods2
-                           [10]);
-      }
-
-      /* Allocate memory of model methods 3 */
-      {
-        ssSetModelMethods3(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods3
-                           [10]);
-      }
-
-      /* Allocate memory of model methods 4 */
-      {
-        ssSetModelMethods4(rts,
-                           &Reference_model_Control_Engineering_M->NonInlinedSFcns.methods4
-                           [10]);
-      }
-
-      /* Allocate memory for states auxilliary information */
-      {
-        ssSetStatesInfo2(rts,
-                         &Reference_model_Control_Engineering_M->NonInlinedSFcns.statesInfo2
-                         [10]);
-        ssSetPeriodicStatesInfo(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.periodicStatesInfo
-          [10]);
-      }
-
-      /* inputs */
-      {
-        _ssSetNumInputPorts(rts, 1);
-        ssSetPortInfoForInputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.inputPortInfo
-          [0]);
-        _ssSetPortInfo2ForInputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.inputPortUnits
-          [0]);
-        ssSetInputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForInputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.inputPortCoSimAttribute
-          [0]);
-        ssSetInputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          real_T const **sfcnUPtrs = (real_T const **)
-            &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.UPtrs0;
-          sfcnUPtrs[0] = &Reference_model_Control_Engineering_B.Startsetpoint;
-          ssSetInputPortSignalPtrs(rts, 0, (InputPtrsType)&sfcnUPtrs[0]);
-          _ssSetInputPortNumDimensions(rts, 0, 1);
-          ssSetInputPortWidth(rts, 0, 1);
-        }
-      }
-
-      /* outputs */
-      {
-        ssSetPortInfoForOutputs(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.outputPortInfo
-          [0]);
-        _ssSetNumOutputPorts(rts, 1);
-        _ssSetPortInfo2ForOutputUnits(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.outputPortUnits
-          [0]);
-        ssSetOutputPortUnit(rts, 0, 0);
-        _ssSetPortInfo2ForOutputCoSimAttribute(rts,
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.outputPortCoSimAttribute
-          [0]);
-        ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
-
-        /* port 0 */
-        {
-          _ssSetOutputPortNumDimensions(rts, 0, 1);
-          ssSetOutputPortWidth(rts, 0, 3);
-          ssSetOutputPortSignal(rts, 0, ((real_T *)
-            Reference_model_Control_Engineering_B.SFunction_c));
-        }
-      }
-
-      /* path info */
-      ssSetModelName(rts, "S-Function");
-      ssSetPath(rts, "Reference_model_Control_Engineering/Subsystem/S-Function");
-      ssSetRTModel(rts,Reference_model_Control_Engineering_M);
-      ssSetParentSS(rts, (NULL));
-      ssSetRootSS(rts, rts);
-      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
-
-      /* parameters */
-      {
-        mxArray **sfcnParams = (mxArray **)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.params;
-        ssSetSFcnParamsCount(rts, 1);
-        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       Reference_model_Control_Engineering_P.SFunction_P1_Size);
-      }
-
-      /* work vectors */
-      ssSetRWork(rts, (real_T *)
-                 &Reference_model_Control_Engineering_DW.SFunction_RWORK[0]);
-
-      {
-        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.dWork;
-        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &Reference_model_Control_Engineering_M->NonInlinedSFcns.Sfcn10.dWorkAux;
-        ssSetSFcnDWork(rts, dWorkRecord);
-        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
-        _ssSetNumDWork(rts, 1);
-
-        /* RWORK */
-        ssSetDWorkWidth(rts, 0, 50);
-        ssSetDWorkDataType(rts, 0,SS_DOUBLE);
-        ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0,
-                   &Reference_model_Control_Engineering_DW.SFunction_RWORK[0]);
-      }
-
-      /* registration */
-      ref3b(rts);
-      sfcnInitializeSizes(rts);
-      sfcnInitializeSampleTimes(rts);
-
-      /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.0);
-      ssSetOffsetTime(rts, 0, 0.0);
-      sfcnTsMap[0] = 0;
 
       /* set compiled values of dynamic vector attributes */
       ssSetNumNonsampledZCs(rts, 0);
@@ -3080,8 +2463,8 @@ void Reference_model_Control_Engineering_initialize(void)
     }
   }
 
-  /* Start for S-Function (ec_Supervisor): '<S11>/S-Function' */
-  /* Level2 S-Function Block: '<S11>/S-Function' (ec_Supervisor) */
+  /* Start for S-Function (ec_Supervisor): '<S9>/S-Function' */
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[0];
     sfcnStart(rts);
@@ -3089,17 +2472,17 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for S-Function (dnotch): '<S1>/Dctnotch' */
-  /* Level2 S-Function Block: '<S1>/Dctnotch' (dnotch) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
+  /* Start for Constant: '<S5>/Start setpoint' */
+  Reference_model_Control_Engineering_B.Startsetpoint =
+    Reference_model_Control_Engineering_P.Refpower_stat;
 
-  /* Start for S-Function (dweakint): '<S1>/Dctintegrator' */
-  /* Level2 S-Function Block: '<S1>/Dctintegrator' (dweakint) */
+  /* Start for Constant: '<S2>/Constant1' */
+  memcpy(&Reference_model_Control_Engineering_B.Constant1[0],
+         &Reference_model_Control_Engineering_P.Constant1_Value[0], sizeof
+         (real_T) << 3U);
+
+  /* Start for S-Function (dnotch): '<S7>/Dctnotch8' */
+  /* Level2 S-Function Block: '<S7>/Dctnotch8' (dnotch) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[3];
     sfcnStart(rts);
@@ -3107,8 +2490,8 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for S-Function (dleadlag): '<S1>/Dctleadlag' */
-  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
+  /* Start for S-Function (dleadlag): '<S7>/Dctleadlag4' */
+  /* Level2 S-Function Block: '<S7>/Dctleadlag4' (dleadlag) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[4];
     sfcnStart(rts);
@@ -3116,8 +2499,8 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for S-Function (dlowpass2): '<S1>/Dct2lowpass' */
-  /* Level2 S-Function Block: '<S1>/Dct2lowpass' (dlowpass2) */
+  /* Start for S-Function (dnotch): '<S7>/Dctnotch9' */
+  /* Level2 S-Function Block: '<S7>/Dctnotch9' (dnotch) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[5];
     sfcnStart(rts);
@@ -3125,8 +2508,8 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for S-Function (dleadlag): '<S1>/Dctleadlag1' */
-  /* Level2 S-Function Block: '<S1>/Dctleadlag1' (dleadlag) */
+  /* Start for S-Function (ddoubleint): '<S7>/Dctdoubleintegrator4' */
+  /* Level2 S-Function Block: '<S7>/Dctdoubleintegrator4' (ddoubleint) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[6];
     sfcnStart(rts);
@@ -3134,13 +2517,8 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for Constant: '<S4>/Constant1' */
-  memcpy(&Reference_model_Control_Engineering_B.Constant1[0],
-         &Reference_model_Control_Engineering_P.Constant1_Value[0], sizeof
-         (real_T) << 3U);
-
-  /* Start for S-Function (dnotch): '<S2>/Dctnotch' */
-  /* Level2 S-Function Block: '<S2>/Dctnotch' (dnotch) */
+  /* Start for S-Function (dlowpass2): '<S7>/Dct2lowpass4' */
+  /* Level2 S-Function Block: '<S7>/Dct2lowpass4' (dlowpass2) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[7];
     sfcnStart(rts);
@@ -3148,34 +2526,21 @@ void Reference_model_Control_Engineering_initialize(void)
       return;
   }
 
-  /* Start for S-Function (dleadlag): '<S2>/Dctleadlag' */
-  /* Level2 S-Function Block: '<S2>/Dctleadlag' (dleadlag) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[8];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* Start for S-Function (dweakint): '<S2>/Dctintegrator' */
-  /* Level2 S-Function Block: '<S2>/Dctintegrator' (dweakint) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[9];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* Start for Constant: '<S8>/Start setpoint' */
-  Reference_model_Control_Engineering_B.Startsetpoint =
-    Reference_model_Control_Engineering_P.Refpower_stat;
-
   {
     FILE* a;
     real_T tmp;
     int32_T i;
     int32_T t;
     uint32_T tseed;
+
+    /* InitializeConditions for S-Function (ref3b): '<S6>/S-Function' */
+    /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
+    {
+      SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
+      sfcnInitializeConditions(rts);
+      if (ssGetErrorStatus(rts) != (NULL))
+        return;
+    }
 
     /* InitializeConditions for RandomNumber: '<Root>/Noise' */
     tmp = floor(Reference_model_Control_Engineering_P.Noise_Seed);
@@ -3204,16 +2569,7 @@ void Reference_model_Control_Engineering_initialize(void)
 
     /* End of InitializeConditions for RandomNumber: '<Root>/Noise' */
 
-    /* InitializeConditions for S-Function (ref3b): '<S9>/S-Function' */
-    /* Level2 S-Function Block: '<S9>/S-Function' (ref3b) */
-    {
-      SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[10];
-      sfcnInitializeConditions(rts);
-      if (ssGetErrorStatus(rts) != (NULL))
-        return;
-    }
-
-    /* SystemInitialize for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+    /* SystemInitialize for MATLAB Function: '<S3>/SPERTE_measurement_function' */
     a = NULL;
     for (i = 0; i < 20; i++) {
       Reference_model_Control_Engineering_DW.eml_autoflush[i] = false;
@@ -3225,87 +2581,66 @@ void Reference_model_Control_Engineering_initialize(void)
     Reference_model_Control_Engineering_DW.fileID = 0.0;
     Reference_model_Control_Engineering_DW.busy = 0U;
 
-    /* End of SystemInitialize for MATLAB Function: '<S6>/SPERTE_measurement_function' */
+    /* End of SystemInitialize for MATLAB Function: '<S3>/SPERTE_measurement_function' */
   }
 }
 
 /* Model terminate function */
 void Reference_model_Control_Engineering_terminate(void)
 {
-  /* Terminate for S-Function (ec_Supervisor): '<S11>/S-Function' */
-  /* Level2 S-Function Block: '<S11>/S-Function' (ec_Supervisor) */
+  /* Terminate for S-Function (ec_Supervisor): '<S9>/S-Function' */
+  /* Level2 S-Function Block: '<S9>/S-Function' (ec_Supervisor) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (ec_Ebox): '<S10>/ec_Ebox' */
-  /* Level2 S-Function Block: '<S10>/ec_Ebox' (ec_Ebox) */
+  /* Terminate for S-Function (ec_Ebox): '<S8>/ec_Ebox' */
+  /* Level2 S-Function Block: '<S8>/ec_Ebox' (ec_Ebox) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dnotch): '<S1>/Dctnotch' */
-  /* Level2 S-Function Block: '<S1>/Dctnotch' (dnotch) */
+  /* Terminate for S-Function (ref3b): '<S6>/S-Function' */
+  /* Level2 S-Function Block: '<S6>/S-Function' (ref3b) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dweakint): '<S1>/Dctintegrator' */
-  /* Level2 S-Function Block: '<S1>/Dctintegrator' (dweakint) */
+  /* Terminate for S-Function (dnotch): '<S7>/Dctnotch8' */
+  /* Level2 S-Function Block: '<S7>/Dctnotch8' (dnotch) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[3];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dleadlag): '<S1>/Dctleadlag' */
-  /* Level2 S-Function Block: '<S1>/Dctleadlag' (dleadlag) */
+  /* Terminate for S-Function (dleadlag): '<S7>/Dctleadlag4' */
+  /* Level2 S-Function Block: '<S7>/Dctleadlag4' (dleadlag) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[4];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dlowpass2): '<S1>/Dct2lowpass' */
-  /* Level2 S-Function Block: '<S1>/Dct2lowpass' (dlowpass2) */
+  /* Terminate for S-Function (dnotch): '<S7>/Dctnotch9' */
+  /* Level2 S-Function Block: '<S7>/Dctnotch9' (dnotch) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[5];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dleadlag): '<S1>/Dctleadlag1' */
-  /* Level2 S-Function Block: '<S1>/Dctleadlag1' (dleadlag) */
+  /* Terminate for S-Function (ddoubleint): '<S7>/Dctdoubleintegrator4' */
+  /* Level2 S-Function Block: '<S7>/Dctdoubleintegrator4' (ddoubleint) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[6];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (dnotch): '<S2>/Dctnotch' */
-  /* Level2 S-Function Block: '<S2>/Dctnotch' (dnotch) */
+  /* Terminate for S-Function (dlowpass2): '<S7>/Dct2lowpass4' */
+  /* Level2 S-Function Block: '<S7>/Dct2lowpass4' (dlowpass2) */
   {
     SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[7];
-    sfcnTerminate(rts);
-  }
-
-  /* Terminate for S-Function (dleadlag): '<S2>/Dctleadlag' */
-  /* Level2 S-Function Block: '<S2>/Dctleadlag' (dleadlag) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[8];
-    sfcnTerminate(rts);
-  }
-
-  /* Terminate for S-Function (dweakint): '<S2>/Dctintegrator' */
-  /* Level2 S-Function Block: '<S2>/Dctintegrator' (dweakint) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[9];
-    sfcnTerminate(rts);
-  }
-
-  /* Terminate for S-Function (ref3b): '<S9>/S-Function' */
-  /* Level2 S-Function Block: '<S9>/S-Function' (ref3b) */
-  {
-    SimStruct *rts = Reference_model_Control_Engineering_M->childSfunctions[10];
     sfcnTerminate(rts);
   }
 }

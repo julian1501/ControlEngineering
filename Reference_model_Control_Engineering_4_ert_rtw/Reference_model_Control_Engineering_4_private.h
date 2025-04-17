@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering_4".
  *
- * Model version              : 7.37
+ * Model version              : 7.43
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Tue Apr 15 11:22:03 2025
+ * C source code generated on : Wed Apr 16 14:06:48 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -48,7 +48,8 @@ extern void ec_Supervisor(SimStruct *rts);
 extern void ec_Ebox(SimStruct *rts);
 extern void dnotch(SimStruct *rts);
 extern void dleadlag(SimStruct *rts);
-extern void ddoubleint(SimStruct *rts);
+extern void dweakint(SimStruct *rts);
 extern void dlowpass2(SimStruct *rts);
+extern void ddoubleint(SimStruct *rts);
 
 #endif         /* RTW_HEADER_Reference_model_Control_Engineering_4_private_h_ */
