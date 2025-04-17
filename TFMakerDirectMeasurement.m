@@ -11,8 +11,8 @@ nfft = 8000;
 window = hamming(nfft);
 noverlap = nfft/2;
 
-[TF, F] = tfestimate(input,output,window,noverlap,nfft,Fs);
-Coherence = mscohere(input,output,window,noverlap,nfft,Fs);
+[TF, F] = tfestimate(input,-output,window,noverlap,nfft,Fs);
+Coherence = mscohere(input,-output,window,noverlap,nfft,Fs);
 
 TF = TF(3:end,:);
 F = F(3:end,:);

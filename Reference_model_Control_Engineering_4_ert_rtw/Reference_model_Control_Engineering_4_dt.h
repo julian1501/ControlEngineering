@@ -7,9 +7,9 @@
  *
  * Code generation for model "Reference_model_Control_Engineering_4".
  *
- * Model version              : 7.37
+ * Model version              : 7.45
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Tue Apr 15 11:22:03 2025
+ * C source code generated on : Wed Apr 16 16:12:12 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -72,12 +72,15 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&Reference_model_Control_Engineering_4_B.Startsetpoint), 0, 0, 76
+  { (char_T *)(&Reference_model_Control_Engineering_4_B.Constant1[0]), 0, 0, 10
+  },
+
+  { (char_T *)(&Reference_model_Control_Engineering_4_B.Startsetpoint), 0, 0, 36
   }
   ,
 
   { (char_T *)(&Reference_model_Control_Engineering_4_DW.Downsample_Buffer[0]),
-    0, 0, 163 },
+    0, 0, 71 },
 
   { (char_T *)
     (&Reference_model_Control_Engineering_4_DW.ToWorkspace_PWORK.LoggedData), 11,
@@ -98,7 +101,7 @@ static DataTypeTransition rtBTransitions[] = {
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  8U,
+  9U,
   rtBTransitions
 };
 
@@ -116,7 +119,7 @@ static DataTypeTransition rtPTransitions[] = {
     3, 0, 2 },
 
   { (char_T *)(&Reference_model_Control_Engineering_4_P.count2rad_Gain), 0, 0,
-    382 },
+    89 },
 
   { (char_T *)
     (&Reference_model_Control_Engineering_4_P.Selectencoder_CurrentSetting), 3,

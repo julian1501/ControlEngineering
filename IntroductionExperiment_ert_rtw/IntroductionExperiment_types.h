@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.27
+ * Model version              : 7.28
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Tue Apr  1 13:56:35 2025
+ * C source code generated on : Wed Apr 16 11:38:56 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,7 +25,7 @@
 
 /* Model Code Variants */
 
-/* Custom Type definition for MATLAB Function: '<S5>/SPERTE_measurement_function' */
+/* Custom Type definition for MATLAB Function: '<S4>/SPERTE_measurement_function' */
 #include <stdio.h>
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T

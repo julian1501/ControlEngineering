@@ -7,9 +7,9 @@
  *
  * Code generation for model "IntroductionExperiment".
  *
- * Model version              : 7.27
+ * Model version              : 7.28
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Tue Apr  1 13:56:35 2025
+ * C source code generated on : Wed Apr 16 11:38:56 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -45,9 +45,9 @@ extern real_T rt_nrand_Upu32_Yd_f_pw_snf(uint32_T *u);
 extern real_T rt_roundd_snf(real_T u);
 extern void ec_Supervisor(SimStruct *rts);
 extern void ec_Ebox(SimStruct *rts);
+extern void ref3b(SimStruct *rts);
 extern void dleadlag(SimStruct *rts);
 extern void dlowpass1(SimStruct *rts);
 extern void dnotch(SimStruct *rts);
-extern void ref3b(SimStruct *rts);
 
 #endif                        /* RTW_HEADER_IntroductionExperiment_private_h_ */
